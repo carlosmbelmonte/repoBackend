@@ -7,6 +7,21 @@ class Contenedor{
     }
     
     //Metodos de la clase
+    deleteAll = async () => {
+        try{
+            await fs.promises.writeFile('./productos.txt','[]')    
+        }catch(err){
+            console.log('NO SE PUEDE LEER EL ARCHIVO',err)
+        }            
+    }
+    getAll = async () => {
+        try{
+            const todos = JSON.parse(await fs.promises.readFile('./productos.txt','utf-8'))
+            console.log(todos)
+        }catch(err){
+            console.log('NO SE PUEDE LEER EL ARCHIVO',err)
+        } 
+    }
     save = async ({title,price,thumbnail}) => {         
         try{
             const informacion = JSON.parse(await fs.promises.readFile('./productos.txt','utf-8')) 
@@ -43,6 +58,8 @@ class Contenedor{
 }
 
 let productos = new Contenedor('./productos.txt');
+//productos.getAll()
 //productos.save({title: 'Escuadra',price: 123.45,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png'})
 //productos.save({title: 'Calculadora',price: 234.56,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png'})
-productos.save({title: 'Globo Terráqueo',price: 345.67,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png'})
+//productos.save({title: 'Globo Terráqueo',price: 345.67,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png'})
+//productos.deleteAll()
