@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { IncomingMessage } = require('http');
 
 class Contenedor{
     constructor(fileData){
