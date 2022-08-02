@@ -16,7 +16,7 @@ class Contenedor{
 
     async deleteById(x){
         try{
-            const idProductos = JSON.parse(await fs.promises.readFile(this.fileData,'utf-8'))           
+            const idProductos = await this.getAll()            
             const filterId = idProductos.filter((item) => item.id !== x)
             await fs.promises.writeFile(this.fileData,JSON.stringify(filterId, null,2)) 
         }catch(error){
@@ -61,14 +61,10 @@ class Contenedor{
 }
 
 const productos = new Contenedor('./productos.txt');
-//productos.save({title: 'Escuadra',price: 123.45,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png'})
-//productos.save({title: 'Calculadora',price: 234.56,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png'})
-//productos.save({title: 'Globo Terráqueo',price: 345.67,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png'})
-//productos.getById(2)
-//productos.deleteById(2)
-//productos.deleteAll()
 
 const main = async () => {
+    let idReferencia = 2
+
     //Guardar productos
     await productos.save({title: 'Escuadra',price: 123.45,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png'})
     await productos.save({title: 'Calculadora',price: 234.56,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png'})
@@ -76,16 +72,24 @@ const main = async () => {
 
     //Mostramos todos los productos
     let allProducts = await productos.getAll();
-    console.log(allProducts);
+    console.log('Mostramos todos los productos guardados: \n',allProducts);
 
     //Mostramos un producto por id
-    const product = await productos.getById(2);  
+    const product = await productos.getById(idReferencia);  
     if (product === undefined) {
         console.log('No se encuentra producto con dicho ID');    
     }else{
-        console.log('Producto con ID solicitado: \n', product);    
+        console.log(`Producto con ID: ${idReferencia} \n`, product);    
     }
 
+    //Eliminamos un producto por ID
+    await productos.deleteById(idReferencia);
+    delProducts = await productos.getAll();
+    console.log(`Archivo sin el Producto con ID: ${idReferencia} \n`, delProducts);
+
+    await productos.deleteAll()
+    AlldeleteProducts = await productos.getAll();
+    console.log('Archivo sin productos: \n', AlldeleteProducts);
 }
 
 main();
