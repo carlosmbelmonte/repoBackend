@@ -3,87 +3,92 @@ const fs = require('fs');
 class Contenedor{
     constructor(fileData){
         this.fileData = fileData;
-        this.countId=0
     }
     
     //Metodos de la clase
-    deleteAll = async () => {
+    async deleteAll(){
         try{
-            await fs.promises.writeFile('./productos.txt','[]')    
-        }catch(err){
-            console.log('NO SE PUEDE LEER EL ARCHIVO',err)
-        }  
-        this.countId = 0          
+            await fs.promises.writeFile(this.fileData,'[]')    
+        }catch(error){
+            throw new Error(`Error al eliminar el archivo: ${error}`)
+        }            
     }
 
-    deleteById = async (x) => {
+    async deleteById(x){
         try{
-            const idProductos = JSON.parse(await fs.promises.readFile('./productos.txt','utf-8'))           
+            const idProductos = JSON.parse(await fs.promises.readFile(this.fileData,'utf-8'))           
             const filterId = idProductos.filter((item) => item.id !== x)
-            await fs.promises.writeFile('./productos.txt',JSON.stringify(filterId, null,2)) 
-        }catch(err){
-            console.log('NO SE PUEDE LEER EL ARCHIVO',err)
+            await fs.promises.writeFile(this.fileData,JSON.stringify(filterId, null,2)) 
+        }catch(error){
+            throw new Error(`Error al eliminar el objeto del archivo: ${error}`)
         }
     }
 
-    getAll = async () => {
+    async getAll(){
         try{
-            const todos = JSON.parse(await fs.promises.readFile('./productos.txt','utf-8'))
-            console.log("Se imprime todos los productos: \n",todos)
+            const todos = await fs.promises.readFile(this.fileData,'utf-8')
+            return JSON.parse(todos)
         }catch(err){
-            console.log('NO SE PUEDE LEER EL ARCHIVO',err)
+            return []
         } 
     }
 
-    getById = async (x) => {
+    async getById(x){
         try{
-            const idProductos = JSON.parse(await fs.promises.readFile('./productos.txt','utf-8'))           
-            let indice = idProductos.findIndex(producto => producto.id == x);
-            if(indice == -1){
-                console.log("No se encuentra el producto")
-            }else{
-                console.log(`Se muestra el producto correspondiente al id = ${x} : \n`,idProductos[indice])    
-            }
-            
-        }catch(err){
-            console.log('NO SE PUEDE LEER EL ARCHIVO',err)
+            const idProductos = await this.getAll()           
+            return idProductos.find(producto => producto.id == x);            
+        }catch(error){
+            throw new Error(`Error leer el ID de archivo: ${error}`)
         } 
     }
 
-    save = async ({title,price,thumbnail}) => {         
+    async save(newObj){
+        const informacion = await this.getAll()
+        let newId
+        if(informacion.length == 0){
+            newId = 1
+        }else{
+            newId = parseInt(informacion[informacion.length-1].id) + 1
+        }
+        informacion.push({...newObj, id: newId})
         try{
-            const informacion = JSON.parse(await fs.promises.readFile('./productos.txt','utf-8')) 
-            if(informacion.length == 0 || informacion.length > 0){
-                if(informacion.length == 0){
-                    this.countId = 1
-                }else{
-                    this.countId = (informacion[informacion.length-1].id) + 1
-                }
-                informacion.push(
-                    {
-                        title: title,
-                        price: price,
-                        thumbnail: thumbnail,
-                        id: this.countId
-                    }
-                )
-                console.log("El Id del producto guardado es: ", this.countId)
-                await fs.promises.writeFile('./productos.txt',JSON.stringify(informacion, null,2))              
-            }          
-        }catch(err){
-            console.log('NO SE PUEDE LEER EL ARCHIVO',err)
-        }     
+            await fs.promises.writeFile(this.fileData,JSON.stringify(informacion, null,2))
+            return newId    
+        }catch(error){
+            throw new Error(`Error al guardar: ${error}`)
+        }
     }
 }
 
-let productos = new Contenedor('./productos.txt');
+const productos = new Contenedor('./productos.txt');
 //productos.save({title: 'Escuadra',price: 123.45,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png'})
 //productos.save({title: 'Calculadora',price: 234.56,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png'})
 //productos.save({title: 'Globo Terráqueo',price: 345.67,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png'})
-productos.getAll()
 //productos.getById(2)
 //productos.deleteById(2)
 //productos.deleteAll()
+
+const main = async () => {
+    //Guardar productos
+    await productos.save({title: 'Escuadra',price: 123.45,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png'})
+    await productos.save({title: 'Calculadora',price: 234.56,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png'})
+    await productos.save({title: 'Globo Terráqueo',price: 345.67,thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-256.png'})
+
+    //Mostramos todos los productos
+    let allProducts = await productos.getAll();
+    console.log(allProducts);
+
+    //Mostramos un producto por id
+    const product = await productos.getById(2);  
+    if (product === undefined) {
+        console.log('No se encuentra producto con dicho ID');    
+    }else{
+        console.log('Producto con ID solicitado: \n', product);    
+    }
+
+}
+
+main();
 
 
 
