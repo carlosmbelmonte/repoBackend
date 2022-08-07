@@ -26,8 +26,3 @@ app.get('/productoRandom', async (req, res) => {
     let prodRandom = await productos.getById(random(minimo,maximo))//Traigo el producto que coincide con ese ID random
     res.send(prodRandom)
 })
-
-
-
-
-
