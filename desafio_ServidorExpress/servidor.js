@@ -14,6 +14,13 @@ const random = (min, max) => {
     return Math.floor((Math.random() * (max - min + 1)) + min);
 }
 
+app.get('/', (req, res) => {
+    res.send(
+        `<h1>BIENVENIDOS!!!</h1>
+        <p>Por favor deben escribir el endpoint <b>/productos</b> o <b>/productoRandom</b> para ver la funcionalidad del desafio.</>`
+    )
+})
+
 app.get('/productos', async (req, res) => { 
     let objProd = await productos.getAll();//Traigo el array de objetos
     let onlyProd = objProd.map(producto => producto.title); //Coloco en el array solo los nombres de los productos
