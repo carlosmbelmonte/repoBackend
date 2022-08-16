@@ -64,4 +64,16 @@ router.put('/:id', (req, res) => { //Recibe y actualiza un producto según su id
         }    
     }       
 })
+
+router.delete('/:id', (req, res) => { //Elimina un producto según su id
+    let iD = getById(parseInt(req.params.id))
+    if (!iD) {
+        res.status(400).json({ error : "Producto no encontrado" });
+    } else {
+        const index = productos.findIndex(producto => producto.id === parseInt(req.params.id));
+        productos.splice(index, 1);
+        res.send(productos)
+    }   
+})
+
 module.exports = router
