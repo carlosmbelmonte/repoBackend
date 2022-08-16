@@ -46,18 +46,24 @@ router.put('/:id', (req, res) => { //Recibe y actualiza un producto según su id
     let iD = getById(parseInt(req.params.id))
     const { title, price, thumbnail } = req.body
 
-    if(!title || !price || !thumbnail){
-        res.status(400).json({ "error": "Ingrese todos los datos del producto" });
+    if(!iD) {
+        res.status(400).json({ error : "Producto no encontrado" });
     }else{
-        const newProducto = {
-            "title": title,
-            "price": price,
-            "thumbnail": thumbnail,
-            "id": parseInt(req.params.id)
-        }
-        const index = productos.findIndex(producto => producto.id === parseInt(req.params.id));
-        productos[index] = newProducto
-        res.send(productos[index])
-    }    
+        if(!title || !price || !thumbnail){
+            res.status(400).json({ "error": "Ingrese todos los datos del producto" });
+        }else{
+            const newProducto = {
+                "title": title,
+                "price": price,
+                "thumbnail": thumbnail,
+                "id": parseInt(req.params.id)
+            }
+            const index = productos.findIndex(producto => producto.id === parseInt(req.params.id));
+            productos[index] = newProducto
+            res.send(productos[index])
+        }    
+    } 
+
+        
 })
 module.exports = router
