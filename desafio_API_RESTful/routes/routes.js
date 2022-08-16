@@ -62,8 +62,6 @@ router.put('/:id', (req, res) => { //Recibe y actualiza un producto según su id
             productos[index] = newProducto
             res.send(productos[index])
         }    
-    } 
-
-        
+    }       
 })
 module.exports = router
