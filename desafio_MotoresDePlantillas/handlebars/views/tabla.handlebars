@@ -1,0 +1,29 @@
+<div >
+    <div >
+        <div >
+            <h1>Vista de productos</h1>
+            {{#if listExist}}
+            <table>
+                <thead >
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Imagen</th>
+                </thead>
+                <tbody>
+                    {{#each listExist}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.price}}</td>
+                        <td><img src="{{this.thumbnail}}" height="48px"></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+                <h2>No hay productos</h2>
+            {{/if}}
+        </div>
+    </div>
+</div>
