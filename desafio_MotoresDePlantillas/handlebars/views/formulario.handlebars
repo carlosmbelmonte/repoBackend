@@ -1,16 +1,16 @@
-<h1>Ingrese Productos</h1>
+<h1 class="display-5 fw-bold">Ingrese Productos (usando Handlebars)</h1>
 <form id="formProducto">
     <div>
-        <input type="text" id="p_title" placeholder="Title">
+        <input class="form-control mb-3" type="text" id="p_title" placeholder="Title">
     </div>
     <div>
-        <input type="number" id="p_price" placeholder="Price">
+        <input class="form-control mb-3" type="number" id="p_price" placeholder="Price">
     </div>
     <div>
-        <input type="text" id="p_thumbnail" placeholder="Thumbnail">
+        <input class="form-control mb-3" type="text" id="p_thumbnail" placeholder="Thumbnail">
     </div>
 </form>
-<button onclick="postProducto()">Agregar Producto</button>
+<button class="btn btn-primary mb-3" onclick="postProducto()">Agregar Producto</button>
 <script>
     function postProducto() {
     let title = document.getElementById("p_title").value;
