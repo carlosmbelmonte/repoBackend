@@ -1,16 +1,14 @@
 <h1 class="display-5 fw-bold">Ingrese Productos (usando Handlebars)</h1>
-<form id="formProducto">
-    <div>
-        <input class="form-control mb-3" type="text" id="p_title" placeholder="Title">
-    </div>
-    <div>
-        <input class="form-control mb-3" type="number" id="p_price" placeholder="Price">
-    </div>
-    <div>
-        <input class="form-control mb-3" type="text" id="p_thumbnail" placeholder="Thumbnail">
-    </div>
+<form class="mx-3" id="formProducto">
+    <input class="form-control mb-3" type="text" id="p_title" placeholder="Title">
+    <input class="form-control mb-3" type="number" id="p_price" placeholder="Price">
+    <input class="form-control mb-3" type="text" id="p_thumbnail" placeholder="Thumbnail">
 </form>
-<button class="btn btn-primary mb-3" onclick="postProducto()">Agregar Producto</button>
+<div class="d-flex mx-3">
+    <button class="btn btn-primary mb-3" onclick="postProducto()">Agregar Producto</button>
+    <a class="btn btn-secondary mb-3 ms-3" href='../productos'>Lista de Productos</a>     
+</div>
+<p class="mx-3" id="mensajeError"></p>  
 <script>
     function postProducto() {
     let title = document.getElementById("p_title").value;
@@ -21,14 +19,19 @@
         "title": title,
         "price": parseInt(price),
         "thumbnail": thumbnail
-    };
+    }
 
-    fetch('/api/productos', {
-        method: 'POST', 
-        body: JSON.stringify(producto),
-        headers: {'Content-Type': 'application/json'}
-    }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+    if(title===''|| price===NaN ||thumbnail===''){
+        document.getElementById("mensajeError").innerText = "No se puede cargar un Producto vacio"
+    }else{
+        document.getElementById("mensajeError").innerText = ""
+        fetch('/api/productos', {
+            method: 'POST', 
+            body: JSON.stringify(producto),
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));    
+    }   
 }
 </script> 
