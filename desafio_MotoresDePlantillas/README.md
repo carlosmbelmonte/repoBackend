@@ -18,3 +18,6 @@
 
 # Opcional:
 - Utilizar bootstrap para maquetar la vista creada por dicho motor de plantillas y el formulario de ingreso de productos.
+
+# Eleccion de motor para el proyecto:
+- Para mi proyecto usaré EJS, dado que se encuentra más documentación y ejemplos para este motor. También la forma de implementación me resultó más familiar a Javascript/Html que el resto.
