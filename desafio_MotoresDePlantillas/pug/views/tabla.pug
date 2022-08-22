@@ -1,9 +1,9 @@
 extends layouts/main-layout.pug
 
 block content
-    h1(class="display-5 fw-bold") Vista de productos (usando Handlebars)
+    h1(class="display-5 fw-bold") Vista de productos (usando Pug)
     div 
-        if listExist
+        if listExist.length
             table(class="table table-dark table-striped")
                 thead
                     th ID
