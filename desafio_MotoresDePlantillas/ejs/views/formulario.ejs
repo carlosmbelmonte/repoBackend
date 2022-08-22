@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+</head>
+<body>
+    <h1 class="display-5 fw-bold"><%=titleTag%></h1>
+    <form class="mx-3" id="formProducto">
+        <input class="form-control mb-3" type="text" id="p_title" placeholder="Title">
+        <input class="form-control mb-3" type="number" id="p_price" placeholder="Price">
+        <input class="form-control mb-3" type="text" id="p_thumbnail" placeholder="Thumbnail">
+    </form>
+    <div class="d-flex mx-3">
+        <button class="btn btn-primary mb-3" onclick="postProducto()">Agregar Producto</button>
+        <a class="btn btn-secondary mb-3 ms-3" href='<%=btnPath%>'><%=btnFrase%></a>     
+    </div>
+    <p class="mx-3" id="mensajeError"></p>
+    <script>
+        function postProducto() {
+        let title = document.getElementById("p_title").value;
+        let price = document.getElementById("p_price").value;
+        let thumbnail = document.getElementById("p_thumbnail").value;
+        document.getElementById('formProducto').reset()
+        let producto = {
+            "title": title,
+            "price": parseInt(price),
+            "thumbnail": thumbnail
+        }
+    
+        if(title===''|| price===NaN ||thumbnail===''){
+            document.getElementById("mensajeError").innerText = "No se puede cargar un Producto vacio"
+        }else{
+            document.getElementById("mensajeError").innerText = ""
+            fetch('/api/productos', {
+                method: 'POST', 
+                body: JSON.stringify(producto),
+                headers: {'Content-Type': 'application/json'}
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => console.log('Success:', response));    
+        }   
+    }
+    </script> 
+</body>
+</html>

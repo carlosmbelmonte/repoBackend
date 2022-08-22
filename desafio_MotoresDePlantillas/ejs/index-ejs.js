@@ -17,9 +17,18 @@ app.set('views','./views')
 app.set('view engine','ejs')
 
 app.get('/', (req, res) => {
-    res.render('formulario')
+    res.render('formulario',{
+        titleTag: 'Ingrese producto (usando ejs)',
+        btnPath:'../productos',
+        btnFrase:'Lista de Productos'
+    })
 })
 
 app.get('/productos',(req,res) => {
-    res.render('tabla',{listExist: productos})
+    res.render('tabla',{
+        listExist: productos,
+        titleTag: 'Vista de productos (usando ejs)',
+        btnPath:'../',
+        btnFrase:'Ir al formulario de carga'
+    })
 })
