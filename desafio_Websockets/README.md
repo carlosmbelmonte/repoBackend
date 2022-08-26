@@ -3,7 +3,7 @@ Modificar el último entregable para que disponga de un canal de websocket que p
 - Puede haber varios clientes conectados simultáneamente y en cada uno de ellos se reflejarán los cambios que se realicen en los productos sin necesidad de recargar la vista.
 - Cuando un cliente se conecte, recibirá la lista de productos a representar en la vista.
 
->> Aspectos a incluir en el entregable:
+> Aspectos a incluir en el entregable:
 Para construir la tabla dinámica con los datos recibidos por websocket utilizar Handlebars en el frontend. Considerar usar archivos públicos para alojar la plantilla vacía, y obtenerla usando la función fetch( ). Recordar que fetch devuelve una promesa.
 
 
