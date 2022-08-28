@@ -3,7 +3,8 @@ const { Server: HTTPServer} = require('http')
 const { Server: IOServer } = require("socket.io")
 const { engine } = require('express-handlebars')
 const { router, productos} = require('./routes/routes')
-const fetch = require('node-fetch')
+
+const postProducto = require('./public/js/postProducto')
 
 const app = express()
 const http = new HTTPServer(app)
@@ -33,16 +34,10 @@ io.on("connection", (socket) => {
     console.log("Nuevo cliente conectado")
     socket.emit('allProductos', productos)
 
-    socket.on('newProducto', data => {
-        fetch(`http://localhost:${PORT}/api/productos`, {
-        method: 'POST', 
-        body: JSON.stringify(data),
-        headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', response));
-
+    socket.on('newProducto', async data => {
+        console.log("Nuevo producto agregado: ", data)
+        await postProducto(data)
+        console.log("Array con todos los productos: ", productos)
         io.sockets.emit('allProductos', productos)
     })
 })
-

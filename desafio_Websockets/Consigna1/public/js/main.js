@@ -22,15 +22,16 @@ button?.addEventListener("click", ()=>{
 })
 
 socket.on('allProductos', productos => {   
-    //document.getElementById('lista').innerHTML = ''
+    document.getElementById('lista').innerHTML = ''
     productos.forEach( producto => {
         document.getElementById('lista').innerHTML += `
-            <tr> 
-                <td>${producto.id}</td>
-                <td>${producto.title}</td>
-                <td>${producto.price}</td>
-                <td><img src="${producto.thumbnail}" height="30px"></td>
-            </tr>
-        `
+            <tr class="table-dark"> 
+                <td class="table-dark">${producto.id}</td>
+                <td class="table-dark">${producto.title}</td>
+                <td class="table-dark">${producto.price}</td>
+                <td class="table-dark">
+                    <img src="${producto.thumbnail}" height="48px">
+                </td>
+            </tr>`
     })
 })
