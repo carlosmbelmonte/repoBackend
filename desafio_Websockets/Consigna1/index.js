@@ -21,7 +21,7 @@ app.use(express.static("public"))
 app.use('/api/productos', router)
 
 app.get('/', (req, res) => {
-    res.render('formulario')
+    res.render('formulario',{listExist: productos})
 })
 
 const PORT = 8080
