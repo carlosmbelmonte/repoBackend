@@ -5,6 +5,8 @@ const { engine } = require('express-handlebars')
 const { router, productos} = require('./routes/routes')
 
 const postProducto = require('./public/js/postProducto')
+const { Contenedor } = require('./public/js/contenedor');
+const chats = new Contenedor('./public/chats.txt')
 
 const app = express()
 const http = new HTTPServer(app)
@@ -39,5 +41,10 @@ io.on("connection", (socket) => {
         await postProducto(data)
         console.log("Array con todos los productos: ", productos)
         io.sockets.emit('allProductos', productos)
+    })
+
+    socket.on('newMensaje', async msg => {
+        console.log("Nuevo mensaje agregado: ", msg)
+        await chats.save(msg)
     })
 })

@@ -1,5 +1,27 @@
 const socket = io.connect()
+
 const button = document.getElementById("agregar")
+const chatButton = document.getElementById("enviarChat")
+
+const padTo2Digits = (num) => {
+    return num.toString().padStart(2, '0');
+}
+  
+const formatDate = (date) => {
+    return (
+    [
+        padTo2Digits(date.getDate()),
+        padTo2Digits(date.getMonth() + 1),
+        date.getFullYear(),
+    ].join('/') +
+    ' ' +
+    [
+        padTo2Digits(date.getHours()),
+        padTo2Digits(date.getMinutes()),
+        padTo2Digits(date.getSeconds()),
+    ].join(':')
+    );
+}
 
 button?.addEventListener("click", ()=>{
     let title = document.getElementById("p_title").value;
@@ -16,7 +38,6 @@ button?.addEventListener("click", ()=>{
         document.getElementById("mensajeError").innerText = "No se puede cargar un Producto vacio"
     }else{
         document.getElementById("mensajeError").innerText = ""
-
         socket.emit('newProducto', producto)
     } 
 })
@@ -43,4 +64,23 @@ socket.on('allProductos', productos => {
             </tr>`
         })  
     }  
+})
+
+chatButton?.addEventListener("click", () => {
+    let mailChat = document.getElementById("mailChat").value;
+    let mensajeChat = document.getElementById("mensajeChat").value;
+    document.getElementById('formChat').reset()
+    let newChat = {
+        "mail": mailChat,
+        "mensaje": mensajeChat,
+        "fecha": formatDate(new Date())
+    }
+
+    if(mailChat===''|| mensajeChat===''){
+        document.getElementById("mensajeErrorChat").innerText = "Se debe ingresar todos los campos!!"
+    }else{
+        document.getElementById("mensajeErrorChat").innerText = ""
+        console.log(newChat)  
+        socket.emit('newMensaje', newChat)   
+    } 
 })
