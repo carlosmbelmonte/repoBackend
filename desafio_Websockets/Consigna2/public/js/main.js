@@ -43,7 +43,7 @@ button?.addEventListener("click", ()=>{
 })
 
 socket.on('allProductos', productos => { 
-    console.log("array en consola",productos) 
+    console.log("array en consola[productos]",productos) 
     if(productos.length === 0){
         document.getElementById('msgProducto').style.display = ''    
         document.getElementById('tablaProducto').style.display = 'none';
@@ -83,4 +83,25 @@ chatButton?.addEventListener("click", () => {
         console.log(newChat)  
         socket.emit('newMensaje', newChat)   
     } 
+})
+
+socket.on('allMensajes', chats => { 
+    console.log("array en consola[chats]",chats)
+    if(chats.length === 0){   
+        document.getElementById('tablaChat').style.display = 'none';
+    }
+    if(chats.length>0){
+        document.getElementById('tablaChat').style.display = '';    
+        document.getElementById('listaChats').innerHTML = ''  
+        chats.forEach( chat => {
+        document.getElementById('listaChats').innerHTML += `
+            <tr> 
+                <td>
+                    <span class="fw-bold text-primary">${chat.mail}</span> 
+                    <span class="text-danger">[${chat.fecha}]: </span>
+                    <span class="text-success fst-italic">${chat.mensaje}</span>
+                </td>    
+            </tr>`
+        })        
+    }
 })

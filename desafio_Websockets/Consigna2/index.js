@@ -32,9 +32,11 @@ const serverPort = http.listen(PORT, () => {
 })
 serverPort.on('error', error => console.log(`Error en el puerto del servidor: ${error}`))
 
-io.on("connection", (socket) => {
+io.on("connection", async(socket) => {
     console.log("Nuevo cliente conectado")
     socket.emit('allProductos', productos)
+    let allChats = await chats.getAll()
+    socket.emit('allMensajes', allChats)
 
     socket.on('newProducto', async data => {
         console.log("Nuevo producto agregado: ", data)
@@ -46,5 +48,8 @@ io.on("connection", (socket) => {
     socket.on('newMensaje', async msg => {
         console.log("Nuevo mensaje agregado: ", msg)
         await chats.save(msg)
+        let newAllChats = await chats.getAll()
+        console.log("Array con todos los chats: ", newAllChats)
+        io.sockets.emit('allMensajes', newAllChats)
     })
 })
