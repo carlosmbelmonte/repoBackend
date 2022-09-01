@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": 1,
+    "timestamp(carrito)": "2022-09-01T17:34:40.520Z"
+  },
+  {
+    "id": 2,
+    "timestamp(carrito)": "2022-09-01T17:34:41.614Z"
+  },
+  {
+    "id": 3,
+    "timestamp(carrito)": "2022-09-01T17:34:42.801Z"
+  },
+  {
+    "id": 5,
+    "timestamp(carrito)": "2022-09-01T17:38:00.713Z",
+    "producto": []
+  },
+  {
+    "id": 6,
+    "timestamp(carrito)": "2022-09-01T17:38:01.666Z",
+    "producto": []
+  },
+  {
+    "id": 7,
+    "timestamp(carrito)": "2022-09-01T17:38:48.738Z",
+    "productos": []
+  }
+]
