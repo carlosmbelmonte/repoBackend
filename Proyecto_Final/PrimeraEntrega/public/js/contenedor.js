@@ -58,6 +58,17 @@ class Contenedor{
             throw new Error(`Error al guardar: ${error}`)
         }
     }
+
+    async putById(x,newObj){
+        try{
+            const allProductos = await this.getAll()             
+            const index = allProductos.map(producto => producto.id).indexOf(x)
+            allProductos[index] = {...newObj, id: x}
+            await fs.promises.writeFile(this.fileData,JSON.stringify(allProductos, null,2))
+        }catch(error){
+            throw new Error(`Error leer el ID de archivo: ${error}`)
+        } 
+    }
 }
 
 module.exports = {Contenedor};
