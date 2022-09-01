@@ -58,7 +58,14 @@ class Contenedor{
             throw new Error(`Error al guardar: ${error}`)
         }
     }
-
+    async saveAll(newArray){
+        try{
+            await fs.promises.writeFile(this.fileData,JSON.stringify(newArray, null,2))    
+        }catch(error){
+            throw new Error(`Error al guardar el archivo: ${error}`)
+        } 
+    }
+    
     async putById(x,newObj){
         try{
             const allProductos = await this.getAll()             
