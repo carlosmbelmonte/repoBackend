@@ -40,9 +40,9 @@ routerProductos.post('/', async(req, res) => { //Recibe y agrega un producto, y 
         }else{
             newId = parseInt(allProductos[allProductos.length-1].id) + 1
         }
-        allProductos.push({id: newId, timestamp: fecha, nombre, descripcion, codigo, foto, precio, stock})
+        allProductos.push({id: newId, 'timestamp(producto)': fecha, nombre, descripcion, codigo, foto, precio, stock})
         await productos.saveAll(allProductos)
-        res.send({id: newId, timestamp: fecha, nombre, descripcion, codigo, foto, precio, stock}) 
+        res.send({id: newId, 'timestamp(producto)': fecha, nombre, descripcion, codigo, foto, precio, stock}) 
     }else{
         res.send({ error : -1,
                     descripcion: `ruta /api/productos/ método POST no autorizado`
@@ -65,7 +65,7 @@ routerProductos.put('/:id', async(req, res) => { //Recibe y actualiza un product
             }else{
                 const newProducto = {
                     "id": parseInt(req.params.id),
-                    "timestamp": fecha,
+                    "timestamp(producto)": fecha,
                     "nombre": nombre,
                     "descripcion": descripcion,
                     "codigo": codigo,
