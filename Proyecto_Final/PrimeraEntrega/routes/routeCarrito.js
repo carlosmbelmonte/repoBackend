@@ -72,14 +72,16 @@ routerCarrito.post('/:id/productos', async(req, res) => { //Incorporar productos
 routerCarrito.delete('/:id/productos/:id_prod', async(req, res) => { //Elimina un producto del carrito por su id de carrito y de producto
     let allCarrito = await carrito.getAll()
     const iDCart = allCarrito.find(cart => cart.id === parseInt(req.params.id))
-    //const indexCart = allCarrito.map(cart => cart.id).indexOf(parseInt(req.params.id))
 
     if (iDCart) {
-        //res.send(iDCart.productos)
-        const idProducto  = parseInt(req.params.id_prod)
         const arrayProductos = iDCart.productos
-        const index = arrayProductos.findIndex( (element) => element.id === idProducto)
-        res.send(arrayProductos[index])
+        const index = arrayProductos.findIndex( (element) => element.id === parseInt(req.params.id_prod))
+
+        if(index === -1){
+            res.status(400).json({ error : `No existe producto con id: ${parseInt(req.params.id_prod)}` })    
+        }else{
+            res.send(arrayProductos[index])    
+        }    
     }else{
         res.status(400).json({ error : "Carrito no encontrado" });
     }   
