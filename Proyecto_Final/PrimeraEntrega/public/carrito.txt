@@ -50,7 +50,7 @@
         "timestamp(producto)": "2022-09-01T17:34:29.626Z",
         "nombre": "beatriz navarro",
         "descripcion": 19900103,
-        "codigo": "www.x343",
+        "codigo": "para prueba DELETE",
         "foto": "www.icon.com",
         "precio": 100,
         "stock": "31 unidades"
