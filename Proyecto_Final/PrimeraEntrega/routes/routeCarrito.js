@@ -80,7 +80,9 @@ routerCarrito.delete('/:id/productos/:id_prod', async(req, res) => { //Elimina u
         if(index === -1){
             res.status(400).json({ error : `No existe producto con id: ${parseInt(req.params.id_prod)}` })    
         }else{
-            res.send(arrayProductos[index])    
+            const newArray = arrayProductos.filter((item) => item.id !== parseInt(req.params.id_prod))
+            iDCart.productos = newArray
+            res.send(iDCart)    
         }    
     }else{
         res.status(400).json({ error : "Carrito no encontrado" });
