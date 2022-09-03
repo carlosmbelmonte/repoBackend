@@ -16,3 +16,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/api/productos', routerProductos)
 app.use('/api/carrito', routerCarrito)
+
+app.use((req, res, next) => {
+    res.send({error: -2, descripcion: `ruta no implementada`})
+})
