@@ -72,18 +72,21 @@ routerCarrito.post('/:id/productos', async(req, res) => { //Incorporar productos
 routerCarrito.delete('/:id/productos/:id_prod', async(req, res) => { //Elimina un producto del carrito por su id de carrito y de producto
     let allCarrito = await carrito.getAll()
     const iDCart = allCarrito.find(cart => cart.id === parseInt(req.params.id))
+    const indexCart = allCarrito.map(cart => cart.id).indexOf(parseInt(req.params.id))
 
     if (iDCart) {
-        const arrayProductos = iDCart.productos
-        const index = arrayProductos.findIndex( (element) => element.id === parseInt(req.params.id_prod))
+        const arrayProd = allCarrito[indexCart].productos
+        const iDProd = arrayProd.find(producto => producto.id === parseInt(req.params.id_prod))
 
-        if(index === -1){
-            res.status(400).json({ error : `No existe producto con id: ${parseInt(req.params.id_prod)}` })    
-        }else{
-            const newArray = arrayProductos.filter((item) => item.id !== parseInt(req.params.id_prod))
-            iDCart.productos = newArray
-            res.send(iDCart)    
-        }    
+        if (iDProd) {
+            const filterId = arrayProd.filter((item) => item.id !== parseInt(req.params.id_prod))
+            allCarrito[indexCart].productos = filterId
+            await carrito.saveAll(allCarrito)
+            res.send(`Producto Eliminado con exito`) 
+        } else {
+            res.status(400).json({ error : "Producto no encontrado" });
+        } 
+        
     }else{
         res.status(400).json({ error : "Carrito no encontrado" });
     }   

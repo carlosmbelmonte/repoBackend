@@ -44,37 +44,6 @@
   {
     "id": 4,
     "timestamp(carrito)": "2022-09-02T00:02:20.892Z",
-    "productos": [
-      {
-        "id": 2,
-        "timestamp(producto)": "2022-09-01T17:34:29.626Z",
-        "nombre": "beatriz navarro",
-        "descripcion": 19900103,
-        "codigo": "para prueba DELETE",
-        "foto": "www.icon.com",
-        "precio": 100,
-        "stock": "31 unidades"
-      },
-      {
-        "id": 3,
-        "timestamp(producto)": "2022-09-01T17:34:30.964Z",
-        "nombre": "beatriz navarro",
-        "descripcion": 19900103,
-        "codigo": "www.x343",
-        "foto": "www.icon.com",
-        "precio": 100,
-        "stock": "31 unidades"
-      },
-      {
-        "id": 1,
-        "timestamp(producto)": "2022-09-01T17:34:26.078Z",
-        "nombre": "beatriz navarro",
-        "descripcion": 19900103,
-        "codigo": "www.x343",
-        "foto": "www.icon.com",
-        "precio": 100,
-        "stock": "31 unidades"
-      }
-    ]
+    "productos": []
   }
 ]
