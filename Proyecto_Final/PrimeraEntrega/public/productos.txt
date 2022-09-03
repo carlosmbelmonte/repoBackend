@@ -1,32 +1,82 @@
 [
   {
     "id": 1,
-    "timestamp(producto)": "2022-09-01T17:34:26.078Z",
-    "nombre": "beatriz navarro",
-    "descripcion": 19900103,
-    "codigo": "www.x343",
-    "foto": "www.icon.com",
-    "precio": 100,
-    "stock": "31 unidades"
+    "timestamp(producto)": "2022-09-03T12:33:41.453Z",
+    "nombre": "DDZ1513",
+    "descripcion": "Medidor Monofasico",
+    "codigo": "80008001",
+    "foto": "https://i.postimg.cc/LsfqqLdX/medidor-DDZ1513.png",
+    "precio": "250 usd",
+    "stock": "3000 unidades"
   },
   {
     "id": 2,
-    "timestamp(producto)": "2022-09-01T17:34:29.626Z",
-    "nombre": "beatriz navarro",
-    "descripcion": 19900103,
-    "codigo": "www.x343",
-    "foto": "www.icon.com",
-    "precio": 100,
-    "stock": "31 unidades"
+    "timestamp(producto)": "2022-09-03T12:43:16.422Z",
+    "nombre": "DTZ1513",
+    "descripcion": "Medidor Trifasico",
+    "codigo": "80009001",
+    "foto": "https://i.postimg.cc/vBs45TMv/medidor-DTZ1513.png",
+    "precio": "550 usd",
+    "stock": "5000 unidades"
   },
   {
     "id": 3,
-    "timestamp(producto)": "2022-09-01T17:34:30.964Z",
-    "nombre": "beatriz navarro",
-    "descripcion": 19900103,
-    "codigo": "www.x343",
-    "foto": "www.icon.com",
-    "precio": 100,
-    "stock": "31 unidades"
+    "timestamp(producto)": "2022-09-03T12:35:46.177Z",
+    "nombre": "I310",
+    "descripcion": "Medidor Trifasico",
+    "codigo": "80010001",
+    "foto": "https://i.postimg.cc/YqsjbbM0/medidor-I310.png",
+    "precio": "650 usd",
+    "stock": "6000 unidades"
+  },
+  {
+    "id": 4,
+    "timestamp(producto)": "2022-09-03T12:36:26.312Z",
+    "nombre": "SL7000",
+    "descripcion": "Medidor Trifasico",
+    "codigo": "60000001",
+    "foto": "https://i.postimg.cc/PfKC8d7m/medidor-SL7000.png",
+    "precio": "450 usd",
+    "stock": "1000 unidades"
+  },
+  {
+    "id": 5,
+    "timestamp(producto)": "2022-09-03T12:37:21.733Z",
+    "nombre": "SP2301",
+    "descripcion": "Medidor Monofasico",
+    "codigo": "20000001",
+    "foto": "https://i.postimg.cc/7Y6f3pvj/medidor-SP2301.png",
+    "precio": "200 usd",
+    "stock": "10000 unidades"
+  },
+  {
+    "id": 6,
+    "timestamp(producto)": "2022-09-03T12:38:17.715Z",
+    "nombre": "ZMD405",
+    "descripcion": "Medidor Trifasico",
+    "codigo": "37000001",
+    "foto": "https://i.postimg.cc/qqBgZFNh/medidor-ZMD.png",
+    "precio": "450 usd",
+    "stock": "6000 unidades"
+  },
+  {
+    "id": 7,
+    "timestamp(producto)": "2022-09-03T12:39:03.160Z",
+    "nombre": "ZMG405",
+    "descripcion": "Medidor Trifasico",
+    "codigo": "27000001",
+    "foto": "https://i.postimg.cc/zvd3mkhd/medidor-ZMG.png",
+    "precio": "300 usd",
+    "stock": "6000 unidades"
+  },
+  {
+    "id": 8,
+    "timestamp(producto)": "2022-09-03T12:40:00.609Z",
+    "nombre": "ZMR230",
+    "descripcion": "Medidor Trifasico",
+    "codigo": "16000001",
+    "foto": "https://i.postimg.cc/k4vBsCgP/medidor-ZMR.png",
+    "precio": "275 usd",
+    "stock": "SIN STOCK"
   }
 ]
