@@ -29,7 +29,7 @@ class ClienteMariaDB{
         return knex.from(this.nombreTabla).select("*")
     }
 
-    getMariaDbById(){
+    getMariaDbById(id){
         return knex.from(this.nombreTabla).select("*").where({ id: `${id}` })
     }
 

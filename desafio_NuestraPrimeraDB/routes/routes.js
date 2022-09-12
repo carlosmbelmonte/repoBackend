@@ -24,8 +24,8 @@ router.get('/', (req, res) => {  // Devuelve todos los productos
                 {
                     id:`${row['ID']}`,
                     title: `${row['Title']}`,
-                    thumbnail: `${row['Thumbnail']}`,
-                    price: `${row['Price']}`
+                    price: `${row['Price']}`,
+                    thumbnail: `${row['Thumbnail']}`
                 }
             )
         }
@@ -41,12 +41,26 @@ router.get('/', (req, res) => {  // Devuelve todos los productos
 })
 
 router.get('/:id', (req, res) => { //Devuelve un producto según su id
-    let iD = getById(parseInt(req.params.id))
-    if (iD) {
-        res.send(iD)
-    } else {
-        res.status(400).json({ error : "Producto no encontrado" });
-    }   
+    let iD = parseInt(req.params.id)
+    let objNew = {}
+
+    tablaProductos.getMariaDbById(iD).then((rows)=>{
+        for(let row of rows){
+            //console.log(`ID: ${row['id']}  |  Nombre: ${row['nombre']}   |  Codigo: ${row['codigo']}  |  Precio: ${row['precio']}  |  Stock: ${row['stock']}`)
+            objNew = {
+                id: `${row['ID']}`,
+                title: `${row['Title']}`, 
+                price: `${row['Price']}`, 
+                thumbnail: `${row['Thumbnail']}`                
+            }
+        }
+
+        if(Object.keys(objNew).length === 0){
+            res.status(400).json({ error : "Producto no encontrado" });    
+        }else{
+            res.send(objNew)    
+        }
+    }).catch(err => console.log(err))   
 })
 
 router.post('/', (req, res) => { //Recibe y agrega un producto, y lo devuelve con su id asignado
@@ -70,7 +84,7 @@ router.post('/', (req, res) => { //Recibe y agrega un producto, y lo devuelve co
             for(let row of rows){
                 newId.push(`${row['ID']}`)
             }
-            res.send({title, price, thumbnail, id: newId[newId.length -1]})
+            res.send({id: newId[newId.length -1], title, price, thumbnail})
         }).catch(err => console.log(err))   
     }).catch(err => console.log(err))    
 })
