@@ -113,14 +113,30 @@ router.put('/:id', (req, res) => { //Recibe y actualiza un producto según su id
 })
 
 router.delete('/:id', (req, res) => { //Elimina un producto según su id
-    let iD = getById(parseInt(req.params.id))
-    if (!iD) {
-        res.status(400).json({ error : "Producto no encontrado" });
-    } else {
-        const index = productos.findIndex(producto => producto.id === parseInt(req.params.id));
-        productos.splice(index, 1);
-        res.send(productos)
-    }   
+    let iD = parseInt(req.params.id)
+    let objNew = {}
+
+    tablaProductos.getMariaDbById(iD).then((rows)=>{
+        for(let row of rows){
+            //console.log(`ID: ${row['id']}  |  Nombre: ${row['nombre']}   |  Codigo: ${row['codigo']}  |  Precio: ${row['precio']}  |  Stock: ${row['stock']}`)
+            objNew = {
+                id: `${row['ID']}`,
+                title: `${row['Title']}`, 
+                price: `${row['Price']}`, 
+                thumbnail: `${row['Thumbnail']}`                
+            }
+        }
+
+        if(Object.keys(objNew).length === 0){
+            res.status(400).json({ error : "Producto no encontrado" });    
+        }else{
+            // 
+            tablaProductos.deleteMariaDbById(iD).then(()=>{
+                res.send({Mensaje: 'Producto Eliminado exitosamente'})
+                console.log(`Producto eliminado`)
+            }).catch(err => console.log(err))   
+        }
+    }).catch(err => console.log(err))   
 })
 
 module.exports = {
