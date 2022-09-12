@@ -51,21 +51,13 @@ router.get('/:id', (req, res) => { //Devuelve un producto según su id
 
 router.post('/', (req, res) => { //Recibe y agrega un producto, y lo devuelve con su id asignado
     const { title, price, thumbnail } = req.body
-    let newId
+    let newId = []
 
     if(!title || !price || !thumbnail){
         res.status(400).json({ "error": "Ingrese todos los datos del producto" })
         return 0
     }
-    /*
-    if(productos.length === 0){
-        newId=1
-    }else{
-        newId = productos.length + 1
-    }
-    productos.push({title, price, thumbnail, id: newId})*/
 
-    
     tablaProductos.postMariaDB(
         {
             Title: title, 
@@ -74,9 +66,13 @@ router.post('/', (req, res) => { //Recibe y agrega un producto, y lo devuelve co
         }
     ).then(() => {
         console.log("Data insertada")
-        res.send({title, price, thumbnail, id: newId})
-    }).catch(err => console.log(err))
-    
+        tablaProductos.getMariaDB().then((rows)=>{
+            for(let row of rows){
+                newId.push(`${row['ID']}`)
+            }
+            res.send({title, price, thumbnail, id: newId[newId.length -1]})
+        }).catch(err => console.log(err))   
+    }).catch(err => console.log(err))    
 })
 
 router.put('/:id', (req, res) => { //Recibe y actualiza un producto según su id
