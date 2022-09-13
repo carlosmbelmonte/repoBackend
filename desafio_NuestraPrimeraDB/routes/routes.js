@@ -10,11 +10,6 @@ tablaProductos.crearTablaMariaDB().then(()=>{
 
 const productos = []
 
-const getById = (x) =>{
-    const idProducto = productos.find(producto => producto.id === x);
-    return idProducto    
-}
-
 router.get('/', (req, res) => {  // Devuelve todos los productos
     let x_productos = []
 
@@ -46,7 +41,6 @@ router.get('/:id', (req, res) => { //Devuelve un producto según su id
 
     tablaProductos.getMariaDbById(iD).then((rows)=>{
         for(let row of rows){
-            //console.log(`ID: ${row['id']}  |  Nombre: ${row['nombre']}   |  Codigo: ${row['codigo']}  |  Precio: ${row['precio']}  |  Stock: ${row['stock']}`)
             objNew = {
                 id: `${row['ID']}`,
                 title: `${row['Title']}`, 
@@ -89,27 +83,35 @@ router.post('/', (req, res) => { //Recibe y agrega un producto, y lo devuelve co
     }).catch(err => console.log(err))    
 })
 
-router.put('/:id', (req, res) => { //Recibe y actualiza un producto según su id
-    let iD = getById(parseInt(req.params.id))
+router.put('/:id', (req, res) => { //Recibe y actualiza un producto según su id   
+    let iD = parseInt(req.params.id)
     const { title, price, thumbnail } = req.body
+    let objNew = {}
 
-    if(!iD) {
-        res.status(400).json({ error : "Producto no encontrado" });
+    if(!title || !price || !thumbnail){
+        res.status(400).json({ "error": "Ingrese todos los datos del producto" })
+        return 0
     }else{
-        if(!title || !price || !thumbnail){
-            res.status(400).json({ "error": "Ingrese todos los datos del producto" });
-        }else{
-            const newProducto = {
-                "title": title,
-                "price": price,
-                "thumbnail": thumbnail,
-                "id": parseInt(req.params.id)
+        tablaProductos.getMariaDbById(iD).then((rows)=>{
+            for(let row of rows){
+                objNew = {
+                    id: `${row['ID']}`,
+                    title: `${row['Title']}`, 
+                    price: `${row['Price']}`, 
+                    thumbnail: `${row['Thumbnail']}`                
+                }
             }
-            const index = productos.findIndex(producto => producto.id === parseInt(req.params.id));
-            productos[index] = newProducto
-            res.send(productos[index])
-        }    
-    }       
+
+            if(Object.keys(objNew).length === 0){
+                res.status(400).json({ error : "Producto no encontrado" });    
+            }else{
+                tablaProductos.putMariaDbById(iD, { ID: objNew.id, Title: title, Price: price, Thumbnail: thumbnail }).then(()=>{
+                    res.send({Mensaje: 'Producto Actualizado exitosamente'})
+                    console.log(`Producto actualizado`,{ ID: objNew.id, Title: title, Price: price, Thumbnail: thumbnail })
+                }).catch(err => console.log(err))                    
+            }
+        }).catch(err => console.log(err))
+    }
 })
 
 router.delete('/:id', (req, res) => { //Elimina un producto según su id
@@ -118,7 +120,6 @@ router.delete('/:id', (req, res) => { //Elimina un producto según su id
 
     tablaProductos.getMariaDbById(iD).then((rows)=>{
         for(let row of rows){
-            //console.log(`ID: ${row['id']}  |  Nombre: ${row['nombre']}   |  Codigo: ${row['codigo']}  |  Precio: ${row['precio']}  |  Stock: ${row['stock']}`)
             objNew = {
                 id: `${row['ID']}`,
                 title: `${row['Title']}`, 
@@ -130,7 +131,6 @@ router.delete('/:id', (req, res) => { //Elimina un producto según su id
         if(Object.keys(objNew).length === 0){
             res.status(400).json({ error : "Producto no encontrado" });    
         }else{
-            // 
             tablaProductos.deleteMariaDbById(iD).then(()=>{
                 res.send({Mensaje: 'Producto Eliminado exitosamente'})
                 console.log(`Producto eliminado`)

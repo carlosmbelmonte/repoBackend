@@ -40,6 +40,16 @@ class ClienteMariaDB{
     deleteMariaDbById(id){
         return knex(this.nombreTabla).where({ id: `${id}` }).del()
     }
+
+    putMariaDbById(id, objPut){
+        return knex(this.nombreTabla).where({ id: `${id}` }).update(
+            {
+                Title: `${objPut.Title}`, 
+                Price: `${objPut.Price}`, 
+                Thumbnail: `${objPut.Thumbnail}`
+            }
+        )
+    }
 }
 
 module.exports = { ClienteMariaDB };
