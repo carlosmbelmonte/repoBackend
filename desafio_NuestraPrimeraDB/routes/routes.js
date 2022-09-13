@@ -2,7 +2,16 @@ const { Router } = require('express')
 const router = Router()
 
 const { ClienteMariaDB } = require('../public/js/clienteMariaDB')
-const tablaProductos = new ClienteMariaDB("articulos")
+const tablaProductos = new ClienteMariaDB({
+    client: 'mysql',
+    connection: {
+        host : 'localhost',
+        port : 3306,
+        user : 'root',
+        password : '',
+        database : 'mibase2'
+    }
+},"mariaDB")
 
 tablaProductos.crearTablaMariaDB().then(()=>{
     console.log("Tabla creada")
