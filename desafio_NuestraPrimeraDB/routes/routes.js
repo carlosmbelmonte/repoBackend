@@ -8,7 +8,7 @@ tablaProductos.crearTablaMariaDB().then(()=>{
     console.log("Tabla creada")
 }).catch(err => console.log(err))
 
-const productos = []
+//const productos = []
 
 router.get('/', (req, res) => {  // Devuelve todos los productos
     let x_productos = []
@@ -141,5 +141,5 @@ router.delete('/:id', (req, res) => { //Elimina un producto según su id
 
 module.exports = {
     router: router,
-    productos: productos,
+    tablaProductos: tablaProductos
 }
