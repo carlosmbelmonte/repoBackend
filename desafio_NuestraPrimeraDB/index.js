@@ -61,7 +61,7 @@ io.on("connection", async(socket) => {
 
 function sendFuction(function_parameter){
     getProductosDB = []
-    tablaProductos.getMariaDB().then((rows)=>{
+    tablaProductos.getDB().then((rows)=>{
         for(let row of rows){
             getProductosDB.push(
                 {
