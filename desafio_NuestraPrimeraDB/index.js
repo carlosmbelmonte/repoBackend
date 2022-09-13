@@ -25,22 +25,9 @@ app.use(express.static("public"))
 app.use('/api/productos', router)
 
 app.get('/', (req, res) => {  // <-----AGREGADO
-    let getAux = []
-    tablaProductos.getMariaDB().then((rows)=>{
-        for(let row of rows){
-            getAux.push(
-                {
-                    id:`${row['ID']}`,
-                    title: `${row['Title']}`,
-                    price: `${row['Price']}`,
-                    thumbnail: `${row['Thumbnail']}`
-                }
-            )
-        }
-        getProductosDB = getAux
-        console.log("Productos en tabla: ", getProductosDB)
+    sendFuction(() => {
         res.render('formulario',{listExist: getProductosDB})
-    }).catch(err => console.log(err)) 
+    })
 })
 
 const PORT = 8080
@@ -57,24 +44,10 @@ io.on("connection", async(socket) => {
 
     socket.on('newProducto', async data => {
         console.log("Nuevo producto agregado: ", data)
-        await postProducto(data)      
-
-        let getAux = []
-        tablaProductos.getMariaDB().then((rows)=>{
-            for(let row of rows){
-                getAux.push(
-                    {
-                        id:`${row['ID']}`,
-                        title: `${row['Title']}`,
-                        price: `${row['Price']}`,
-                        thumbnail: `${row['Thumbnail']}`
-                    }
-                )
-            }
-            getProductosDB = getAux
-            console.log("Array con todos los productos: ", getProductosDB)
-            io.sockets.emit('allProductos', getProductosDB)
-        }).catch(err => console.log(err))    
+        await postProducto(data)       
+        sendFuction(() => {
+            io.sockets.emit('allProductos', getProductosDB)// <-----AGREGADO
+        }) 
     })
 
     socket.on('newMensaje', async msg => {
@@ -86,3 +59,19 @@ io.on("connection", async(socket) => {
     })
 })
 
+function sendFuction(function_parameter){
+    getProductosDB = []
+    tablaProductos.getMariaDB().then((rows)=>{
+        for(let row of rows){
+            getProductosDB.push(
+                {
+                    id:`${row['ID']}`,
+                    title: `${row['Title']}`,
+                    price: `${row['Price']}`,
+                    thumbnail: `${row['Thumbnail']}`
+                }
+            )
+        }
+        function_parameter()
+    }).catch(err => console.log(err))    
+}
