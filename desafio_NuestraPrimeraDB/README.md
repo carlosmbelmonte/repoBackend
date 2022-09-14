@@ -8,3 +8,7 @@
 # Dependecianas especiales
 Dado que daba un error al ejecutarse el fetch, se tuvo que instalar la siguiente dependencia:
 - npm i node-fetch@2.6.7
+
+# Para probar las funcionalidades del desafio:
+Crear con Workbench la DB para MariaDB, con los siguientes comandos:
+- CREATE DATABASE mariaDB
