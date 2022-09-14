@@ -9,12 +9,12 @@ const tablaProductos = new ClienteDB({
         port : 3306,
         user : 'root',
         password : '',
-        database : 'mibase2'
+        database : 'mariaDB'
     }
 },"mariaDB")
 
 tablaProductos.crearTablaMariaDB().then(()=>{
-    console.log("Tabla creada")
+    console.log("...")
 }).catch(err => console.log(err))
 
 router.get('/', (req, res) => {  // Devuelve todos los productos
