@@ -5,10 +5,22 @@ const { engine } = require('express-handlebars')
 const { router, tablaProductos } = require('./routes/routes') // <-----AGREGADO
 
 const postProducto = require('./public/js/postProducto')
-const { Contenedor } = require('./public/js/contenedor')
+const { ClienteDB } = require('./public/js/clienteDB') // <-----AGREGADO
 
-const chats = new Contenedor('./public/chats.txt')
+const tablaChat = new ClienteDB({
+    client: 'sqlite3',
+    connection: {
+        filename: "./DB/ecommerce.sqlite"
+    },
+    useNullAsDefault: true
+},"sqliteDB")
+
 let getProductosDB = []
+let getChatsDB = []
+
+tablaChat.crearTablaSQLite().then(()=>{
+    console.log("***")
+}).catch(err => console.log(err))
 
 const app = express()
 const http = new HTTPServer(app)
@@ -25,7 +37,7 @@ app.use(express.static("public"))
 app.use('/api/productos', router)
 
 app.get('/', (req, res) => {  // <-----AGREGADO
-    sendFuction(() => {
+    sendFuctionProd(() => {
         res.render('formulario',{listExist: getProductosDB})
     })
 })
@@ -39,27 +51,36 @@ serverPort.on('error', error => console.log(`Error en el puerto del servidor: ${
 io.on("connection", async(socket) => {
     console.log("Nuevo cliente conectado")
     socket.emit('allProductos', getProductosDB)// <-----AGREGADO
-    let allChats = await chats.getAll()
-    socket.emit('allMensajes', allChats)
+    
+    sendFuctionChat(() => {
+        socket.emit('allMensajes', getChatsDB)
+    })
 
     socket.on('newProducto', async data => {
         console.log("Nuevo producto agregado: ", data)
         await postProducto(data)       
-        sendFuction(() => {
+        sendFuctionProd(() => {
             io.sockets.emit('allProductos', getProductosDB)// <-----AGREGADO
         }) 
     })
 
     socket.on('newMensaje', async msg => {
         console.log("Nuevo mensaje agregado: ", msg)
-        await chats.save(msg)
-        let newAllChats = await chats.getAll()
-        console.log("Array con todos los chats: ", newAllChats)
-        io.sockets.emit('allMensajes', newAllChats)
+        tablaChat.postDB(
+            {
+                mail: msg.mail, 
+                mensaje: msg.mensaje, 
+                fecha: msg.fecha
+            }
+        ).then(() => { console.log("Chat insertado") }).catch(err => console.log(err))
+
+        sendFuctionChat(() => {
+            io.sockets.emit('allMensajes', getChatsDB)
+        })
     })
 })
 
-function sendFuction(function_parameter){
+function sendFuctionProd(function_parameter){
     getProductosDB = []
     tablaProductos.getDB().then((rows)=>{
         for(let row of rows){
@@ -74,4 +95,21 @@ function sendFuction(function_parameter){
         }
         function_parameter()
     }).catch(err => console.log(err))    
+}
+
+function sendFuctionChat(function_parameter){
+    getChatsDB = []
+    tablaChat.getDB().then((rows)=>{
+        for(let row of rows){
+            getChatsDB.push(
+                {
+                    mail:`${row['mail']}`,
+                    mensaje: `${row['mensaje']}`,
+                    fecha: `${row['fecha']}`,
+                    id: `${row['id']}`
+                }
+            )
+        }
+        function_parameter()
+    }).catch(err => console.log(err)) 
 }
