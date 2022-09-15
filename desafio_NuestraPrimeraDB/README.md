@@ -4,6 +4,7 @@
 - npm install express-handlebars
 - npm install express socket.io
 - npm install knex mysql 
+- npm install knex sqlite3
 
 # Dependecianas especiales
 Dado que daba un error al ejecutarse el fetch, se tuvo que instalar la siguiente dependencia:

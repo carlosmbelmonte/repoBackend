@@ -29,6 +29,29 @@ class ClienteDB{
         })
     }
 
+    crearTablaSQLite(){
+        let flagState
+        return this.db.schema.hasTable(this.nombreTabla).then(function(exists) {
+            if (!exists) {
+                flagState = true
+            }else{
+                flagState = false
+            }
+        }).finally(() => { 
+            if(flagState){
+                console.log(`Se crea la tabla "${this.nombreTabla}"`)
+                return this.db.schema.createTable(this.nombreTabla, table =>{
+                    table.increments("id").primary();
+                    table.string("mail",255).notNullable();
+                    table.string("mensaje",255).notNullable();
+                    table.string("fecha",25).notNullable();
+                })                 
+            }else{
+                console.log(`La tabla "${this.nombreTabla}" ya existe`)    
+            }   
+        })
+    }    
+
     getDB(){
         return this.db.from(this.nombreTabla).select("*")
     }

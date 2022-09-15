@@ -16,7 +16,8 @@
     "knex": "^2.3.0",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.7",
-    "socket.io": "^4.5.2"
+    "socket.io": "^4.5.2",
+    "sqlite3": "^5.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
