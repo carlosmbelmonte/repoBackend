@@ -28,7 +28,7 @@ switch (process.env.PERS) {
         const { default: CarritosDaoArchivo } = await import('./carritos/CarritosDaoArchivo.js')
 
         productosDao = new ProductosDaoArchivo()
-        //carritosDao = new CarritosDaoArchivo()
+        carritosDao = new CarritosDaoArchivo()
         break
 }
 

@@ -102,5 +102,57 @@
         "stock": "6000 unidades"
       }
     ]
+  },
+  {
+    "id": 5,
+    "timestamp(carrito)": "2022-09-30T21:20:18.587Z",
+    "productos": [
+      {
+        "id": 3,
+        "timestamp(producto)": "2022-09-03T12:35:46.177Z",
+        "nombre": "I310",
+        "descripcion": "Medidor Trifasico",
+        "codigo": "80010001",
+        "foto": "https://i.postimg.cc/YqsjbbM0/medidor-I310.png",
+        "precio": "650 usd",
+        "stock": "6000 unidades"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "timestamp(carrito)": "2022-09-30T21:35:24.441Z",
+    "productos": [
+      {
+        "id": 8,
+        "timestamp(producto)": "2022-09-03T12:40:00.609Z",
+        "nombre": "ZMR230",
+        "descripcion": "Medidor Trifasico",
+        "codigo": "16000001",
+        "foto": "https://i.postimg.cc/k4vBsCgP/medidor-ZMR.png",
+        "precio": "275 usd",
+        "stock": "SIN STOCK"
+      },
+      {
+        "id": 2,
+        "timestamp(producto)": "2022-09-03T12:43:16.422Z",
+        "nombre": "DTZ1513",
+        "descripcion": "Medidor Trifasico",
+        "codigo": "80009001",
+        "foto": "https://i.postimg.cc/vBs45TMv/medidor-DTZ1513.png",
+        "precio": "550 usd",
+        "stock": "5000 unidades"
+      },
+      {
+        "id": 5,
+        "timestamp(producto)": "2022-09-30T21:14:56.066Z",
+        "nombre": "SP2301_PruebaDAO",
+        "descripcion": "Medidor Monofasico NONE",
+        "codigo": "20000001",
+        "foto": "https://i.postimg.cc/7Y6f3pvj/medidor-SP2301.png",
+        "precio": "200 usdNONE",
+        "stock": "10000 unidadesNONE"
+      }
+    ]
   }
 ]
