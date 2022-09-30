@@ -1,8 +1,9 @@
 import fs from 'fs'
+import config from '../config.js'
 
 class ContenedorArchivo{
     constructor(fileData){
-        this.fileData = fileData;
+        this.fileData = `${config.fileSystem.path}/${fileData}`;
     }
     
     //Metodos de la clase
@@ -16,8 +17,8 @@ class ContenedorArchivo{
 
     async deleteById(x){
         try{
-            const idItems = await this.getAll()            
-            const filterId = idItems.filter((item) => item.id !== x)
+            const idProductos = await this.getAll()            
+            const filterId = idProductos.filter((item) => item.id !== x)
             await fs.promises.writeFile(this.fileData,JSON.stringify(filterId, null,2)) 
         }catch(error){
             throw new Error(`Error al eliminar el objeto del archivo: ${error}`)
@@ -35,8 +36,8 @@ class ContenedorArchivo{
 
     async getById(x){
         try{
-            const idItems = await this.getAll()           
-            return idItems.find(producto => producto.id == x);            
+            const idProductos = await this.getAll()           
+            return idProductos.find(producto => producto.id == x);            
         }catch(error){
             throw new Error(`Error leer el ID de archivo: ${error}`)
         } 
@@ -68,10 +69,10 @@ class ContenedorArchivo{
     
     async putById(x,newObj){
         try{
-            const allItems = await this.getAll()             
-            const index = allItems.map(item => item.id).indexOf(x)
-            allItems[index] = {...newObj, id: x}
-            await fs.promises.writeFile(this.fileData,JSON.stringify(allItems, null,2))
+            const allProductos = await this.getAll()             
+            const index = allProductos.map(producto => producto.id).indexOf(x)
+            allProductos[index] = {...newObj, id: x}
+            await fs.promises.writeFile(this.fileData,JSON.stringify(allProductos, null,2))
         }catch(error){
             throw new Error(`Error leer el ID de archivo: ${error}`)
         } 
