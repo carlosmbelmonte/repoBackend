@@ -41,13 +41,13 @@
   },
   {
     "id": 5,
-    "timestamp(producto)": "2022-09-03T12:37:21.733Z",
-    "nombre": "SP2301",
-    "descripcion": "Medidor Monofasico",
+    "timestamp(producto)": "2022-09-30T21:14:56.066Z",
+    "nombre": "SP2301_PruebaDAO",
+    "descripcion": "Medidor Monofasico NONE",
     "codigo": "20000001",
     "foto": "https://i.postimg.cc/7Y6f3pvj/medidor-SP2301.png",
-    "precio": "200 usd",
-    "stock": "10000 unidades"
+    "precio": "200 usdNONE",
+    "stock": "10000 unidadesNONE"
   },
   {
     "id": 6,
