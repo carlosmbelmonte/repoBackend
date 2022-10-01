@@ -15,7 +15,7 @@ routerProductos.get('/', async(req, res) => {  // Devuelve todos los productos.
 
 routerProductos.get('/:id', async(req, res) => { //Devuelve un producto según su id
     let allProductos = await productosApi.getAll()
-    const iD = allProductos.find(producto => producto.id === parseInt(req.params.id));
+    const iD = allProductos.find(producto => parseInt(producto.id) === parseInt(req.params.id));
     if (iD) {
         res.send(iD)
     } else {
@@ -53,7 +53,7 @@ routerProductos.post('/', async(req, res) => { //Recibe y agrega un producto, y 
 routerProductos.put('/:id', async(req, res) => { //Recibe y actualiza un producto según su id
     if(administrador){ 
         let allProductos = await productosApi.getAll()   
-        const iD = allProductos.find(producto => producto.id === parseInt(req.params.id));
+        const iD = allProductos.find(producto => parseInt(producto.id) === parseInt(req.params.id));
         const { nombre, descripcion, codigo, foto, precio, stock } = req.body
         let fecha = new Date()
 
@@ -75,7 +75,8 @@ routerProductos.put('/:id', async(req, res) => { //Recibe y actualiza un product
                 }
                 await productosApi.putById(parseInt(req.params.id),newProducto)
                 allProductos = await productosApi.getAll()
-                res.send(allProductos[(parseInt(req.params.id)-1)])
+                const iD = allProductos.find(producto => parseInt(producto.id) === parseInt(req.params.id));
+                res.send(iD)
             }    
         }
     }else{
@@ -88,7 +89,7 @@ routerProductos.put('/:id', async(req, res) => { //Recibe y actualiza un product
 routerProductos.delete('/:id', async(req, res) => { //Elimina un producto según su id   
     if(administrador){  
         let allProductos = await productosApi.getAll()  
-        const iD = allProductos.find(producto => producto.id === parseInt(req.params.id));
+        const iD = allProductos.find(producto => parseInt(producto.id) === parseInt(req.params.id));
         if (!iD) {
             res.status(400).json({ error : "Producto no encontrado" });
         } else {

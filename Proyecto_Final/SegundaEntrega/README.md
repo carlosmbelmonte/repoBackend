@@ -12,3 +12,4 @@ d. Hacer lo mismo para bases de datos relacionales: MariaDB/SQLite3.
 # Dependencias a instalar:
 - npm install express
 - npm install --save-dev nodemon
+- npm install firebase-admin
