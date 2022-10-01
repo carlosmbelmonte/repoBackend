@@ -24,7 +24,7 @@ routerCarrito.post('/', async(req, res) => { //Recibe y agrega un carrito, y dev
 
 routerCarrito.delete('/:id', async(req, res) => { //Elimina un carrito según su id   
     let allCarrito = await carritosApi.getAll()  
-    const iD = allCarrito.find(cart => cart.id === parseInt(req.params.id))
+    const iD = allCarrito.find(cart => parseInt(cart.id) === parseInt(req.params.id))
 
     if (!iD) {
         res.status(400).json({ error : "Carrito no encontrado" });
@@ -37,7 +37,7 @@ routerCarrito.delete('/:id', async(req, res) => { //Elimina un carrito según su
 
 routerCarrito.get('/:id/productos', async(req, res) => { //Devuelve los productos de un carrito segun su id
     let allCarrito = await carritosApi.getAll()
-    const iD = allCarrito.find(cart => cart.id === parseInt(req.params.id))
+    const iD = allCarrito.find(cart => parseInt(cart.id) === parseInt(req.params.id))
 
     if (iD) {
         res.send(iD.productos)
@@ -49,13 +49,13 @@ routerCarrito.get('/:id/productos', async(req, res) => { //Devuelve los producto
 routerCarrito.post('/:id/productos', async(req, res) => { //Incorporar productos al carrito por su id de producto
     let allCarrito = await carritosApi.getAll()
     
-    const iDCart = allCarrito.find(cart => cart.id === parseInt(req.params.id))
-    const indexCart = allCarrito.map(cart => cart.id).indexOf(parseInt(req.params.id))
+    const iDCart = allCarrito.find(cart => parseInt(cart.id) === parseInt(req.params.id))
+    const indexCart = allCarrito.map(cart => parseInt(cart.id)).indexOf(parseInt(req.params.id))
 
     if (iDCart) {
         const { idProducto } = req.body
         let allProductos = await productosApi.getAll()
-        const iD = allProductos.find(producto => producto.id === idProducto)
+        const iD = allProductos.find(producto => parseInt(producto.id) === idProducto)
 
         if (iD) {
             allCarrito[indexCart].productos.push(iD)
@@ -72,15 +72,15 @@ routerCarrito.post('/:id/productos', async(req, res) => { //Incorporar productos
 
 routerCarrito.delete('/:id/productos/:id_prod', async(req, res) => { //Elimina un producto del carrito por su id de carrito y de producto
     let allCarrito = await carritosApi.getAll()
-    const iDCart = allCarrito.find(cart => cart.id === parseInt(req.params.id))
-    const indexCart = allCarrito.map(cart => cart.id).indexOf(parseInt(req.params.id))
+    const iDCart = allCarrito.find(cart => parseInt(cart.id) === parseInt(req.params.id))
+    const indexCart = allCarrito.map(cart => parseInt(cart.id)).indexOf(parseInt(req.params.id))
 
     if (iDCart) {
         const arrayProd = allCarrito[indexCart].productos
-        const iDProd = arrayProd.find(producto => producto.id === parseInt(req.params.id_prod))
+        const iDProd = arrayProd.find(producto => parseInt(producto.id) === parseInt(req.params.id_prod))
 
         if (iDProd) {
-            const filterId = arrayProd.filter((item) => item.id !== parseInt(req.params.id_prod))
+            const filterId = arrayProd.filter((item) => parseInt(item.id) !== parseInt(req.params.id_prod))
             allCarrito[indexCart].productos = filterId
             await carritosApi.saveAll(allCarrito)
             res.send(`Producto Eliminado con exito`) 

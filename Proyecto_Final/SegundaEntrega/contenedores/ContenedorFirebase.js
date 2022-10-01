@@ -45,7 +45,7 @@ class ContenedorFirebase {
         try{
             let preSave = await this.getAll()
             if(preSave.length === 0){
-                await createAll(arrayItems)
+                await this.createAll(arrayItems)
             }else{
                 for(let i = 0;i<preSave.length;i++){
                     await this.coleccion.doc(`${preSave[i].id}`).delete()
@@ -102,20 +102,35 @@ class ContenedorFirebase {
     }
 
     async createAll(arrayCreate){
-        for(let i = 0; i < arrayCreate.length; i++ ){
-            let doc = this.coleccion.doc(`${arrayCreate[i].id}`)
-            await doc.create(
-                {
-                    "timestamp(producto)": arrayCreate[i]["timestamp(producto)"], 
-                    "nombre": arrayCreate[i].nombre,
-                    "descripcion": arrayCreate[i].descripcion,
-                    "codigo": arrayCreate[i].codigo,
-                    "foto": arrayCreate[i].foto,
-                    "precio": arrayCreate[i].precio,
-                    "stock": arrayCreate[i].stock
-                }
-            )   
-        }   
+        if("timestamp(producto)" in arrayCreate[0]) {
+            for(let i = 0; i < arrayCreate.length; i++ ){
+                let doc = this.coleccion.doc(`${arrayCreate[i].id}`)
+                await doc.create(
+                    {
+                        "timestamp(producto)": arrayCreate[i]["timestamp(producto)"], 
+                        "nombre": arrayCreate[i].nombre,
+                        "descripcion": arrayCreate[i].descripcion,
+                        "codigo": arrayCreate[i].codigo,
+                        "foto": arrayCreate[i].foto,
+                        "precio": arrayCreate[i].precio,
+                        "stock": arrayCreate[i].stock
+                    }
+                )   
+            }            
+        }
+        if("timestamp(carrito)" in arrayCreate[0]) {
+            for(let i = 0; i < arrayCreate.length; i++ ){
+                let doc = this.coleccion.doc(`${arrayCreate[i].id}`)
+                await doc.create(
+                    {
+                        "timestamp(carrito)": arrayCreate[i]["timestamp(carrito)"], 
+                        "productos": arrayCreate[i].productos
+                    }
+                )   
+            }            
+        }
+
+   
     }
 }
 export default ContenedorFirebase
