@@ -3,12 +3,10 @@ export default{
         path: './DB/'
     },
     mongodb: {
-        cnxStr: 'mongodb://localhost/ecommerce',
+        cnxStr: 'mongodb+srv://carlosmbelmonte:Carlos123@cluster0.zxvolg7.mongodb.net/ecommerce?retryWrites=true&w=majority',
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useCreateIndex: true,
-            serverSelectionTimeoutMS: 5000,
         }
     },
     firebase: {

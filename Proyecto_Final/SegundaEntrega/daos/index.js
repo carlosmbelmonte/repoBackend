@@ -9,30 +9,35 @@ switch (process.env.PERS) {
         productosDao = new ProductosDaoArchivo()
         carritosDao = new CarritosDaoArchivo()
         break
-    /*case 'firebase':
+    case 'firebase':
         const { default: ProductosDaoFirebase } = await import('./productos/ProductosDaoFirebase.js')
         const { default: CarritosDaoFirebase } = await import('./carritos/CarritosDaoFirebase.js')
 
         productosDao = new ProductosDaoFirebase()
         carritosDao = new CarritosDaoFirebase()
-        break*/
+        break/*
     case 'mongodb':
         const { default: ProductosDaoMongoDb } = await import('./productos/ProductosDaoMongoDb.js')
         const { default: CarritosDaoMongoDb } = await import('./carritos/CarritosDaoMongoDb.js')
 
         productosDao = new ProductosDaoMongoDb()
         carritosDao = new CarritosDaoMongoDb()
-        break
+        break*/
     default:
         /*const { default: ProductosDaoArchivo } = await import('./productos/ProductosDaoArchivos.js')
         const { default: CarritosDaoArchivo } = await import('./carritos/CarritosDaoArchivo.js')
         productosDao = new ProductosDaoArchivo()
-        carritosDao = new CarritosDaoArchivo()*/
+        carritosDao = new CarritosDaoArchivo()
 
         const { default: ProductosDaoFirebase } = await import('./productos/ProductosDaoFirebase.js')
         const { default: CarritosDaoFirebase } = await import('./carritos/CarritosDaoFirebase.js')
         productosDao = new ProductosDaoFirebase()
-        carritosDao = new CarritosDaoFirebase()        
+        carritosDao = new CarritosDaoFirebase()*/  
+        const { default: ProductosDaoMongo } = await import('./productos/ProductosDaoMongo.js')
+        //const { default: CarritosDaoMongoDb } = await import('./carritos/CarritosDaoMongo.js')
+
+        productosDao = new ProductosDaoMongo()
+        //carritosDao = new CarritosDaoMongoDb()              
         break
 }
 
