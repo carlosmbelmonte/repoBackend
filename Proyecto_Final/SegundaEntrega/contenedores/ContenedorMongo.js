@@ -12,7 +12,7 @@ class ContenedorMongo {
     async getAll(){
         await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options)
         try{
-            const respuesta = await this.coleccion.find({},{id:1,'timestamp(producto)':1,nombre:1,descripcion:1,codigo:1,foto:1,precio:1,stock:1}).sort({id: 1})
+            const respuesta = await this.coleccion.find().sort({id: 1})
             mongoose.connection.close()
             return respuesta
         }catch(err){
@@ -23,7 +23,7 @@ class ContenedorMongo {
     async getById(x){
         await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options)
         try{
-            const respuesta = await this.coleccion.find({id:{$eq: `${x}`}},{id:1,'timestamp(producto)':1,nombre:1,descripcion:1,codigo:1,foto:1,precio:1,stock:1})
+            const respuesta = await this.coleccion.find({id:{$eq: `${x}`}})
             mongoose.connection.close()
             return respuesta
         }catch(err){
