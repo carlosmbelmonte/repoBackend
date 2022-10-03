@@ -2,7 +2,7 @@
   {
     "id": 1,
     "timestamp(producto)": "2022-09-03T12:33:41.453Z",
-    "nombre": "DDZ1513",
+    "nombre": "DDZ1513_DB_TXT",
     "descripcion": "Medidor Monofasico",
     "codigo": "80008001",
     "foto": "https://i.postimg.cc/LsfqqLdX/medidor-DDZ1513.png",
@@ -12,7 +12,7 @@
   {
     "id": 2,
     "timestamp(producto)": "2022-09-03T12:43:16.422Z",
-    "nombre": "DTZ1513",
+    "nombre": "DTZ1513_DB_TXT",
     "descripcion": "Medidor Trifasico",
     "codigo": "80009001",
     "foto": "https://i.postimg.cc/vBs45TMv/medidor-DTZ1513.png",
