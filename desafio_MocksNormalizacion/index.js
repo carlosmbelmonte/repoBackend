@@ -42,6 +42,10 @@ app.get('/', (req, res) => {  // <-----AGREGADO
     })
 })
 
+app.get('/faker', (req, res) => {  // <-----AGREGADO
+    res.send(`Hola mundo desde faker`)
+})
+
 const PORT = 8080
 const serverPort = http.listen(PORT, () => {
     console.log(`listening on port ${PORT}`)
