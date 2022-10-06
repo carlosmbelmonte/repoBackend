@@ -2,10 +2,11 @@ const express = require("express")
 const { Server: HTTPServer} = require('http')
 const { Server: IOServer } = require("socket.io")
 const { engine } = require('express-handlebars')
-const { router, tablaProductos } = require('./routes/routes') // <-----AGREGADO
+const { router, tablaProductos } = require('./routes/routes') 
+const { routerFaker , productosRandom} = require('./routes/routeFaker')// <-----AGREGADO
 
 const postProducto = require('./public/js/postProducto')
-const { ClienteDB } = require('./public/js/clienteDB') // <-----AGREGADO
+const { ClienteDB } = require('./public/js/clienteDB') 
 
 const tablaChat = new ClienteDB({
     client: 'sqlite3',
@@ -35,22 +36,23 @@ app.use(express.urlencoded({ extended : true }))
 app.use(express.static("public"))
 
 app.use('/api/productos', router)
-
-app.get('/', (req, res) => {  // <-----AGREGADO
-    sendFuctionProd(() => {
-        res.render('formulario',{listExist: getProductosDB})
-    })
-})
-
-app.get('/faker', (req, res) => {  // <-----AGREGADO
-    res.send(`Hola mundo desde faker`)
-})
+app.use('/api/productos-test', routerFaker)
 
 const PORT = 8080
 const serverPort = http.listen(PORT, () => {
     console.log(`listening on port ${PORT}`)
 })
 serverPort.on('error', error => console.log(`Error en el puerto del servidor: ${error}`))
+
+app.get('/', (req, res) => {
+    sendFuctionProd(() => {
+        res.render('formulario',{listExist: getProductosDB})
+    })
+})
+
+app.get('/faker', (req, res) => {  // <-----AGREGADO
+    res.render('tabla',{listFaker: productosRandom()})
+})
 
 io.on("connection", async(socket) => {
     console.log("Nuevo cliente conectado")

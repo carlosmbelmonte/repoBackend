@@ -43,6 +43,7 @@ Así podremos utilizar los mismos métodos de normalizr que en el backend. Por e
 - npm install express socket.io
 - npm install knex mysql 
 - npm install knex sqlite3
+- npm install @faker-js/faker --save-dev
 
 # Dependecianas especiales
 Dado que daba un error al ejecutarse el fetch, se tuvo que instalar la siguiente dependencia:
