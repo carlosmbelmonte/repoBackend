@@ -3,6 +3,9 @@ const socket = io.connect()
 const button = document.getElementById("agregar")
 const chatButton = document.getElementById("enviarChat")
 
+let cteMoneda 
+let dolarPrecio
+
 const padTo2Digits = (num) => {
     return num.toString().padStart(2, '0');
 }
@@ -105,3 +108,17 @@ socket.on('allMensajes', chats => {
         })        
     }
 })
+
+const radioButtons = document.querySelectorAll('input[name="showForm"]');
+for(const radioButton of radioButtons){
+    radioButton.addEventListener('change', function(e) {
+        document.getElementById('showFormYes').checked ? (
+            document.getElementById('formChat').style.display = '',
+            document.getElementById('enviarChat').style.display = ''
+        ) : (
+            document.getElementById('formChat').style.display = 'none',
+            document.getElementById('enviarChat').style.display = 'none'
+        )
+      }
+    );
+}

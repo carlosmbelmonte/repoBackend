@@ -1,11 +1,11 @@
-<h1 class="display-5 fw-bold mx-3">Ingrese Productos (usando Handlebars)</h1>
-<form class="mx-3" id="formProducto">
+<h1 class="display-5 fw-bold mx-3">Productos generados con Faker</h1>
+<form class="mx-3" id="formProducto" style="display: none;">
     <input class="form-control mb-3" type="text" id="p_title" placeholder="Title">
     <input class="form-control mb-3" type="number" id="p_price" placeholder="Price">
     <input class="form-control mb-3" type="text" id="p_thumbnail" placeholder="Thumbnail">
 </form>
 <div class="d-flex mx-3">
-    <button class="btn btn-primary mb-3" id="agregar">Agregar Producto</button>    
+    <button class="btn btn-primary mb-3" id="agregar" style="display: none;">Agregar Producto</button>    
 </div>
 <p class="mx-3" id="mensajeError"></p>
 <div class="mx-3"> 
@@ -21,6 +21,16 @@
         </tbody>
     </table>
     <h2 class="fw-bold" id="msgProducto">No hay productos</h2>
+</div>
+<div class="d-flex mx-3">Mostrar formulario de mensaje:  
+    <div class="mx-3">
+        <input type="radio" name="showForm" value="SI" id="showFormYes" checked>
+        <label for="showFormYes">SI</label> 
+    </div>
+    <div class="mx-3">
+        <input type="radio" name="showForm" value="NO" id="showFormNo">
+        <label for="showFormNo">NO</label> 
+    </div>
 </div>
 {{> chat }}
 <script src="js/main.js"></script>
