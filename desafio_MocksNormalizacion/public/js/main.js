@@ -1,4 +1,5 @@
 const socket = io.connect()
+const { denormalize, schema } = normalizr//---->Para Normalizr
 
 const button = document.getElementById("agregar")
 const chatButton = document.getElementById("enviarChat")
@@ -78,14 +79,8 @@ chatButton?.addEventListener("click", () => {
     let avatarChat = document.getElementById("avatarChat").value;
     let mensajeChat = document.getElementById("mensajeChat").value;
 
-
     document.getElementById('formChat').reset()
-/*    let newChat = {
-        "mail": mailChat,
-        "mensaje": mensajeChat,
-        "fecha": formatDate(new Date())
-    }
-    }*/
+
     let newChat = {
         "author": {
             "id": mailChat,
@@ -103,12 +98,18 @@ chatButton?.addEventListener("click", () => {
         document.getElementById("mensajeErrorChat").innerText = "Se debe ingresar los campos: MAIL-MENSAJE-NOMBRE-APELLIDO"
     }else{
         document.getElementById("mensajeErrorChat").innerText = ""
-        console.log(newChat)  
+        //console.log(newChat)  
         socket.emit('newMensaje', newChat)   
     } 
 })
 
-socket.on('allMensajes', chats => { 
+socket.on('allMensajes', normalizrChats => {
+    const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'id' }) //---->Para Normalizr
+    const messageSchema = new schema.Entity('messages', { author: authorSchema }, { idAttribute: '_id' }) //---->Para Normalizr
+    const denormalizedMessages = denormalize(normalizrChats.result, [messageSchema], normalizrChats.entities)//---->Para Normalizr
+
+    const chats = denormalizedMessages//---->Para Normalizr
+
     console.log("array en consola[chats]",chats)
     if(chats.length === 0){   
         document.getElementById('tablaChat').style.display = 'none';

@@ -6,9 +6,13 @@ const { engine } = require('express-handlebars')
 const { routerFaker , productosRandom} = require('./routes/routeFaker')// <-----AGREGADO
 
 const postProducto = require('./public/js/postProducto')
+const { normalize, schema } = require("normalizr")//---->Para Normalizr
 
 const { Contenedor } = require('./public/js/contenedor') //---->Para Normalizr
-const chats = new Contenedor('./public/chatsNormalizr.txt')//---->Para Normalizr
+const chats = new Contenedor('./public/chat.txt')//---->Para Normalizr
+
+const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'id' }) //---->Para Normalizr
+const messageSchema = new schema.Entity('messages', { author: authorSchema }, { idAttribute: '_id' }) //---->Para Normalizr
 
 let productos = productosRandom()
 
@@ -42,7 +46,9 @@ io.on("connection", async(socket) => {
     console.log("Nuevo cliente conectado")
     socket.emit('allProductos', productos)
     let allChats = await chats.getAll()
-    socket.emit('allMensajes', allChats)
+    const normalizedMessages = normalize(allChats, [messageSchema])//---->Para Normalizr
+    console.log("Array con todos los chats: ", normalizedMessages)
+    socket.emit('allMensajes', normalizedMessages)
 
     socket.on('newProducto', async data => {
         console.log("Nuevo producto agregado: ", data)
@@ -55,7 +61,8 @@ io.on("connection", async(socket) => {
         console.log("Nuevo mensaje agregado: ", msg)
         await chats.saveNormalizr(msg)
         let newAllChats = await chats.getAll()
-        console.log("Array con todos los chats: ", newAllChats)
-        io.sockets.emit('allMensajes', newAllChats)
+        const newNormalizedMessages = normalize(newAllChats, [messageSchema])//---->Para Normalizr
+        console.log("Array con todos los chats: ", newNormalizedMessages)
+        io.sockets.emit('allMensajes', newNormalizedMessages)
     })
 })

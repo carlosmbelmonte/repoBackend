@@ -74,7 +74,15 @@ class Contenedor{
         }catch(error){
             throw new Error(`Error al guardar: ${error}`)
         }
-    }    
+    }  
+    
+    async normalizadoGuardado(msjNormalizado){
+        try{
+            await fs.promises.writeFile(this.fileData,JSON.stringify(msjNormalizado, null,2))   
+        }catch(error){
+            throw new Error(`Error al guardar: ${error}`)
+        }   
+    }
 }
 
 module.exports = { Contenedor };
