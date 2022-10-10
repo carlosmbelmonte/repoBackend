@@ -58,6 +58,23 @@ class Contenedor{
             throw new Error(`Error al guardar: ${error}`)
         }
     }
+
+    async saveNormalizr(newObj){
+        const informacion = await this.getAll()
+        let newId
+        if(informacion.length == 0){
+            newId = 1
+        }else{
+            newId = parseInt(informacion[informacion.length-1]._id) + 1
+        }
+        informacion.push({...newObj, _id: newId})
+        try{
+            await fs.promises.writeFile(this.fileData,JSON.stringify(informacion, null,2))
+            return newId    
+        }catch(error){
+            throw new Error(`Error al guardar: ${error}`)
+        }
+    }    
 }
 
 module.exports = { Contenedor };

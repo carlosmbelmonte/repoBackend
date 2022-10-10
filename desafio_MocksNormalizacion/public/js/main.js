@@ -71,12 +71,32 @@ socket.on('allProductos', productos => {
 
 chatButton?.addEventListener("click", () => {
     let mailChat = document.getElementById("mailChat").value;
+    let nombreChat = document.getElementById("nombreChat").value;
+    let apellidoChat = document.getElementById("apellidoChat").value;
+    let edadChat = document.getElementById("edadChat").value;
+    let aliasChat = document.getElementById("aliasChat").value;
+    let avatarChat = document.getElementById("avatarChat").value;
     let mensajeChat = document.getElementById("mensajeChat").value;
+
+
     document.getElementById('formChat').reset()
-    let newChat = {
+/*    let newChat = {
         "mail": mailChat,
         "mensaje": mensajeChat,
         "fecha": formatDate(new Date())
+    }
+    }*/
+    let newChat = {
+        "author": {
+            "id": mailChat,
+            "nombre": nombreChat,
+            "apellido": apellidoChat,
+            "edad": edadChat,
+            "alias": aliasChat,
+            "avatar": avatarChat
+        },
+        "text": mensajeChat,
+        "fecha": formatDate(new Date())        
     }
 
     if(mailChat===''|| mensajeChat===''){
@@ -100,10 +120,11 @@ socket.on('allMensajes', chats => {
         document.getElementById('listaChats').innerHTML += `
             <tr> 
                 <td>
-                    <span class="fw-bold text-primary">${chat.mail}</span> 
+                    <span class="fw-bold text-primary">${chat.author.id}</span> 
                     <span class="text-danger">[${chat.fecha}]: </span>
-                    <span class="text-success fst-italic">${chat.mensaje}</span>
-                </td>    
+                    <span class="text-success fst-italic">${chat.text}</span>
+                    <img src="${chat.author.avatar}" height="48px">
+                </td>  
             </tr>`
         })        
     }

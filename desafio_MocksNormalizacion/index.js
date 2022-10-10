@@ -53,7 +53,7 @@ io.on("connection", async(socket) => {
 
     socket.on('newMensaje', async msg => {
         console.log("Nuevo mensaje agregado: ", msg)
-        await chats.save(msg)
+        await chats.saveNormalizr(msg)
         let newAllChats = await chats.getAll()
         console.log("Array con todos los chats: ", newAllChats)
         io.sockets.emit('allMensajes', newAllChats)
