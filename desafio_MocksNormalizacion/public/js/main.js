@@ -99,8 +99,8 @@ chatButton?.addEventListener("click", () => {
         "fecha": formatDate(new Date())        
     }
 
-    if(mailChat===''|| mensajeChat===''){
-        document.getElementById("mensajeErrorChat").innerText = "Se debe ingresar todos los campos!!"
+    if(mailChat===''|| mensajeChat==='' || nombreChat==='' || apellidoChat===''){
+        document.getElementById("mensajeErrorChat").innerText = "Se debe ingresar los campos: MAIL-MENSAJE-NOMBRE-APELLIDO"
     }else{
         document.getElementById("mensajeErrorChat").innerText = ""
         console.log(newChat)  
