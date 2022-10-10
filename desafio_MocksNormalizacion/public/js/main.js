@@ -110,7 +110,12 @@ socket.on('allMensajes', normalizrChats => {
 
     const chats = denormalizedMessages//---->Para Normalizr
 
+    console.log("Tamaño objeto normalizado: ",JSON.stringify(normalizrChats).length)
+    console.log("Tamaño objeto original: ",JSON.stringify(chats).length);
     console.log("array en consola[chats]",chats)
+
+    
+    
     if(chats.length === 0){   
         document.getElementById('tablaChat').style.display = 'none';
     }
@@ -127,7 +132,11 @@ socket.on('allMensajes', normalizrChats => {
                     <img src="${chat.author.avatar}" height="48px">
                 </td>  
             </tr>`
-        })        
+        })
+
+        const porcentajeDeCompresion = ((JSON.stringify(normalizrChats).length * 100) / JSON.stringify(chats).length).toFixed(2)
+        console.log(`El porcentaje de compresión es del ${porcentajeDeCompresion}%`)    
+        document.getElementById("formLegend").innerText = `Centro de Mensajes (Compresión: ${porcentajeDeCompresion}%)`   
     }
 })
 

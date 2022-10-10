@@ -102,5 +102,31 @@
     "text": "El mismo usuario mandando el mensaje desde EDGE",
     "fecha": "10/10/2022 13:05:43",
     "_id": 8
+  },
+  {
+    "author": {
+      "id": "Joaquin@edge.com",
+      "nombre": "Joaquin",
+      "apellido": "Belmonte",
+      "edad": "1",
+      "alias": "JB",
+      "avatar": "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__1-64.png"
+    },
+    "text": "Nuevo usuario desde edge, para probar los porcentajes de compresion.",
+    "fecha": "10/10/2022 13:29:15",
+    "_id": 9
+  },
+  {
+    "author": {
+      "id": "Joaquin@edge.com",
+      "nombre": "Joaquin",
+      "apellido": "Belmonte",
+      "edad": "1",
+      "alias": "JB",
+      "avatar": "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__1-64.png"
+    },
+    "text": "El mismo usuario envia un mensaje desde Chrome!",
+    "fecha": "10/10/2022 13:30:09",
+    "_id": 10
   }
 ]
