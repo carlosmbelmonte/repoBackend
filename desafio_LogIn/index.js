@@ -42,6 +42,10 @@ app.get('/login', (req, res) => {
     res.render('formulario',{listExist: productos})
 })
 
+app.get('/logout', (req, res) => {
+    res.render('logout')
+})
+
 io.on("connection", async(socket) => {
     console.log("Nuevo cliente conectado")
     socket.emit('allProductos', productos)

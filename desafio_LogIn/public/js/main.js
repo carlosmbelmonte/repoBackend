@@ -1,8 +1,13 @@
 const socket = io.connect()
 const { denormalize, schema } = normalizr//---->Para Normalizr
 
+document.getElementById('loginPosterio').style.display = 'none'
+document.getElementById('accesoPermitido').style.display = 'none'
+
 const button = document.getElementById("agregar")
 const chatButton = document.getElementById("enviarChat")
+const btnLogin = document.getElementById("enviarLogIn")
+const btnDesloguear = document.getElementById("desloguear")
 
 let cteMoneda 
 let dolarPrecio
@@ -153,3 +158,19 @@ for(const radioButton of radioButtons){
       }
     );
 }
+
+btnLogin?.addEventListener("click", () => {
+    let nombreUserLogIn = document.getElementById("inputLogIn").value
+    
+    if(nombreUserLogIn===''){
+        document.getElementById("mensajeErrorLogIn").innerText = "Se debe ingresar el campo: NOMBRE"
+        document.getElementById('inputLogIn').value=''
+    }else{
+        document.getElementById("mensajeErrorLogIn").innerText = ""    
+        document.getElementById('inputLogIn').value=''
+        document.getElementById('loginPrevio').style.display = 'none'
+        document.getElementById('loginPosterio').style.display = ''
+        document.getElementById("logueoOk").innerText = `Bienvenido ${nombreUserLogIn}`
+        document.getElementById('accesoPermitido').style.display = ''
+    } 
+})
