@@ -159,18 +159,28 @@ for(const radioButton of radioButtons){
     );
 }
 
-btnLogin?.addEventListener("click", () => {
+btnLogin?.addEventListener("click", (evt) => {
     let nombreUserLogIn = document.getElementById("inputLogIn").value
     
     if(nombreUserLogIn===''){
         document.getElementById("mensajeErrorLogIn").innerText = "Se debe ingresar el campo: NOMBRE"
         document.getElementById('inputLogIn').value=''
+        evt.preventDefault()
     }else{
+        evt.preventDefault()
         document.getElementById("mensajeErrorLogIn").innerText = ""    
         document.getElementById('inputLogIn').value=''
         document.getElementById('loginPrevio').style.display = 'none'
         document.getElementById('loginPosterio').style.display = ''
         document.getElementById("logueoOk").innerText = `Bienvenido ${nombreUserLogIn}`
         document.getElementById('accesoPermitido').style.display = ''
-    } 
+
+        fetch('/login', {
+            method: 'POST', 
+            body: JSON.stringify({user: nombreUserLogIn}),
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response)); 
+    }    
 })

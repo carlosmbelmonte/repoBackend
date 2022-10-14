@@ -42,6 +42,11 @@ app.get('/login', (req, res) => {
     res.render('formulario',{listExist: productos})
 })
 
+app.post('/login',(req, res) => {
+    const { user } = req.body    
+    console.log("prueba para verificar llegada del usuario:", user)
+})
+
 app.get('/logout', (req, res) => {
     res.render('logout')
 })
