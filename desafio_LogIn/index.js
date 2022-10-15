@@ -37,14 +37,25 @@ const serverPort = http.listen(PORT, () => {
 })
 serverPort.on('error', error => console.log(`Error en el puerto del servidor: ${error}`))
 
+app.get('/', (req, res) => {
+    res.redirect('/login')  
+})
 
 app.get('/login', (req, res) => {
     if(usuarioPrueba===''){
         res.render('loginPrevio') 
-    }else{
-        res.render('formulario',{userSend: usuarioPrueba})    
     }
-    console.log("Prueba variable usuario fuera If:", usuarioPrueba)
+    else{ 
+        res.redirect('/home')  
+    }
+})
+
+app.get('/home', (req, res) => {
+    if(usuarioPrueba===''){
+        res.redirect('/login')       
+    }else{
+        res.render('formulario',{userSend: usuarioPrueba})             
+    }
 })
 
 app.post('/login',(req, res) => {
@@ -60,9 +71,10 @@ app.get('/logout', (req, res) => {
         res.render('logout',{userSend: usuarioPrueba})
         varDeslogueo = false
         usuarioPrueba=''    
-    }else{
-        res.status(400).json({ error : "No se puede desloguear, si previamente no se logueo" });
-    }   
+    }
+    else{
+        res.redirect('/login') 
+    } 
 })
 
 app.post('/logout',(req, res) => {
