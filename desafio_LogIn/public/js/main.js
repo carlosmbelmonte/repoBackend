@@ -1,16 +1,8 @@
 const socket = io.connect()
 const { denormalize, schema } = normalizr//---->Para Normalizr
 
-document.getElementById('loginPosterio').style.display = 'none'
-document.getElementById('accesoPermitido').style.display = 'none'
-
 const button = document.getElementById("agregar")
 const chatButton = document.getElementById("enviarChat")
-const btnLogin = document.getElementById("enviarLogIn")
-const btnDesloguear = document.getElementById("desloguear")
-
-let cteMoneda 
-let dolarPrecio
 
 const padTo2Digits = (num) => {
     return num.toString().padStart(2, '0');
@@ -158,7 +150,7 @@ for(const radioButton of radioButtons){
       }
     );
 }
-
+/*
 btnLogin?.addEventListener("click", (evt) => {
     let nombreUserLogIn = document.getElementById("inputLogIn").value
     
@@ -183,4 +175,22 @@ btnLogin?.addEventListener("click", (evt) => {
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response)); 
     }    
+})
+document.getElementById("logueoOk").innerText = `Bienvenido Tu turrito`*/
+
+const btnDesloguear = document.getElementById("desloguear")
+
+btnDesloguear?.addEventListener("click", () => {
+    fetch('/login', {
+        method: 'POST', 
+        body: JSON.stringify(
+            {
+                user: '',
+                flag: 'salirLogin'
+            }
+        ),
+        headers: {'Content-Type': 'application/json'}
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response)); 
 })
