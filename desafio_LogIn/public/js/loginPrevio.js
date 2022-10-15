@@ -17,7 +17,6 @@ btnLogin?.addEventListener("click", (evt) => {
             body: JSON.stringify(
                 {
                     user: nombreUserLogIn,
-                    flag: 'entrarLogin'
                 }
             ),
             headers: {'Content-Type': 'application/json'}

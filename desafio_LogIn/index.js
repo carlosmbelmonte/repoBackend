@@ -44,23 +44,33 @@ app.get('/login', (req, res) => {
     }else{
         res.render('formulario',{userSend: usuarioPrueba})    
     }
+    console.log("Prueba variable usuario fuera If:", usuarioPrueba)
 })
 
 app.post('/login',(req, res) => {
     const { user } = req.body    
-    console.log("prueba para verificar llegada del usuario:", user)
-    
-    if(user!==''){
-        usuarioPrueba = user   
-        res.redirect('/login') 
-    }else{
-        usuarioPrueba = user   
-        res.redirect('/login')         
+    usuarioPrueba = user
+    if(user!==''){ 
+       res.redirect('/login') 
     }
 })
 
 app.get('/logout', (req, res) => {
-    res.render('logout')
+    if(varDeslogueo){
+        res.render('logout',{userSend: usuarioPrueba})
+        varDeslogueo = false
+        usuarioPrueba=''    
+    }else{
+        res.status(400).json({ error : "No se puede desloguear, si previamente no se logueo" });
+    }   
+})
+
+app.post('/logout',(req, res) => {
+    const { flag } = req.body    
+    varDeslogueo = flag
+    if(flag){ 
+        res.redirect('/logout') 
+    }
 })
 
 io.on("connection", async(socket) => {
