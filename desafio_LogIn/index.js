@@ -2,7 +2,9 @@ const express = require("express")
 const { Server: HTTPServer} = require('http')
 const { Server: IOServer } = require("socket.io")
 const { engine } = require('express-handlebars')
-const { routerFaker , productosRandom} = require('./routes/routeFaker')// <-----AGREGADO
+const { routerFaker , productosRandom} = require('./routes/routeFaker')
+const session = require('express-session')// <-----AGREGADO
+const MongoStore = require('connect-mongo')// <-----AGREGADO
 
 const postProducto = require('./public/js/postProducto')
 const { normalize, schema } = require("normalizr")//---->Para Normalizr
@@ -12,6 +14,8 @@ const chats = new Contenedor('./public/chat.txt')//---->Para Normalizr
 
 const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'id' }) //---->Para Normalizr
 const messageSchema = new schema.Entity('messages', { author: authorSchema }, { idAttribute: '_id' }) //---->Para Normalizr
+
+
 
 let productos = productosRandom()
 let usuarioPrueba = ''
@@ -37,40 +41,71 @@ const serverPort = http.listen(PORT, () => {
 })
 serverPort.on('error', error => console.log(`Error en el puerto del servidor: ${error}`))
 
+/* ------------------------------------------------*/
+/*           Persistencia por MongoDB              */
+/* ------------------------------------------------*/
+const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true }
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://carlosmbelmonte:Carlos123@cluster0.zxvolg7.mongodb.net/sesionPrueba?retryWrites=true&w=majority',
+        mongoOptions: advancedOptions
+    }),
+    /* ----------------------------------------------------- */
+
+    secret: 'shhhhhhhhhhhhhhhhhhhhh',
+    resave: false,
+    saveUninitialized: false,
+    rolling: true,
+    cookie: {
+        maxAge: 60000
+    }
+}))
+
 app.get('/', (req, res) => {
     res.redirect('/login')  
 })
 
 app.get('/login', (req, res) => {
-    if(usuarioPrueba===''){
-        res.render('loginPrevio') 
+    const nombre = req.session?.usuario
+    if(nombre){
+        res.redirect('/home')  
     }
     else{ 
-        res.redirect('/home')  
+        res.render('loginPrevio')
     }
 })
 
 app.get('/home', (req, res) => {
-    if(usuarioPrueba===''){
-        res.redirect('/login')       
-    }else{
-        res.render('formulario',{userSend: usuarioPrueba})             
+    const nombre = req.session?.usuario
+    if(nombre){
+        res.render('formulario',{userSend: nombre})        
+    }else{  
+        res.redirect('/login')         
     }
 })
 
 app.post('/login',(req, res) => {
     const { user } = req.body    
-    usuarioPrueba = user
-    if(user!==''){ 
-       res.redirect('/login') 
+    req.session.usuario = user
+    if(req.session.usuario!==''){ 
+        res.redirect('/login') 
     }
 })
 
 app.get('/logout', (req, res) => {
     if(varDeslogueo){
-        res.render('logout',{userSend: usuarioPrueba})
-        varDeslogueo = false
-        usuarioPrueba=''    
+        const aux = req.session?.usuario
+        //res.render('logout',{userSend: req.session.usuario})
+        
+        
+        if(aux){
+            varDeslogueo = false 
+            req.session.destroy(err => {
+                if (!err) res.render('logout',{userSend: aux})
+                else res.send({ status: 'Logout ERROR', body: err })
+            })            
+        }
+
     }
     else{
         res.redirect('/login') 
