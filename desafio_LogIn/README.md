@@ -19,6 +19,8 @@ Al desloguearse, se mostrará una vista con el mensaje de 'Hasta luego' más el 
 - npm install express socket.io
 - npm install @faker-js/faker --save-dev
 - npm install normalizr
+- npm install express-session
+- npm install connect-mongo
 
 # Dependecianas especiales
 Dado que daba un error al ejecutarse el fetch, se tuvo que instalar la siguiente dependencia:
