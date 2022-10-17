@@ -61,8 +61,21 @@ app.use(session({
     }
 }))
 
+function autentificador(req, res, next) {
+    const nombre = req.session?.usuario
+    if (nombre) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+}
+
 app.get('/', (req, res) => {
     res.redirect('/login')  
+})
+
+app.get('/prueba', (req, res) => {
+    res.send("Mensaje de prueba")  
 })
 
 app.get('/login', (req, res) => {
@@ -75,29 +88,21 @@ app.get('/login', (req, res) => {
     }
 })
 
-app.get('/home', (req, res) => {
-    const nombre = req.session?.usuario
-    if(nombre){
-        res.render('formulario',{userSend: nombre})        
-    }else{  
-        res.redirect('/login')         
-    }
+app.get('/home', autentificador,(req, res) => {
+    res.render('formulario',{userSend: req.session.usuario})
+    varDeslogueo = true        
 })
 
 app.post('/login',(req, res) => {
-    const { user } = req.body    
-    req.session.usuario = user
-    if(req.session.usuario!==''){ 
-        res.redirect('/login') 
-    }
+    const { user } = req.body  
+    req.session.usuario = user 
+    if(user){ res.redirect('/') }
 })
 
 app.get('/logout', (req, res) => {
     if(varDeslogueo){
         const aux = req.session?.usuario
-        //res.render('logout',{userSend: req.session.usuario})
-        
-        
+   
         if(aux){
             varDeslogueo = false 
             req.session.destroy(err => {
@@ -105,19 +110,8 @@ app.get('/logout', (req, res) => {
                 else res.send({ status: 'Logout ERROR', body: err })
             })            
         }
-
     }
-    else{
-        res.redirect('/login') 
-    } 
-})
-
-app.post('/logout',(req, res) => {
-    const { flag } = req.body    
-    varDeslogueo = flag
-    if(flag){ 
-        res.redirect('/logout') 
-    }
+    else{ res.redirect('/') } 
 })
 
 io.on("connection", async(socket) => {
