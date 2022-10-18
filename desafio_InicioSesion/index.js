@@ -73,11 +73,14 @@ function autentificador(req, res, next) {
 app.get('/', (req, res) => {
     res.redirect('/login')  
 })
-
+//---------------------------------------------//
 app.get('/register', (req, res) => {
     res.render('register') 
 })
-
+app.get('/login2', (req, res) => {
+    res.render('login2') 
+})
+//---------------------------------------------//
 app.get('/login', (req, res) => {
     const nombre = req.session?.usuario
     if(nombre){
