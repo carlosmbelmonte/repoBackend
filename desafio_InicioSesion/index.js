@@ -74,8 +74,8 @@ app.get('/', (req, res) => {
     res.redirect('/login')  
 })
 
-app.get('/prueba', (req, res) => {
-    res.send("Mensaje de prueba")  
+app.get('/register', (req, res) => {
+    res.render('register') 
 })
 
 app.get('/login', (req, res) => {
