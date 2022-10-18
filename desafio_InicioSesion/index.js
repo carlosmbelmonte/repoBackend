@@ -80,6 +80,12 @@ app.get('/register', (req, res) => {
 app.get('/login2', (req, res) => {
     res.render('login2') 
 })
+app.get('/failregister', (req, res) => {
+    res.render('failregister') 
+})
+app.get('/faillogin', (req, res) => {
+    res.render('faillogin') 
+})
 //---------------------------------------------//
 app.get('/login', (req, res) => {
     const nombre = req.session?.usuario
