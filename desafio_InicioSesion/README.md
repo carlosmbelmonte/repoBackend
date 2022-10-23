@@ -17,6 +17,10 @@ El resto de la funciones, deben quedar tal cual estaban el proyecto original.
 - npm install normalizr
 - npm install express-session
 - npm install connect-mongo
+- npm install mongoose
+- npm install passport
+- npm install passport-local
+- npm install bcrypt
 
 # Dependecianas especiales
 Dado que daba un error al ejecutarse el fetch, se tuvo que instalar la siguiente dependencia:

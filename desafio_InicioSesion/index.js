@@ -3,8 +3,13 @@ const { Server: HTTPServer} = require('http')
 const { Server: IOServer } = require("socket.io")
 const { engine } = require('express-handlebars')
 const { routerFaker , productosRandom} = require('./routes/routeFaker')
-const session = require('express-session')// <-----AGREGADO
-const MongoStore = require('connect-mongo')// <-----AGREGADO
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+const mongoose = require('mongoose')// <-----AGREGADO
+const { Users } = require('./public/js/esquemaMongo')
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bCrypt = require('bcrypt')
 
 const postProducto = require('./public/js/postProducto')
 const { normalize, schema } = require("normalizr")//---->Para Normalizr
@@ -15,11 +20,9 @@ const chats = new Contenedor('./public/chat.txt')//---->Para Normalizr
 const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'id' }) //---->Para Normalizr
 const messageSchema = new schema.Entity('messages', { author: authorSchema }, { idAttribute: '_id' }) //---->Para Normalizr
 
-
-
 let productos = productosRandom()
-let usuarioPrueba = ''
 let varDeslogueo = false
+let flagRegister = true
 
 const app = express()
 const http = new HTTPServer(app)
@@ -41,14 +44,21 @@ const serverPort = http.listen(PORT, () => {
 })
 serverPort.on('error', error => console.log(`Error en el puerto del servidor: ${error}`))
 
-/* ------------------------------------------------*/
-/*           Persistencia por MongoDB              */
-/* ------------------------------------------------*/
-const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true }
+
+/* --------------------------------------------------------------------------*/
+/*              Persistencia por MongoDB - Conexion con mongoose             */
+/* --------------------------------------------------------------------------*/
+const clientP = mongoose.connect(
+    'mongodb+srv://carlosmbelmonte:Carlos123@cluster0.zxvolg7.mongodb.net/sesionPrueba?retryWrites=true&w=majority',
+    { 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true 
+    }
+    ).then(m => m.connection.getClient())
+
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://carlosmbelmonte:Carlos123@cluster0.zxvolg7.mongodb.net/sesionPrueba?retryWrites=true&w=majority',
-        mongoOptions: advancedOptions
+        client: clientP
     }),
     /* ----------------------------------------------------- */
 
@@ -75,17 +85,47 @@ app.get('/', (req, res) => {
 })
 //---------------------------------------------//
 app.get('/register', (req, res) => {
-    res.render('register') 
+    if(flagRegister){
+        res.render('register')
+    }else{
+        res.redirect('/failregister')    
+    }   
 })
 app.get('/login2', (req, res) => {
     res.render('login2') 
 })
 app.get('/failregister', (req, res) => {
-    res.render('failregister') 
+    res.render('failregister')         
 })
 app.get('/faillogin', (req, res) => {
     res.render('faillogin') 
 })
+
+app.post('/register', async(req, res) => {
+    const userEmail = req.body.userEmail;
+    const userAlias = req.body.userAlias;
+    const userPass = req.body.userPass;
+
+    try {
+        const respuesta=await Users.find({ email: `${userEmail}`})
+
+        if(respuesta.length === 0){
+            await Users.create({
+                alias: userAlias,
+                email: userEmail,
+                password: userPass,
+            }) 
+            flagRegister = true               
+        }else{
+            console.log(respuesta[0].email)
+            flagRegister = false
+            return res.render('failregister')  
+        }
+    } catch (err) {
+        res.status(500).send({ error: true, message: err.message });
+    }
+})
+
 //---------------------------------------------//
 app.get('/login', (req, res) => {
     const nombre = req.session?.usuario
