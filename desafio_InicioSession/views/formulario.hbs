@@ -1,0 +1,40 @@
+{{> logueado }}
+<div id="accesoPermitido">
+    <h1 class="display-5 fw-bold mx-3">Productos generados con Faker</h1>
+    <form class="mx-3" id="formProducto" style="display: none;">
+        <input class="form-control mb-3" type="text" id="p_title" placeholder="Title">
+        <input class="form-control mb-3" type="number" id="p_price" placeholder="Price">
+        <input class="form-control mb-3" type="text" id="p_thumbnail" placeholder="Thumbnail">
+    </form>
+    <div class="d-flex mx-3">
+        <button class="btn btn-primary mb-3" id="agregar" style="display: none;">Agregar Producto</button>    
+    </div>
+    <p class="mx-3" id="mensajeError"></p>
+    <div class="mx-3"> 
+        <table id="tablaProducto" class="table table-dark table-striped">
+            <thead >
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Imagen</th>
+            </thead>
+            <tbody id="lista">
+
+            </tbody>
+        </table>
+        <h2 class="fw-bold" id="msgProducto">No hay productos</h2>
+    </div>
+    <div class="d-flex mx-3">Mostrar formulario de mensaje:  
+        <div class="mx-3">
+            <input type="radio" name="showForm" value="SI" id="showFormYes" checked>
+            <label for="showFormYes">SI</label> 
+        </div>
+        <div class="mx-3">
+            <input type="radio" name="showForm" value="NO" id="showFormNo">
+            <label for="showFormNo">NO</label> 
+        </div>
+    </div>
+    {{> chat }}    
+</div>
+<script src="js/main.js"></script>
+<script src="js/deslogueo.js"></script>
