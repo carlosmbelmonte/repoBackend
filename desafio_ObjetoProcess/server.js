@@ -7,10 +7,11 @@ const { normalize, schema } = require("normalizr")
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bCrypt = require('bcrypt')
-const parseArgs = require('minimist');
+const parseArgs = require('minimist')
+const dotenv = require('dotenv').config()
 
 const rutas = require('./funcionesRutas');
-const config = require('./mongoAtlas/config');
+//const config = require('./mongoAtlas/config');
 const controllersdb = require('./mongoAtlas/controllersdb');
 const User = require('./mongoAtlas/models');
 
@@ -110,7 +111,7 @@ app.set('view engine', '.hbs');
 
 const options = {
   alias: { p: 'puerto' },
-  default: { puerto: 8080 }
+  default: { puerto: process.env.PUERTO }
 }
 
 const { puerto, _ } = parseArgs(process.argv.slice(2), options)
@@ -125,7 +126,7 @@ app.use(session({
   cookie: {
     httpOnly: false,
     secure: false,
-    maxAge: config.TIEMPO_EXPIRACION
+    maxAge: parseInt(process.env.TIEMPOEXPIRACION)
   },
   rolling: true,
   resave: true,
@@ -181,7 +182,7 @@ app.get('/ruta-protegida', checkAuthentication, (req, res) => {
 // ------------------------------------------------------------------------------
 //  LISTEN SERVER
 // ------------------------------------------------------------------------------
-controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
+controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
 
   if (err) return console.log('error en conexión de base de datos', err);
   console.log('BASE DE DATOS CONECTADA');
