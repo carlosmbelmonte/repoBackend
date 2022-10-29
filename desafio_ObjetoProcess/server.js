@@ -7,6 +7,7 @@ const { normalize, schema } = require("normalizr")
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bCrypt = require('bcrypt')
+const parseArgs = require('minimist');
 
 const rutas = require('./funcionesRutas');
 const config = require('./mongoAtlas/config');
@@ -107,7 +108,13 @@ app.use('/api/productos-test', routerFaker)
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
 
-const port = process.env.PORT || 8080;
+const options = {
+  alias: { p: 'puerto' },
+  default: { puerto: 8080 }
+}
+
+const { puerto, _ } = parseArgs(process.argv.slice(2), options)
+const port = puerto
 
 //app.use(express.static(__dirname + '/views'));
 app.use(express.static("public"))
