@@ -19,6 +19,7 @@ const { Contenedor } = require('./public/js/contenedor')
 const chats = new Contenedor('./public/chat.txt')
 
 const { routerFaker , productosRandom} = require('./routes/routeFaker')
+const { router } = require('./routes/routes')
 let productos = productosRandom()
 
 const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'id' }) 
@@ -105,7 +106,7 @@ const app = express();
 const http = new HTTPServer(app)//****************************************************************//
 const io = new IOServer(http)//****************************************************************//
 app.use('/api/productos-test', routerFaker)
-
+app.use('/api/randoms', router)
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
 
