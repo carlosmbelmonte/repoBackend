@@ -71,7 +71,15 @@ function getLogout (req, res) {
 }
 
 function getInfo(req, res){
-  res.render('info', {});
+  res.render('info', { 
+      argumentoEntrada: process.argv0,
+      sistemaOperativo: process.platform,
+      nodeVersion: process.version,
+      memoriaTotal: process.memoryUsage.rss(),
+      pathEjecucion: process.execPath,
+      processId: process.pid,
+      carpetaProyecto: process.cwd()
+  });
 }
 
 function failRoute(req, res){
