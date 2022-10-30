@@ -70,6 +70,10 @@ function getLogout (req, res) {
   }
 }
 
+function getInfo(req, res){
+  res.render('info', {});
+}
+
 function failRoute(req, res){
   res.status(404).render('routing-error', {});
 }
@@ -83,5 +87,6 @@ module.exports = {
     failRoute,
     getSignup,
     postSignup,
+    getInfo,
     getFailsignup
 }

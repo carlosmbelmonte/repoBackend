@@ -161,8 +161,7 @@ app.all('/failsignup', rutas.getFailsignup);
 //  LOGOUT
 app.get('/logout', rutas.getLogout);
 
-//  FAIL ROUTE
-app.all('*', rutas.failRoute);
+
 
 // PRIVATE
 function checkAuthentication(req, res, next) {
@@ -172,13 +171,10 @@ function checkAuthentication(req, res, next) {
     res.redirect("/login");
   }
 }
+app.get('/info', checkAuthentication, rutas.getInfo)
 
-app.get('/ruta-protegida', checkAuthentication, (req, res) => {
-  const { user } = req;
-  console.log(user);
-  res.send('<h1>Ruta OK!</h1>');
-});
-
+//  FAIL ROUTE
+app.all('*', rutas.failRoute);
 // ------------------------------------------------------------------------------
 //  LISTEN SERVER
 // ------------------------------------------------------------------------------
