@@ -22,10 +22,10 @@ Incluir también un pequeño documento en donde se detallen los comandos que deb
 - Para ejecutar el desafio ya sea con nodemon o simplemente con node, se debe poner como primer parametro el puerto, luego seguido del modo de CLUSTER o FORK, si no se agrega nada, se inicia en modo FORK
 
 Ejemplo de ejecucion en nodemon en modo FORK:
-![image]
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFORK_nodemon.png)
 
 Ejemplo de ejecucion en nodemon en modo CLUSTER:
-![image]
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoCLUSTER_nodemon.png)
 
 
 
