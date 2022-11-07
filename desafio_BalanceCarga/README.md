@@ -27,14 +27,25 @@ Ejemplo de ejecucion en nodemon en modo FORK:
 Ejemplo de ejecucion en nodemon en modo CLUSTER:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoCLUSTER_nodemon.png)
 
-Ejemplo de ejecucion en nodemon en modo FOREVER, se crean 2 servidores con puertos de escucha 8081 y 8082:
+Ejemplo de ejecucion en modo FOREVER, se crean 2 servidores con puertos de escucha 8081 y 8082:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server_Comandos.png)
+
 Listamos los PID de cada Server:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server_ListProcess.png)
+
 Listamos todos los procesos de node.js activos:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server_procesosNode.png)
+
 Frontend de los 2 servidores corriendo en paralelo:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server.png)
 
+Ejemplo de ejecucion con PM2 tanto modo FORK como CLUSTER, se crean 2 servidores con puertos de escucha 8081 y 8082:
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoPM2_ForkCluster.png)
+
+Listamos todos los procesos de node.js activos:
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoPM2_ForkCluster_procesosNode.png)
+
+Paramos los servidores y los eliminamos:
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoPM2_ForkCluster_StopDelete.png)
 
 
