@@ -110,14 +110,14 @@ app.use('/api/randoms', router)
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
 
-const options = {
+/*const options = {
   alias: { p: 'puerto' },
   default: { puerto: process.env.PUERTO }
-}
+}*/
 
 //const { puerto, _ } = parseArgs(process.argv.slice(2), options)
 //const port = puerto
-const port = parseInt(process.argv[2]) || 8080
+const port = parseInt(process.argv[2]) || parseInt(process.env.PUERTO)
 
 
 //app.use(express.static(__dirname + '/views'));
