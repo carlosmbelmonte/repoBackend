@@ -10,6 +10,10 @@ const bCrypt = require('bcrypt')
 const parseArgs = require('minimist')
 const dotenv = require('dotenv').config()
 
+const cluster = require('cluster') /* https://nodejs.org/dist/latest-v14.x/docs/api/cluster.html */
+const numCPUs = require('os').cpus().length
+const modoCluster = process.argv[3] == 'CLUSTER'
+
 const rutas = require('./funcionesRutas');
 //const config = require('./mongoAtlas/config');
 const controllersdb = require('./mongoAtlas/controllersdb');
@@ -110,16 +114,6 @@ app.use('/api/randoms', router)
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
 
-/*const options = {
-  alias: { p: 'puerto' },
-  default: { puerto: process.env.PUERTO }
-}*/
-
-//const { puerto, _ } = parseArgs(process.argv.slice(2), options)
-//const port = puerto
-const port = parseInt(process.argv[2]) || parseInt(process.env.PUERTO)
-
-
 //app.use(express.static(__dirname + '/views'));
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }));
@@ -164,8 +158,6 @@ app.all('/failsignup', rutas.getFailsignup);
 //  LOGOUT
 app.get('/logout', rutas.getLogout);
 
-
-
 // PRIVATE
 function checkAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
@@ -179,20 +171,36 @@ app.get('/info', checkAuthentication, rutas.getInfo)
 //  FAIL ROUTE
 app.all('*', rutas.failRoute);
 // ------------------------------------------------------------------------------
-//  LISTEN SERVER
+//  LISTEN SERVER MODO FORK O MODO CLUSTER
 // ------------------------------------------------------------------------------
-controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
+if(modoCluster && cluster.isPrimary) {
+  console.log(`Número de procesadores: ${numCPUs}`)
+  console.log(`PID MASTER ${process.pid}`)
 
-  if (err) return console.log('error en conexión de base de datos', err);
-  console.log('BASE DE DATOS CONECTADA');
+  for(let i=0; i<numCPUs; i++) {
+      cluster.fork()
+  }
 
-  http.listen(port, (err) => {
-    if (err) return console.log('error en listen server', err);
-    console.log(`Server running on port ${port}`);
-  });
+  cluster.on('exit', worker => {
+      console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+      cluster.fork()
+  })
+}
+else {
+  const port = parseInt(process.argv[2]) || parseInt(process.env.PUERTO)
+
+  controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
+    if (err) return console.log('error en conexión de base de datos', err);
+    console.log('BASE DE DATOS CONECTADA');
   
-});
+    http.listen(port, (err) => {
+      if (err) return console.log('error en listen server', err);
+      console.log(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
+    })  
+  })
+}
 
+// ------------------------------------------------------------------------------
 io.on("connection", async(socket) => {
   console.log("Nuevo cliente conectado")
   socket.emit('allProductos', productos)
