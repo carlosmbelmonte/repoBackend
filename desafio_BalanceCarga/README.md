@@ -18,7 +18,14 @@ Luego, modificar la configuración para que todas las consultas a /api/randoms s
 Incluir el archivo de configuración de nginx junto con el proyecto.
 Incluir también un pequeño documento en donde se detallen los comandos que deben ejecutarse por línea de comandos y los argumentos que deben enviarse para levantar todas las instancias de servidores de modo que soporten la configuración detallada en los puntos anteriores.
 
+# Documentacion de ejecucion
+- Para ejecutar el desafio ya sea con nodemon o simplemente con node, se debe poner como primer parametro el puerto, luego seguido del modo de CLUSTER o FORK, si no se agrega nada, se inicia en modo FORK
 
+Ejemplo de ejecucion en nodemon en modo FORK:
+![image]
+
+Ejemplo de ejecucion en nodemon en modo CLUSTER:
+![image]
 
 
 
