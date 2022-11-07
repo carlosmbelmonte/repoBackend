@@ -115,8 +115,10 @@ const options = {
   default: { puerto: process.env.PUERTO }
 }
 
-const { puerto, _ } = parseArgs(process.argv.slice(2), options)
-const port = puerto
+//const { puerto, _ } = parseArgs(process.argv.slice(2), options)
+//const port = puerto
+const port = parseInt(process.argv[2]) || 8080
+
 
 //app.use(express.static(__dirname + '/views'));
 app.use(express.static("public"))
