@@ -50,6 +50,11 @@ Paramos los servidores y los eliminamos:
 
 Para la primera parte de NGINX, para poder redireccionar todas las consultas al puerto 8080, excepto las de api/randoms (esta en el puerto 8081), se debe comentar las lineas de codigo en server.js desde 190 a 200.
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/comentarCodigo.png)
+
 Luego ejecutar el modo FORK primero y luego el modo CLUSTER con los siguientes comandos:
+pm2 start server.js --name="Server1" --watch -- 8080 FORK
+pm2 start server.js --name="Server2" --watch -- 8081 CLUSTER
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/redireccionamiento.png)
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/puertosensimultaneo.png)
 
 
