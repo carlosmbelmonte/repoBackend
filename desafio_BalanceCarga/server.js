@@ -187,7 +187,7 @@ if(modoCluster && cluster.isPrimary) {
   })
 }
 else {
-  const port = parseInt(process.argv[2]) || parseInt(process.env.PUERTO)
+  /*const port = parseInt(process.argv[2]) || parseInt(process.env.PUERTO)
 
   controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
     if (err) return console.log('error en conexión de base de datos', err);
@@ -197,7 +197,26 @@ else {
       if (err) return console.log('error en listen server', err);
       console.log(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
     })  
-  })
+  })*/
+
+  if(parseInt(process.argv[2])===8081){
+    const appRandom = express()
+    appRandom.use('/api/randoms', router)
+    appRandom.listen(8081, err => {
+        if(!err) console.log(`Servidor express escuchando en el puerto ${parseInt(process.argv[2])} - PID WORKER ${process.pid}`)
+    })            
+  }else{
+    const port = parseInt(process.env.PUERTO)
+
+    controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
+      if (err) return console.log('error en conexión de base de datos', err);
+      console.log('BASE DE DATOS CONECTADA');
+    
+      http.listen(port, (err) => {
+        if (err) return console.log('error en listen server', err);
+        console.log(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
+      })  
+    })}  
 }
 
 // ------------------------------------------------------------------------------
