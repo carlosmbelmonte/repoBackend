@@ -4,11 +4,14 @@ const path = require('path')
 const router = Router()
 
 router.get('/:cant?', (req, res) => {
-    const cant = req.query.cant || 100000000
+    const cant = req.query.cant || 10000
     const computo = fork(path.resolve(__dirname, 'computo.js'))
     computo.send(cant)
     computo.on('message', obj => {
-        res.send(obj)
+        res.send({  
+            PuertoEscucha:(process.argv[2]) ,
+            ObjetoCalculado: obj,
+        })
     })
 })
 
