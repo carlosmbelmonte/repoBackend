@@ -48,4 +48,8 @@ Listamos todos los procesos de node.js activos:
 Paramos los servidores y los eliminamos:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoPM2_ForkCluster_StopDelete.png)
 
+Para la primera parte de NGINX, para poder redireccionar todas las consultas al puerto 8080, excepto las de api/randoms (esta en el puerto 8081), se debe comentar las lineas de codigo en server.js desde 190 a 200.
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/comentarCodigo.png)
+Luego ejecutar el modo FORK primero y luego el modo CLUSTER con los siguientes comandos:
+
 
