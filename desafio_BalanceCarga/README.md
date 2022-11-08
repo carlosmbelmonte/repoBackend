@@ -22,15 +22,20 @@ Incluir también un pequeño documento en donde se detallen los comandos que deb
 - Para ejecutar el desafio ya sea con nodemon o simplemente con node, se debe poner como primer parametro el puerto, luego seguido del modo de CLUSTER o FORK, si no se agrega nada, se inicia en modo FORK
 
 Ejemplo de ejecucion en nodemon en modo FORK:
+> npm start 8081
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFORK_nodemon.png)
 
 Ejemplo de ejecucion en nodemon en modo CLUSTER:
+> npm start 8081 CLUSTER
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoCLUSTER_nodemon.png)
 
 Ejemplo de ejecucion en modo FOREVER, se crean 2 servidores con puertos de escucha 8081 y 8082:
+> forever start server.js 8081
+> forever start server.js 8082
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server_Comandos.png)
 
 Listamos los PID de cada Server:
+> forever list
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server_ListProcess.png)
 
 Listamos todos los procesos de node.js activos:
@@ -40,6 +45,8 @@ Frontend de los 2 servidores corriendo en paralelo:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server.png)
 
 Ejemplo de ejecucion con PM2 tanto modo FORK como CLUSTER, se crean 2 servidores con puertos de escucha 8081 y 8082:
+> pm2 start server.js --name="Server1" --watch -- 8081
+> pm2 start server.js --name="Server2" --watch -i 2 -- 8082
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoPM2_ForkCluster.png)
 
 Listamos todos los procesos de node.js activos:
@@ -48,7 +55,7 @@ Listamos todos los procesos de node.js activos:
 Paramos los servidores y los eliminamos:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoPM2_ForkCluster_StopDelete.png)
 
-Para la primera parte de NGINX, para poder redireccionar todas las consultas al puerto 8080, excepto las de api/randoms (esta en el puerto 8081), se debe comentar las lineas de codigo en server.js desde 190 a 200.
+Para la primera parte de NGINX, para poder redireccionar todas las consultas al puerto 8080, excepto las de api/randoms (esta en el puerto 8081), se trabaja como en los anteriores ejemplos, para trabajar con NGINX se debe agregar un 4to parametro a la linea de comando, la misma ejecutara una funciones para llamarlo (Ver funcion final):
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/comentarCodigo.png)
 
 Luego ejecutar el modo FORK primero y luego el modo CLUSTER con los siguientes comandos:
