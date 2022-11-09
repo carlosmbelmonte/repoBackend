@@ -22,20 +22,20 @@ Incluir también un pequeño documento en donde se detallen los comandos que deb
 - Para ejecutar el desafio ya sea con nodemon o simplemente con node, se debe poner como primer parametro el puerto, luego seguido del modo de CLUSTER o FORK, si no se agrega nada, se inicia en modo FORK
 
 Ejemplo de ejecucion en nodemon en modo FORK:
-> npm start 8081
+> - npm start 8081
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFORK_nodemon.png)
 
 Ejemplo de ejecucion en nodemon en modo CLUSTER:
-> npm start 8081 CLUSTER
+> - npm start 8081 CLUSTER
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoCLUSTER_nodemon.png)
 
 Ejemplo de ejecucion en modo FOREVER, se crean 2 servidores con puertos de escucha 8081 y 8082:
-> forever start server.js 8081
-> forever start server.js 8082
+> - forever start server.js 8081
+> - forever start server.js 8082
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server_Comandos.png)
 
 Listamos los PID de cada Server:
-> forever list
+> - forever list
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server_ListProcess.png)
 
 Listamos todos los procesos de node.js activos:
@@ -45,8 +45,8 @@ Frontend de los 2 servidores corriendo en paralelo:
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoFOREVER_2Server.png)
 
 Ejemplo de ejecucion con PM2 tanto modo FORK como CLUSTER, se crean 2 servidores con puertos de escucha 8081 y 8082:
-> pm2 start server.js --name="Server1" --watch -- 8081
-> pm2 start server.js --name="Server2" --watch -i 2 -- 8082
+> - pm2 start server.js --name="Server1" --watch -- 8081
+> - pm2 start server.js --name="Server2" --watch -i 2 -- 8082
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoPM2_ForkCluster.png)
 
 Listamos todos los procesos de node.js activos:
@@ -63,5 +63,24 @@ Luego ejecutar el modo FORK primero y luego el modo CLUSTER con los siguientes c
 - pm2 start server.js --name="Server2" --watch -- 8081 CLUSTER
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/redireccionamiento.png)
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/puertosensimultaneo.png)
+
+Para la segunda parte, utilizando NGINX se debe primero ejecutar los siguientes comandos:
+> - pm2 start server.js --name="Server1" --watch -- 8080
+> - pm2 start server.js --name="Server2" --watch -i 2 -- 8082 CLUSTER SINIGNX
+> - pm2 start server.js --name="Server3" --watch -i 2 -- 8083 CLUSTER SINIGNX
+> - pm2 start server.js --name="Server4" --watch -i 2 -- 8084 CLUSTER SINIGNX
+> - pm2 start server.js --name="Server5" --watch -i 2 -- 8085 CLUSTER SINIGNX
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoNGINX.png)
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoNGINX2.png)
+
+Luego se modifica el archivo de configuracion de nginx 
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoNGINX3.png)
+
+Se ejecuta el archivo nginx.exe y se realiza un reload para chequear que tome los cambios de nginx.conf
+Luego se procede a chequear que los servidores respondan a los cambios 
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoNGINX4.gif)
+
+ACLARACION: Se recomienda copiar este repositorio en la carpeta de nginx, para su correcta ejecucion
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/modoNGINX5.png)
 
 
