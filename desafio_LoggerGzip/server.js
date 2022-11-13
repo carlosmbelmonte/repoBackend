@@ -9,6 +9,8 @@ const LocalStrategy = require('passport-local').Strategy
 const bCrypt = require('bcrypt')
 const parseArgs = require('minimist')
 const dotenv = require('dotenv').config()
+const log4js = require('log4js')
+const logger = require('./logger');
 
 const cluster = require('cluster') /* https://nodejs.org/dist/latest-v14.x/docs/api/cluster.html */
 const numCPUs = require('os').cpus().length
@@ -67,7 +69,7 @@ passport.use('login', new LocalStrategy(
     let user
     try {
       user = await User.findOne({ email })
-      console.log("usuario encontrado: ", user)
+      logger.info("usuario encontrado: ", user)
     } catch (error) {
       return done(err);
     }
@@ -175,15 +177,15 @@ app.all('*', rutas.failRoute);
 //  LISTEN SERVER MODO FORK O MODO CLUSTER
 // ------------------------------------------------------------------------------
 if(modoCluster && cluster.isPrimary) {
-  console.log(`Número de procesadores: ${numCPUs}`)
-  console.log(`PID MASTER ${process.pid}`)
+  logger.info(`Número de procesadores: ${numCPUs}`)
+  logger.info(`PID MASTER ${process.pid}`)
 
   for(let i=0; i<numCPUs; i++) {
       cluster.fork()
   }
 
   cluster.on('exit', worker => {
-      console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+      logger.info('Worker', worker.process.pid, 'died', new Date().toLocaleString())
       cluster.fork()
   })
 }
@@ -193,7 +195,7 @@ else {
 
 // ------------------------------------------------------------------------------
 io.on("connection", async(socket) => {
-  console.log("Nuevo cliente conectado")
+  logger.info("Nuevo cliente conectado")
   socket.emit('allProductos', productos)
   let allChats = await chats.getAll()
   const normalizedMessages = normalize(allChats, [messageSchema])//---->Para Normalizr
@@ -218,7 +220,7 @@ function estadoNgix(varNginx){
       const appRandom = express()
       appRandom.use('/api/randoms', router)
       appRandom.listen(parseInt(process.argv[2]), err => {
-          if(!err) console.log(`Servidor express escuchando en el puerto ${parseInt(process.argv[2])} - PID WORKER ${process.pid}`)
+          if(!err) logger.info(`Servidor express escuchando en el puerto ${parseInt(process.argv[2])} - PID WORKER ${process.pid}`)
       })  
       appRandom.get('/api/randoms', (req,res) => {
         res.send(`Server en PORT(${parseInt(process.argv[2])}) - PID(${process.pid}) - FYH(${new Date().toLocaleString()})`)
@@ -228,11 +230,11 @@ function estadoNgix(varNginx){
   
       controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
         if (err) return console.log('error en conexión de base de datos', err);
-        console.log('BASE DE DATOS CONECTADA');
+        logger.info('BASE DE DATOS CONECTADA')
       
         http.listen(port, (err) => {
           if (err) return console.log('error en listen server', err);
-          console.log(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
+          logger.info(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
         })  
       })
     }
@@ -242,11 +244,11 @@ function estadoNgix(varNginx){
 
     controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
       if (err) return console.log('error en conexión de base de datos', err);
-      console.log('BASE DE DATOS CONECTADA');
-    
+      logger.info('BASE DE DATOS CONECTADA')
+
       http.listen(port, (err) => {
         if (err) return console.log('error en listen server', err);
-        console.log(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
+        logger.info(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
       })  
     })    
   }

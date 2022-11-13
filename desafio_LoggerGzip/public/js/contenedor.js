@@ -1,4 +1,6 @@
 const fs = require('fs');
+const log4js = require('log4js')
+const logger = require('../../logger');
 
 class Contenedor{
     constructor(fileData){
@@ -29,6 +31,7 @@ class Contenedor{
             const todos = await fs.promises.readFile(this.fileData,'utf-8')
             return JSON.parse(todos)
         }catch(err){
+            logger.error(`Archivo Vacio o Inexistente`)
             return []
         } 
     }

@@ -33,5 +33,10 @@ Para comprobar la compresion, se agrega un 5to parametro por consola, el mismo i
 - Con compresion, se agrega el parametro COMPRESION
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/endpointINFO_conCompresion.png)
 
+Para probar el logger, toda la informacion enviada por consola, se envia en INFO-WARN-ERROR.
+- Los Warn por error de ruta o error en logueo, se guarda en una archivo warn.log.
+- Para simular el error en el chat, se cambia el nombre del archivo de persistencia a chat2.txt, entonces al no encontrar el archivo chat.txt, se genera el error, y se lo guarda al mismo en errores.log
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/logger.png)
+
 
 
