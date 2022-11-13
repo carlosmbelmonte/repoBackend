@@ -113,7 +113,6 @@ app.use('/api/productos-test', routerFaker)
 app.use('/api/randoms', router)
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
-
 //app.use(express.static(__dirname + '/views'));
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }));
@@ -159,14 +158,16 @@ app.all('/failsignup', rutas.getFailsignup);
 app.get('/logout', rutas.getLogout);
 
 // PRIVATE
-function checkAuthentication(req, res, next) {
+/*function checkAuthentication(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
     res.redirect("/login");
   }
 }
-app.get('/info', checkAuthentication, rutas.getInfo)
+app.get('/info', checkAuthentication, rutas.getInfo)*/
+estadoCompresion(process.argv[5])
+
 
 //  FAIL ROUTE
 app.all('*', rutas.failRoute);
@@ -248,5 +249,16 @@ function estadoNgix(varNginx){
         console.log(`Servidor express escuchando en el puerto ${port} - PID WORKER ${process.pid}`)
       })  
     })    
+  }
+}
+
+function estadoCompresion(varCompresion){
+  if(varCompresion === 'COMPRESION'){
+    const compression = require('compression')
+    app.use(compression())
+    app.get('/info', compression({level: 8, threshold: 1}), rutas.getInfo)
+    return 0
+  }else{
+    app.get('/info', rutas.getInfo)
   }
 }
