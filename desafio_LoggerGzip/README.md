@@ -28,10 +28,10 @@ Realizar un informe en formato pdf sobre las pruebas realizadas incluyendo los r
 # Documentacion de ejecucion
 Para comprobar la compresion, se agrega un 5to parametro por consola, el mismo indica en que modo se ejecuta el servidor (Con o Sin compresion)
 - Sin compresion, no se agrega nada o cualquier valor excepto COMPRESION
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/endpointINFO_sinCompresion.png)
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/endpointINFO_sinCompresion.png)
 
 - Con compresion, se agrega el parametro COMPRESION
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_BalanceCarga/public/imagen/endpointINFO_conCompresion.png)
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/endpointINFO_conCompresion.png)
 
 
 
