@@ -50,8 +50,8 @@ Luego se prende el servidor en modo profiler, se renombran los archivos para amb
 - ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/modoProfiler.png)
 
 Se vuelve a ejecutar artillery para ambos modos, y en powershell (para el funcionamiento correcto en Windows) se ejecutan los siguiente comandos para decodificar los archivos:
-node --prof-process sinConsole-v8.log > result_fork_prof-sinConsole.txt
-node --prof-process conConsole-v8.log > result_fork_prof-conConsole.txt
+- node --prof-process sinConsole-v8.log > result_fork_prof-sinConsole.txt
+- node --prof-process conConsole-v8.log > result_fork_prof-conConsole.txt
 
 
 
