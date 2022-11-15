@@ -53,6 +53,16 @@ Se vuelve a ejecutar artillery para ambos modos, y en powershell (para el funcio
 - node --prof-process sinConsole-v8.log > result_fork_prof-sinConsole.txt
 - node --prof-process conConsole-v8.log > result_fork_prof-conConsole.txt
 
+Con autocannon se generan 100 conexiones en 20segundos, esto por consola (agregado/sacando el console.log):
+- Se instala la dependencia de autocannon: npm i autocannon -g
+- Se corre el servidor en el puerto 8080 modo FORK: npm start 8080 FORK
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/autocannon1.png)
+- En otra terminal, se ejecuta autocannon: autocannon -d 20 -c 100 "http://localhost:8080/info"
+- Los resultados son los siguientes:
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/autocannon2.png)
+- SIN CONSOLE.LOG RESULTADOS:
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/autocannon3.png)
+
 
 
 
