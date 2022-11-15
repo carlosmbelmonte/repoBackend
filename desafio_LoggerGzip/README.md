@@ -38,12 +38,12 @@ Para probar el logger, toda la informacion enviada por consola, se envia en INFO
 - Para simular el error en el chat, se cambia el nombre del archivo de persistencia a chat2.txt, entonces al no encontrar el archivo chat.txt, se genera el error, y se lo guarda al mismo en errores.log
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/logger.png)
 
-- Se agrega una funcion para agregar o quitar un ConsoleLog, el cual muestra la informacion que se envia al cliente, para utilizarla se debe descomentarla.
+Se agrega una funcion para agregar o quitar un ConsoleLog, el cual muestra la informacion que se envia al cliente, para utilizarla se debe descomentarla.
 - Primero se inicia el server en modo FORK sin el consoleLog y se ejecuta artillery. Luego se agrega el consolelog, se vuelve a ejecutar el server y se prueba nuevamente artillery
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/consolelogINFO.png)
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/artillery.png)
->> artillery quick --count 50 -n 20 http://localhost:8080/info > result_fork_sinConsoleLog.txt
->> artillery quick --count 50 -n 20 http://localhost:8080/info > result_fork_conConsoleLog.txt
+- artillery quick --count 50 -n 20 http://localhost:8080/info > result_fork_sinConsoleLog.txt
+- artillery quick --count 50 -n 20 http://localhost:8080/info > result_fork_conConsoleLog.txt
 
 
 
