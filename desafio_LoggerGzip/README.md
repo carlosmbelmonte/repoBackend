@@ -47,7 +47,7 @@ Se agrega una funcion para agregar o quitar un ConsoleLog, el cual muestra la in
 
 Luego se prende el servidor en modo profiler, se renombran los archivos para ambos casos (sin y con console)
 - node --prof server.js 8080 FORK
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/modoProfiler.png)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/modoProfiler.png)
 
 Se vuelve a ejecutar artillery para ambos modos, y en powershell (para el funcionamiento correcto en Windows) se ejecutan los siguiente comandos para decodificar los archivos:
 node --prof-process sinConsole-v8.log > result_fork_prof-sinConsole.txt
