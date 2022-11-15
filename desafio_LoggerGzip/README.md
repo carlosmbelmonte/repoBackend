@@ -70,6 +70,9 @@ Para el diagrama de flama se realiza lo siguiente:
 - Se ejecuta el comando de artillery 
 - >> artillery quick --count 50 -n 20 http://localhost:8080/info > result_fork_sinConsoleLog.txt
 
+El archivo con la conclusion obtenida, se encuentra en la siguiente ruta:
+- https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/ConclusioObtenida.pdf
+
 
 
 
