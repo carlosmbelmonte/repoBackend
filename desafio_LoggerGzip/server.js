@@ -258,9 +258,24 @@ function estadoCompresion(varCompresion){
   if(varCompresion === 'COMPRESION'){
     const compression = require('compression')
     app.use(compression())
+    rutaInfo()
     app.get('/info', compression({level: 8, threshold: 1}), rutas.getInfo)
     return 0
   }else{
+    rutaInfo()
     app.get('/info', rutas.getInfo)
   }
+}
+
+function rutaInfo(){
+  console.log({ 
+    argumentoEntrada: process.argv0,
+    sistemaOperativo: process.platform,
+    nodeVersion: process.version,
+    memoriaTotal: process.memoryUsage.rss(),
+    pathEjecucion: process.execPath,
+    processId: process.pid,
+    carpetaProyecto: process.cwd(),
+    numCPUs: require('os').cpus().length
+  })
 }
