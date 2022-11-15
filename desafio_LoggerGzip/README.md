@@ -63,6 +63,11 @@ Con autocannon se generan 100 conexiones en 20segundos, esto por consola (agrega
 - SIN CONSOLE.LOG RESULTADOS:
 - ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/autocannon3.png)
 
+Para el diagrama de flama se realiza lo siguiente:
+- Se instala la dependencia npm install -g 0x
+- En la ruta del proyecto se ejecuta el servidor de la siguiente manera 0x server.js 8080 FORK (tanto SIN y CON console.log)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_LoggerGzip/public/imagen/0x_sinConsole.png)
+- Se ejecuta el comando de artillery artillery quick --count 50 -n 20 http://localhost:8080/info > result_fork_sinConsoleLog.txt
 
 
 
