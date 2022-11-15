@@ -84,7 +84,7 @@ function getInfo(req, res){
     carpetaProyecto: process.cwd(),
     numCPUs: require('os').cpus().length
   }
-  //console.log(objNew)
+  console.log(objNew)
   res.render('info', objNew);
 }
 

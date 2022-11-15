@@ -258,11 +258,11 @@ function estadoCompresion(varCompresion){
   if(varCompresion === 'COMPRESION'){
     const compression = require('compression')
     app.use(compression())
-    //rutaInfo()
+    rutaInfo()
     app.get('/info', compression({level: 8, threshold: 1}), rutas.getInfo)
     return 0
   }else{
-    //rutaInfo()
+    rutaInfo()
     app.get('/info', rutas.getInfo)
   }
 }
