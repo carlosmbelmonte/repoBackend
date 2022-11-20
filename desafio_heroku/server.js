@@ -240,7 +240,7 @@ function estadoNgix(varNginx){
     }
   }
   if(varNginx!=='SINIGNX'){
-    const port = process.env.PORT || 5000
+    const port = process.env.PORT || 8080
 
     controllersdb.conectarDB(process.env.URLBASE,JSON.parse(process.env.MI_USER),err => {
       if (err) return console.log('error en conexión de base de datos', err);
