@@ -10,3 +10,6 @@ Se toma como base el desafio_LoggerGzip para probarlo en Heroku, para ellos se e
 - Se modifica el puerto de escucha, para que escuche en el 8080 en modo local y con heroku, este le asigna uno. Tambien se modifica en packjson el npm start, para forzar el inicio en modo FORK y en dicho puerto
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_heroku/public/imagen/herokuCambio1.png)
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_heroku/public/imagen/herokuCambio2.png)
+
+# Demostracion de funcionalidad
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio_heroku/public/imagen/demostracion.gif)
