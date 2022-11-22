@@ -4,6 +4,12 @@ import {fileURLToPath} from 'url';//---> Solucion encontrada en Google
 import routerProductos from './routes/routeProductos.js'
 import routerCarrito from './routes/routeCarrito.js'
 
+import bcrypt from 'bcrypt'
+import { engine } from 'express-handlebars';
+import session from "express-session";
+import passport from 'passport';
+import { Strategy as LocalStrategy } from "passport-local";
+
 const __filename = fileURLToPath(import.meta.url);//---> Solucion encontrada en Google
 const __dirname = path.dirname(__filename);//---> Solucion encontrada en Google
 
