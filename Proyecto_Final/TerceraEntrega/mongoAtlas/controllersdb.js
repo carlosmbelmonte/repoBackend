@@ -22,6 +22,6 @@ function conectarDB(url, cb) {
   });
 }
 
-export {
+export default{
   conectarDB
 }
