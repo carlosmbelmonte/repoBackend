@@ -8,11 +8,15 @@ import { engine } from 'express-handlebars';
 import session from "express-session";
 import passport from 'passport';
 import { Strategy as LocalStrategy } from "passport-local";
+import {Server as IOServer} from 'socket.io';
 
 import rutas from './funcionesRutas.js'
 import config from './mongoAtlas/config.js'
 import controllersdb from './mongoAtlas/controllersdb.js'
 import User from './mongoAtlas/models.js'
+import { productosDao as productosApi } from './daos/index.js'
+
+let productos = await productosApi.getAll()
 
 passport.use('signup', new LocalStrategy({
     passReqToCallback: true
@@ -47,8 +51,8 @@ passport.use('signup', new LocalStrategy({
       }
   
       return done(null, userWithId)
-    })
-  )
+  })
+)
   
 passport.use('login', new LocalStrategy(
     { usernameField: "email", passwordField: "password" },
@@ -93,32 +97,34 @@ async function isValidPassword(user, password) {
 
 const app = express()
 const http = new HTTPServer(app)
+const io = new IOServer(http)
+app.use('/api/productos', routerProductos)
+app.use('/api/carrito', routerCarrito)
 app.engine('.hbs', engine({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
-
 
 const port = process.env.PORT || 8080;
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-    secret: 'shhhhhhhh',
-    cookie: {
-      httpOnly: false,
-      secure: false,
-      maxAge: config.TIEMPO_EXPIRACION
-    },
-    rolling: true,
-    resave: true,
-    saveUninitialized: false
-  }));
+  secret: 'shhhhhhhh',
+  cookie: {
+    httpOnly: false,
+    secure: false,
+    maxAge: config.TIEMPO_EXPIRACION
+  },
+  rolling: true,
+  resave: true,
+  saveUninitialized: false
+}));
   
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
-  app.use((req, res, next) => {
-    next()
-  });
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use((req, res, next) => {
+  next()
+});
 
 // ------------------------------------------------------------------------------
 //  ROUTING GET POST
@@ -126,63 +132,71 @@ app.use(session({
 //  INDEX
 app.get('/', (req, res) => {
     res.redirect('/login')  
-  })
+})
   
-  //  LOGIN
-  app.get('/login', rutas.getLogin);
-  app.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), rutas.postLogin);
-  app.all('/faillogin', rutas.getFaillogin);
+//  LOGIN
+app.get('/login', rutas.getLogin);
+app.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), rutas.postLogin);
+app.all('/faillogin', rutas.getFaillogin);
   
-  //  SIGNUP
-  app.get('/signup', rutas.getSignup);
-  app.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup' }), rutas.postSignup);
-  app.all('/failsignup', rutas.getFailsignup);
-  
-  //  LOGOUT
-  app.get('/logout', rutas.getLogout);
-  
-  //  FAIL ROUTE
-  app.all('*', rutas.failRoute);
-  
-  // PRIVATE
-  function checkAuthentication(req, res, next) {
-    if (req.isAuthenticated()) {
-      next();
-    } else {
-      res.redirect("/login");
-    }
+//  SIGNUP
+app.get('/signup', rutas.getSignup);
+app.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup' }), rutas.postSignup);
+app.all('/failsignup', rutas.getFailsignup);
+
+//  LOGOUT
+app.get('/logout', rutas.getLogout);
+
+//  FAIL ROUTE
+app.all('*', rutas.failRoute);
+
+// PRIVATE
+function checkAuthentication(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
   }
+}
   
-  app.get('/ruta-protegida', checkAuthentication, (req, res) => {
-    const { user } = req;
-    console.log(user);
-    res.send('<h1>Ruta OK!</h1>');
+app.get('/ruta-protegida', checkAuthentication, (req, res) => {
+  const { user } = req;
+  console.log(user);
+  res.send('<h1>Ruta OK!</h1>');
+});
+  
+// ------------------------------------------------------------------------------
+//  LISTEN SERVER
+// ------------------------------------------------------------------------------
+controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
+
+  if (err) return console.log('error en conexión de base de datos', err);
+  console.log('BASE DE DATOS CONECTADA');
+
+  http.listen(port, (err) => {
+    if (err) return console.log('error en listen server', err);
+    console.log(`Server running on port ${port}`);
   });
   
-  // ------------------------------------------------------------------------------
-  //  LISTEN SERVER
-  // ------------------------------------------------------------------------------
-  controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
-  
-    if (err) return console.log('error en conexión de base de datos', err);
-    console.log('BASE DE DATOS CONECTADA');
-  
-    http.listen(port, (err) => {
-      if (err) return console.log('error en listen server', err);
-      console.log(`Server running on port ${port}`);
-    });
-    
-  });
+});
 
 
+io.on("connection", async(socket) => {
+  console.log("Nuevo cliente conectado")
+  socket.emit('allProductos', productos)
+  //let allChats = await chats.getAll()
+  //const normalizedMessages = normalize(allChats, [messageSchema])//---->Para Normalizr
+  //socket.emit('allMensajes', normalizedMessages)
 
-//app.use(express.json())
-//app.use(express.urlencoded({ extended : true }))
-//app.use(express.static(__dirname + '/public'));
+  socket.on('newProducto', async data => {
+      //await postProducto(data)
+      io.sockets.emit('allProductos', productos)
+  })
 
-app.use('/api/productos', routerProductos)
-app.use('/api/carrito', routerCarrito)
-
-app.use((req, res, next) => {
-    res.send({error: -2, descripcion: `ruta no implementada`})
+  /*socket.on('newMensaje', async msg => {
+      await chats.saveNormalizr(msg)
+      let newAllChats = await chats.getAll()
+      const newNormalizedMessages = normalize(newAllChats, [messageSchema])//---->Para Normalizr
+      io.sockets.emit('allMensajes', newNormalizedMessages)
+  })*/
 })
