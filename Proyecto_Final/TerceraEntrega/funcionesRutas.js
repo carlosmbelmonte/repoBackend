@@ -1,4 +1,5 @@
 import path from 'path';//---> Solucion encontrada en Google
+import { nextTick } from 'process';
 import {fileURLToPath} from 'url';//---> Solucion encontrada en Google
 const __filename = fileURLToPath(import.meta.url);//---> Solucion encontrada en Google
 const __dirname = path.dirname(__filename);//---> Solucion encontrada en Google

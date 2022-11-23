@@ -103,7 +103,7 @@ app.use('/api/carrito', routerCarrito)
 app.engine('.hbs', engine({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
 
-const port = process.env.PORT || 8080;
+
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }));
 
@@ -122,10 +122,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
+app.use(function(req, res, next) {
   next()
-});
-
+})
+const port = process.env.PORT || 8080;
 // ------------------------------------------------------------------------------
 //  ROUTING GET POST
 // ------------------------------------------------------------------------------
