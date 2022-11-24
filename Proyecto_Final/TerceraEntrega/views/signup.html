@@ -38,11 +38,26 @@
 
         <div class="form-group mx-3">
           <input name='phone' placeholder="Telefono" class="form-control mb-1" type="number" required>          
-        </div> 
+        </div>          
+        
+        <div class="d-flex mx-3">Metodo de cargar imagen:  
+          <div class="mx-3">
+              <input type="radio" name="showUpload" value="SI" id="showUploadUrl" checked>
+              <label for="showUploadUrl">URL</label> 
+          </div>
+          <div class="mx-3">
+              <input type="radio" name="showUpload" value="NO" id="showUploadFile">
+              <label for="showUploadFile">File</label> 
+          </div>
+        </div>
         
         <div class="form-group mx-3">
-          <input name='avatar' placeholder="Avatar" class="form-control mb-1" type="text" required>          
-        </div>         
+          <input id="avatarURL" name='avatar' placeholder="Avatar: URL" class="form-control mb-1" type="text">          
+        </div>  
+
+        <div class="form-group mx-3">
+          <input id="avatarFile" name="myFile" class="form-control mb-1" type="file"  />  
+        </div>
 
         <div class="form-group">
           <input class="btn btn-success mx-3 mt-3 mb-3" type="submit" value="Register">
@@ -51,4 +66,5 @@
     <button class="btn btn-warning mx-3 mb-3" onclick="location.href='/login'" id="gotoLogin">Ir a Login</button>
   </div> 
 </body>
+<script src="js/avatar.js"></script>
 </html>

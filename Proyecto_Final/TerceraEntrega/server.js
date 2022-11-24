@@ -141,7 +141,7 @@ app.all('/faillogin', rutas.getFaillogin);
   
 //  SIGNUP
 app.get('/signup', rutas.getSignup);
-app.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup' }), rutas.postSignup);
+app.post('/signup',passport.authenticate('signup', { failureRedirect: '/failsignup' }), rutas.postSignup);
 app.all('/failsignup', rutas.getFailsignup);
 
 //  LOGOUT
