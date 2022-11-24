@@ -14,7 +14,9 @@ function getLogin(req, res) {
 
     let user = req.user;
     res.render('formulario', {
-      userSend: user.username
+      userSend: user.username,
+      avatarSend: user.avatar,
+      mailSend: user.email,
     });
   }
   else {
@@ -28,7 +30,9 @@ function getSignup(req, res) {
 
     let user = req.user;
     res.render('formulario', {
-      userSend: user.username
+      userSend: user.username,
+      avatarSend: user.avatar,
+      mailSend: user.email,
     });
   }
   else {
