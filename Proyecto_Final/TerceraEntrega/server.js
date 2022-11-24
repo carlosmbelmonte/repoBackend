@@ -40,7 +40,7 @@ passport.use('signup', new LocalStrategy({
         age: req.body.age,
         address: req.body.address,
         phone: req.body.phone,
-        avatar: req.body.avatar,
+        avatar: req.body.avatar||req.body.myFile,
       }
   
       let userWithId

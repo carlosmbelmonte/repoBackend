@@ -7,8 +7,8 @@ for(const radioButton of radioButtons){
             document.getElementById('avatarURL').style.display = '',
             document.getElementById('avatarFile').style.display = 'none'
         ) : (
-            document.getElementById('avatarURL').style.display = '',
-            document.getElementById('avatarFile').style.display = 'none'
+            document.getElementById('avatarURL').style.display = 'none',
+            document.getElementById('avatarFile').style.display = ''
         )
       }
     );
