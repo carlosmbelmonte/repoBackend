@@ -17,6 +17,9 @@ function getLogin(req, res) {
       userSend: user.username,
       avatarSend: user.avatar,
       mailSend: user.email,
+      ageSend: user.age,
+      addresSend: user.address,
+      phoneSend: user.phone,
     });
   }
   else {
@@ -33,6 +36,9 @@ function getSignup(req, res) {
       userSend: user.username,
       avatarSend: user.avatar,
       mailSend: user.email,
+      ageSend: user.age,
+      addresSend: user.address,
+      phoneSend: user.phone,
     });
   }
   else {
