@@ -1,4 +1,25 @@
 var socket = io.connect()
+document.getElementById('productosDisponibles').style.display = 'none'
+document.getElementById('informacionPersonal').style.display = 'none'
+
+const btnShowProducts = document.getElementById("showProducts")
+const btnShowPersonal = document.getElementById("showPersonal")
+const btnShowChart = document.getElementById("showChart")
+
+btnShowProducts?.addEventListener("click", () => {
+    document.getElementById('productosDisponibles').style.display = ''
+    document.getElementById('informacionPersonal').style.display = 'none'
+})
+
+btnShowPersonal?.addEventListener("click", () => {
+    document.getElementById('productosDisponibles').style.display = 'none'
+    document.getElementById('informacionPersonal').style.display = ''
+})
+
+btnShowChart?.addEventListener("click", () => {
+    document.getElementById('productosDisponibles').style.display = 'none'
+    document.getElementById('informacionPersonal').style.display = 'none'
+})
 
 socket.on('allProductos', productos => { 
     console.log("array en consola[productos]",productos) 
