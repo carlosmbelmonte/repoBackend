@@ -9,6 +9,7 @@ import session from "express-session";
 import passport from 'passport';
 import { Strategy as LocalStrategy } from "passport-local";
 import {Server as IOServer} from 'socket.io';
+import nodemailer from 'nodemailer'
 
 import rutas from './funcionesRutas.js'
 import config from './mongoAtlas/config.js'
@@ -17,6 +18,30 @@ import User from './mongoAtlas/models.js'
 import { productosDao as productosApi } from './daos/index.js'
 
 let productos = await productosApi.getAll()
+
+function createSendMail(mailConfig) {
+
+  const transporter = nodemailer.createTransport(mailConfig);
+
+  return function sendMail({ to, subject, text, html }) {
+    const mailOptions = { from: mailConfig.auth.user, to, subject, text, html };
+    return transporter.sendMail(mailOptions)
+  }
+}
+
+function createSendMailEthereal() {
+  return createSendMail({
+    service: 'gmail',
+    port: 587,
+    auth: {
+        user: 'carlos.m.belmonte@gmail.com',
+        pass: 'jnvgvypbhrdyzapl'
+    },
+    tls: {
+        rejectUnauthorized: false
+    }
+  })
+}
 
 passport.use('signup', new LocalStrategy({
     passReqToCallback: true
@@ -42,10 +67,31 @@ passport.use('signup', new LocalStrategy({
         phone: req.body.phone,
         avatar: req.body.avatar||req.body.myFile,
       }
-  
+      const sendMail = createSendMailEthereal()
+      const cuentaDePrueba = 'carlos.m.belmonte@gmail.com'
+      const asunto = 'Nuevo Registro'
+      let mensajeHtml = `
+        <div>
+          <h5>Informacion de Usuario</h5>
+          <ul>
+            <li>Nombre y Apellido: ${newUser.username}</li>
+            <li>Edad: ${newUser.age}</li>
+            <li>Email: ${newUser.email}</li>
+            <li>Direccion: ${newUser.address}</li>
+            <li>Telefono: ${newUser.phone}</li>
+            <li>Avatar (URL): ${newUser.avatar}</li>        
+          </ul>
+        </div>`
+
       let userWithId
+      let infoRegistro
       try {
         userWithId = await User.create(newUser)
+        infoRegistro = await sendMail({
+          to: cuentaDePrueba,
+          subject: asunto,
+          html: mensajeHtml
+        })
       } catch (error) {
         return done(err);
       }
