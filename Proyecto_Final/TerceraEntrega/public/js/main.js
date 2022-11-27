@@ -1,6 +1,7 @@
 var socket = io.connect()
 document.getElementById('productosDisponibles').style.display = 'none'
 document.getElementById('informacionPersonal').style.display = 'none'
+document.getElementById('productosCarrito').style.display = 'none'
 
 const btnShowProducts = document.getElementById("showProducts")
 const btnShowPersonal = document.getElementById("showPersonal")
@@ -9,16 +10,19 @@ const btnShowChart = document.getElementById("showChart")
 btnShowProducts?.addEventListener("click", () => {
     document.getElementById('productosDisponibles').style.display = ''
     document.getElementById('informacionPersonal').style.display = 'none'
+    document.getElementById('productosCarrito').style.display = 'none'
 })
 
 btnShowPersonal?.addEventListener("click", () => {
     document.getElementById('productosDisponibles').style.display = 'none'
     document.getElementById('informacionPersonal').style.display = ''
+    document.getElementById('productosCarrito').style.display = 'none'
 })
 
 btnShowChart?.addEventListener("click", () => {
     document.getElementById('productosDisponibles').style.display = 'none'
     document.getElementById('informacionPersonal').style.display = 'none'
+    document.getElementById('productosCarrito').style.display = ''
 })
 
 socket.on('allProductos', productos => { 
@@ -45,3 +49,5 @@ socket.on('allProductos', productos => {
         })  
     }  
 })
+
+
