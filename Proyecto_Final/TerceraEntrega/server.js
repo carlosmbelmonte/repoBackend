@@ -16,6 +16,7 @@ import config from './mongoAtlas/config.js'
 import controllersdb from './mongoAtlas/controllersdb.js'
 import User from './mongoAtlas/models.js'
 import { productosDao as productosApi } from './daos/index.js'
+import smsSend from './public/js/twiliosms.js'
 
 let productos = await productosApi.getAll()
 
@@ -230,19 +231,14 @@ controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
 io.on("connection", async(socket) => {
   console.log("Nuevo cliente conectado")
   socket.emit('allProductos', productos)
-  //let allChats = await chats.getAll()
-  //const normalizedMessages = normalize(allChats, [messageSchema])//---->Para Normalizr
-  //socket.emit('allMensajes', normalizedMessages)
 
   socket.on('newProducto', async data => {
-      //await postProducto(data)
       io.sockets.emit('allProductos', productos)
   })
 
-  /*socket.on('newMensaje', async msg => {
-      await chats.saveNormalizr(msg)
-      let newAllChats = await chats.getAll()
-      const newNormalizedMessages = normalize(newAllChats, [messageSchema])//---->Para Normalizr
-      io.sockets.emit('allMensajes', newNormalizedMessages)
-  })*/
+  socket.on("smstexto", (flagState) => {
+    if(flagState === 'true'){ 
+      smsSend.infoTwilio()
+    }
+  })
 })
