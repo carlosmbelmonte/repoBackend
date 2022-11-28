@@ -12,6 +12,10 @@ btnCrearChart?.addEventListener("click", async() => {
         .then(response =>  {
             console.log(response)
             document.getElementById('nroIDCarrito').innerText = `Se crea el carrito con ID ${response.id}`
+            let botones = document.getElementsByName('btnAddProd');
+            botones.forEach((boton) => {
+                boton.style.display = ''
+            })
         }); 
 
 })
