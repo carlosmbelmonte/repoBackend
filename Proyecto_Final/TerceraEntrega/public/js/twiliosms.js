@@ -9,13 +9,13 @@ const to = '+541162349408'
 const body = 'Su pedido ha sido recibido y se encuentra en proceso.'
 
 
-const infoTwilio = async() =>{
+const smsTwilio = async() =>{
     const info = await twilioClient.messages.create({ body, from, to })  
-    console.log(info)  
+    console.log(info.dateUpdated)  
 } 
 
 export default {
-    infoTwilio
+    smsTwilio
 }
 
 

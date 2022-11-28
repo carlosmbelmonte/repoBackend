@@ -17,6 +17,7 @@ import controllersdb from './mongoAtlas/controllersdb.js'
 import User from './mongoAtlas/models.js'
 import { productosDao as productosApi } from './daos/index.js'
 import smsSend from './public/js/twiliosms.js'
+import wspSend from './public/js/twiliowsp.js'
 
 let productos = await productosApi.getAll()
 
@@ -238,7 +239,7 @@ io.on("connection", async(socket) => {
 
   socket.on("smstexto", (flagState) => {
     if(flagState === 'true'){ 
-      smsSend.infoTwilio()
+      wspSend.wspTwilio()
     }
   })
 })
