@@ -51,6 +51,9 @@ socket.on('allProductos', productos => {
                 <td class="table-dark">
                     <img src="${producto.foto}" height="48px">
                 </td>
+                <td>
+                    <button class="btn btn-success" id="agregarprodcarrito${producto.id}" style="display: none;">Agregar al Carrito</button>
+                </td>
             </tr>`
         })  
     }  

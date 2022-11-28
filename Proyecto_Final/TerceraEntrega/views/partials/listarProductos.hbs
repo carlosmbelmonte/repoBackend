@@ -1,18 +1,25 @@
 <div id="productosDisponibles">
-    <h1 class="display-5 fw-bold mx-3">Productos Disponibles</h1>
-    <div class="mx-3"> 
-        <table id="tablaProducto" class="table table-dark table-striped">
-            <thead >
-                <th>ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Imagen</th>
-            </thead>
-            <tbody id="lista">
+    <div>
+        <h1 class="display-5 fw-bold mx-3">Productos Disponibles</h1>
+        <div class="mx-3"> 
+            <table id="tablaProducto" class="table table-dark table-striped">
+                <thead >
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Imagen</th>
+                    <th></th>
+                </thead>
+                <tbody id="lista">
 
-            </tbody>
-        </table>
-        <h2 class="fw-bold" id="msgProducto">No hay productos</h2>
+                </tbody>
+            </table>
+            <h2 class="fw-bold" id="msgProducto">No hay productos</h2>
+        </div>        
+    </div>
+    <div>
+        <button class="btn btn-warning mx-3 mt-3 mb-3" id="crearcarrito">Crear Carrito</button> 
+        <h2 class="fw-bold" id="nroIDCarrito"></h2>
     </div>
 </div>
