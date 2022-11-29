@@ -23,7 +23,6 @@ btnCrearChart?.addEventListener("click", async() => {
 })
 
 async function addProductos(idrecibido) {
-    //document.getElementById('mensajeGuardado').style.display = ''
     let objAux= { idProducto: parseInt(idrecibido)}
     console.log("idrecibido producto: ",objAux)
 
@@ -40,4 +39,13 @@ async function addProductos(idrecibido) {
     });
 }
 
+function finalizarCarrito(){
+    document.getElementById('objectosenCarrito').innerHTML = ``
+    document.getElementById('nroIDCarrito').innerText = ``
+    botones.forEach((boton) => {
+        boton.style.display = 'none'
+    })
+    document.getElementById('mensajeGuardado').style.display = 'none'    
+    document.getElementById('crearcarrito').style.display = ''
+}
 
