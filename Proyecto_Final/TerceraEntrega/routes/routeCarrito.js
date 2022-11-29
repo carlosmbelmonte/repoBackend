@@ -47,11 +47,10 @@ routerCarrito.get('/:id/productos', async(req, res) => { //Devuelve los producto
     }   
 })
 
-routerCarrito.get('/mail', async(req, res) => { //Devuelve los productos de un carrito segun su mail
+routerCarrito.get('/mail/:mail', async(req, res) => { //Devuelve los productos de un carrito segun su mail
     let allCarrito = await carritosApi.getAll()
-    const { mailUsuario } = req.body
+    const  mailUsuario  = req.params.mail
     const filterMail = allCarrito.filter((item) => item.usuario == mailUsuario)
-    //const iD = allCarrito.find(cart => parseInt(cart.id) === parseInt(req.params.id))
 
     if (filterMail.length === 0) {
         res.status(400).json({ error : "Mail no encontrado" });

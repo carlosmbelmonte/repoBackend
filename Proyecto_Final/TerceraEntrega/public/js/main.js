@@ -29,6 +29,28 @@ btnShowChart?.addEventListener("click", () => {
     document.getElementById('productosDisponibles').style.display = 'none'
     document.getElementById('informacionPersonal').style.display = 'none'
     document.getElementById('productosCarrito').style.display = ''
+
+    fetch(`/api/carrito/mail/${document.getElementById('logueoOkmail').textContent}`)
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+        console.log('Success:', response)
+        for(let i = 0; i<response.length;i++){
+            for(let j=0; j<response[i].productos.length;j++){
+                document.getElementById('listaCarrito').innerHTML += `
+                <tr class="table-dark"> 
+                    <td class="table-dark">${response[i].id}</td>
+                    <td class="table-dark">
+                        <img src="${response[i].productos[j].foto}" height="48px">
+                    </td>
+                    <td class="table-dark">${response[i].productos[j].nombre}</td>
+                    <td class="table-dark">${response[i].productos[j].descripcion}</td>
+                    <td class="table-dark">${response[i].productos[j].precio}</td>
+                </tr>`                 
+            }
+  
+        }
+    });    
 })
 
 socket.on('allProductos', productos => { 
