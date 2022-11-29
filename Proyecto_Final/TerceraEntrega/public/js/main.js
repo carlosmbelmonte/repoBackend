@@ -34,21 +34,44 @@ btnShowChart?.addEventListener("click", () => {
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
     .then(response => {
+        document.getElementById('listaCarrito').innerHTML = ''
         console.log('Success:', response)
         for(let i = 0; i<response.length;i++){
+            document.getElementById('listaCarrito').innerHTML += `
+            <div class="mb-3 row">
+                <div id="tabla${response[i].id}" class="col-10">
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <th style="width: 10%">ID del Carrito</th>
+                            <th style="width: 15%">Imagen</th>
+                            <th style="width: 20%">Producto</th>
+                            <th style="width: 40%">Descripcion</th>
+                            <th style="width: 15%">Precio</th>
+                        </thead>
+                        <tbody id="tablaBody${response[i].id}">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="botonera${response[i].id}" class="d-flex align-items-center col-2">
+                    <button id="endChart${response[i].id}" type="button" class="btn btn-warning">Finalizar Carrito ID:${response[i].id}</button>   
+                </div> 
+            </div>           
+            `
+
             for(let j=0; j<response[i].productos.length;j++){
-                document.getElementById('listaCarrito').innerHTML += `
-                <tr class="table-dark"> 
-                    <td class="table-dark">${response[i].id}</td>
-                    <td class="table-dark">
-                        <img src="${response[i].productos[j].foto}" height="48px">
-                    </td>
-                    <td class="table-dark">${response[i].productos[j].nombre}</td>
-                    <td class="table-dark">${response[i].productos[j].descripcion}</td>
-                    <td class="table-dark">${response[i].productos[j].precio}</td>
-                </tr>`                 
+                document.getElementById(`tablaBody${response[i].id}`).innerHTML += `
+                    <tr class="table-dark"> 
+                        <td class="table-dark">${response[i].id}</td>
+                        <td class="table-dark">
+                            <img src="${response[i].productos[j].foto}" height="48px">
+                        </td>
+                        <td class="table-dark">${response[i].productos[j].nombre}</td>
+                        <td class="table-dark">${response[i].productos[j].descripcion}</td>
+                        <td class="table-dark">${response[i].productos[j].precio}</td>
+                    </tr>                                    
+                `                
             }
-  
         }
     });    
 })
