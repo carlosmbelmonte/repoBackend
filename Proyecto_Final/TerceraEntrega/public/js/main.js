@@ -52,7 +52,7 @@ socket.on('allProductos', productos => {
                     <img src="${producto.foto}" height="48px">
                 </td>
                 <td>
-                    <button onclick="addProductos()" name="btnAddProd" class="btn btn-success" id="agregarprodcarrito${producto.id}" style="display: none;">Agregar al Carrito</button>
+                    <button onclick="addProductos(${producto.id})" name="btnAddProd" class="btn btn-success" id="agregarprodcarrito${producto.id}" style="display: none;">Agregar al Carrito</button>
                 </td>
             </tr>`
         })  

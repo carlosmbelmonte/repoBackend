@@ -21,16 +21,21 @@ btnCrearChart?.addEventListener("click", async() => {
         }); 
 })
 
-async function addProductos() {
-    //document.getElementById("demo").innerHTML = "Hello World";
-    console.log("aca vemos el valor del carrito: ",valorCarrito )
+async function addProductos(idrecibido) {
+    
+    let objAux= { idProducto: parseInt(idrecibido)}
+    console.log("idrecibido producto: ",objAux)
+
     fetch(`/api/carrito/${valorCarrito}/productos`, {
         method: 'POST', 
-        body: JSON.stringify({idProducto: 3}),
+        body: JSON.stringify(objAux),
         headers: {'Content-Type': 'application/json'}
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
+    .then(response => {
+        console.log('Success:', response)
+        document.getElementById('objectosenCarrito').innerHTML += `<p>${response.mensaje}</p>`
+    });
 }
 
 
