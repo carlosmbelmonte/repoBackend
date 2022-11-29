@@ -60,7 +60,7 @@ routerCarrito.post('/:id/productos', async(req, res) => { //Incorporar productos
         if (iD) {
             allCarrito[indexCart].productos.push(iD)
             await carritosApi.saveAll(allCarrito)
-            res.send(`Producto con ID: ${idProducto} agregado exitosamente al carrito con ID: ${req.params.id}`)    
+            res.send({mensaje:`Producto con ID: ${idProducto} agregado exitosamente al carrito con ID: ${req.params.id}`})    
         }else{
             res.status(400).json({ "error": "Ingrese el ID del producto" })
         }

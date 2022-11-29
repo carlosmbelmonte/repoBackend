@@ -21,11 +21,12 @@ btnCrearChart?.addEventListener("click", async() => {
         }); 
 })
 
-function addProductos() {
+async function addProductos() {
     //document.getElementById("demo").innerHTML = "Hello World";
+    console.log("aca vemos el valor del carrito: ",valorCarrito )
     fetch(`/api/carrito/${valorCarrito}/productos`, {
         method: 'POST', 
-        body: JSON.stringify({idProducto: 1}),
+        body: JSON.stringify({idProducto: 3}),
         headers: {'Content-Type': 'application/json'}
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
