@@ -1,6 +1,7 @@
 let valorCarrito
 const btnCrearChart = document.getElementById("crearcarrito")
 let botones = document.getElementsByName('btnAddProd')
+document.getElementById('mensajeGuardado').style.display = 'none'
 
 btnCrearChart?.addEventListener("click", async() => {
     document.getElementById('crearcarrito').style.display = 'none'
@@ -22,7 +23,7 @@ btnCrearChart?.addEventListener("click", async() => {
 })
 
 async function addProductos(idrecibido) {
-    
+    //document.getElementById('mensajeGuardado').style.display = ''
     let objAux= { idProducto: parseInt(idrecibido)}
     console.log("idrecibido producto: ",objAux)
 
@@ -34,6 +35,7 @@ async function addProductos(idrecibido) {
     .catch(error => console.error('Error:', error))
     .then(response => {
         console.log('Success:', response)
+        document.getElementById('mensajeGuardado').style.display = ''
         document.getElementById('objectosenCarrito').innerHTML += `<p>${response.mensaje}</p>`
     });
 }

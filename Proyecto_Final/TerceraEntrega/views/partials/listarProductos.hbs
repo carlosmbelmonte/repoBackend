@@ -20,7 +20,19 @@
     </div>
     <div>
         <button class="btn btn-warning mx-3 mt-3 mb-3" id="crearcarrito">Crear Carrito</button> 
-        <h2 class="fw-bold" id="nroIDCarrito"></h2>
-        <div id="objectosenCarrito"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2 class="fw-bold" id="nroIDCarrito"></h2>
+                    <div id="objectosenCarrito"></div>                    
+                </div>
+                <div id="mensajeGuardado" class="col">
+                    <h3>Desea guardar el carrito?</h3>
+                    <button class="btn btn-success mt-3 mb-3" id="finalizarCarrito">SI</button> 
+                    <p>NOTA: Al guardar el carrito, no se permite ingresar mas productos al mismo, y se inicia el proceso de COMPRA.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
