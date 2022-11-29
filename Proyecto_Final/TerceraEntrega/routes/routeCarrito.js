@@ -10,6 +10,7 @@ routerCarrito.post('/', async(req, res) => { //Recibe y agrega un carrito, y dev
     let allCarrito = await carritosApi.getAll()
     let newId
     let fecha = new Date()
+    let { mailuser } = req.body
 
     if(allCarrito.length === 0){
         newId=1
@@ -17,7 +18,7 @@ routerCarrito.post('/', async(req, res) => { //Recibe y agrega un carrito, y dev
         newId = parseInt(allCarrito[allCarrito.length-1].id) + 1
     }
 
-    allCarrito.push({id: newId, 'timestamp(carrito)': fecha, productos: []})
+    allCarrito.push({id: newId, 'timestamp(carrito)': fecha, productos: [], usuario: mailuser})
     await carritosApi.saveAll(allCarrito)
     res.send({id: newId})       
 })

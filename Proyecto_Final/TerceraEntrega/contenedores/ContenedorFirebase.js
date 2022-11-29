@@ -124,7 +124,8 @@ class ContenedorFirebase {
                 await doc.create(
                     {
                         "timestamp(carrito)": arrayCreate[i]["timestamp(carrito)"], 
-                        "productos": arrayCreate[i].productos
+                        "productos": arrayCreate[i].productos,
+                        "usuario": arrayCreate[i].usuario
                     }
                 )   
             }            

@@ -4,10 +4,11 @@ let botones = document.getElementsByName('btnAddProd')
 document.getElementById('mensajeGuardado').style.display = 'none'
 
 btnCrearChart?.addEventListener("click", async() => {
+    let objAux= { mailuser: `${document.getElementById('logueoOkmail').textContent}`}
     document.getElementById('crearcarrito').style.display = 'none'
     fetch('/api/carrito', {
         method: 'POST', 
-        
+        body: JSON.stringify(objAux),
         headers: {'Content-Type': 'application/json'}
     }).then(res => res.json())
         .catch(error => console.error('Error:', error))
