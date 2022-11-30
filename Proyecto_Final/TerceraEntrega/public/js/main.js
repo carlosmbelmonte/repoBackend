@@ -7,11 +7,11 @@ document.getElementById('productosCarrito').style.display = 'none'
 const btnShowProducts = document.getElementById("showProducts")
 const btnShowPersonal = document.getElementById("showPersonal")
 const btnShowChart = document.getElementById("showChart")
-const btnEndChart = document.getElementById("endChart")
+/*const btnEndChart = document.getElementById("endChart")
 
 btnEndChart?.addEventListener("click", async() => {
     socket.emit('smstexto', 'true')
-})
+})*/
 
 btnShowProducts?.addEventListener("click", () => {
     document.getElementById('productosDisponibles').style.display = ''
@@ -54,7 +54,7 @@ btnShowChart?.addEventListener("click", () => {
                     </table>
                 </div>
                 <div id="botonera${response[i].id}" class="d-flex align-items-center col-2">
-                    <button id="endChart${response[i].id}" type="button" class="btn btn-warning">Finalizar Carrito ID:${response[i].id}</button>   
+                    <button onclick="endChart(${response[i].id})" class="btn btn-warning">Finalizar Carrito ID:${response[i].id}</button>   
                 </div> 
             </div>           
             `
@@ -62,7 +62,7 @@ btnShowChart?.addEventListener("click", () => {
             for(let j=0; j<response[i].productos.length;j++){
                 document.getElementById(`tablaBody${response[i].id}`).innerHTML += `
                     <tr class="table-dark"> 
-                        <td class="table-dark">${response[i].id}</td>
+                        <td id="idChartTabla${response[i].id}" class="table-dark">${response[i].id}</td>
                         <td class="table-dark">
                             <img src="${response[i].productos[j].foto}" height="48px">
                         </td>
@@ -75,6 +75,32 @@ btnShowChart?.addEventListener("click", () => {
         }
     });    
 })
+
+function endChart(varChart){
+    let auxObj={}
+    fetch(`/api/carrito/${varChart}/productos`)
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+        auxObj = {
+            nombre: document.getElementById('logueoOkuser').textContent,
+            mail: document.getElementById('logueoOkmail').textContent,
+            idCarrito: varChart,
+            cantProd: response.length,
+            productos:[]
+        }
+       
+        for(let i=0; i<response.length; i++){
+            auxObj.productos[i]={
+                producto:response[i].nombre,
+                precio:response[i].precio,
+                descripcion:response[i].descripcion
+            }
+        }
+        console.log(auxObj)
+        socket.emit('mailCarrito', auxObj)
+    })
+}
 
 socket.on('allProductos', productos => { 
     console.log("array en consola[productos]",productos) 

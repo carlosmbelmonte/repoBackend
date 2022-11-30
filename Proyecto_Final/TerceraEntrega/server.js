@@ -239,9 +239,37 @@ io.on("connection", async(socket) => {
       io.sockets.emit('allProductos', productos)
   })
 
-  socket.on("smstexto", (flagState) => {
-    if(flagState === 'true'){ 
-      wspSend.wspTwilio()
-    }
+  socket.on('mailCarrito', async(objMailCarrito) => {
+     
+      //wspSend.wspTwilio()
+      const sendMailCarrito = createSendMailEthereal()
+      const cuentaDePrueba = 'carlos.m.belmonte@gmail.com'
+      const asunto = `Nuevo pedido de ${objMailCarrito.nombre} - ${objMailCarrito.mail}`
+      let mensajeHtml = `
+        <div>
+          <h5>Informacion del pedido</h5>
+          <ul>
+            <li>ID Carrito: ${objMailCarrito.idCarrito}</li>
+            <li>Cantidad de productos: ${objMailCarrito.cantProd}</li>      
+          </ul>
+        </div>
+        `
+
+      for(let i=0;i<objMailCarrito.cantProd;i++){
+        mensajeHtml +=
+        ` <h5>Producto ${i+1}</h5>
+          <ul>
+            <li>Producto: ${objMailCarrito.productos[i].producto}</li>
+            <li>Descripcion: ${objMailCarrito.productos[i].descripcion}</li>
+            <li>Precio: ${objMailCarrito.productos[i].precio}</li>
+          </ul>
+        `          
+      }
+
+      await sendMailCarrito({
+        to: cuentaDePrueba,
+        subject: asunto,
+        html: mensajeHtml
+      }) 
   })
 })
