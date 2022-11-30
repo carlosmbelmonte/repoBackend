@@ -10,6 +10,7 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from "passport-local";
 import {Server as IOServer} from 'socket.io';
 import nodemailer from 'nodemailer'
+import log4js from "log4js"
 
 import rutas from './funcionesRutas.js'
 import config from './mongoAtlas/config.js'
@@ -18,6 +19,7 @@ import User from './mongoAtlas/models.js'
 import { productosDao as productosApi } from './daos/index.js'
 import smsSend from './public/js/twiliosms.js'
 import wspSend from './public/js/twiliowsp.js'
+import logger from './logger.js'
 
 let productos = await productosApi.getAll()
 

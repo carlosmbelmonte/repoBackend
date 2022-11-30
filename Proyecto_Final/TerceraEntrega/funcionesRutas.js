@@ -1,5 +1,7 @@
 import path from 'path';//---> Solucion encontrada en Google
 import {fileURLToPath} from 'url';//---> Solucion encontrada en Google
+import log4js from "log4js"
+import logger from './logger.js'
 const __filename = fileURLToPath(import.meta.url);//---> Solucion encontrada en Google
 const __dirname = path.dirname(__filename);//---> Solucion encontrada en Google
 
