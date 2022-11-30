@@ -7,11 +7,7 @@ document.getElementById('productosCarrito').style.display = 'none'
 const btnShowProducts = document.getElementById("showProducts")
 const btnShowPersonal = document.getElementById("showPersonal")
 const btnShowChart = document.getElementById("showChart")
-/*const btnEndChart = document.getElementById("endChart")
 
-btnEndChart?.addEventListener("click", async() => {
-    socket.emit('smstexto', 'true')
-})*/
 
 btnShowProducts?.addEventListener("click", () => {
     document.getElementById('productosDisponibles').style.display = ''
