@@ -53,7 +53,7 @@ routerCarrito.get('/mail/:mail', async(req, res) => { //Devuelve los productos d
     const filterMail = allCarrito.filter((item) => item.usuario == mailUsuario)
 
     if (filterMail.length === 0) {
-        res.status(400).json({ error : "Mail no encontrado" });
+        res.send({ error : "Mail no encontrado y/o Carrito Vacio" });
     } else {
         res.send(filterMail)
     }   

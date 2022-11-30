@@ -26,6 +26,48 @@ btnShowChart?.addEventListener("click", () => {
     document.getElementById('informacionPersonal').style.display = 'none'
     document.getElementById('productosCarrito').style.display = ''
 
+    actualizarCarrito()
+})
+
+function endChart(varChart){
+    let auxObj={}
+    fetch(`/api/carrito/${varChart}/productos`)
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+        auxObj = {
+            nombre: document.getElementById('logueoOkuser').textContent,
+            mail: document.getElementById('logueoOkmail').textContent,
+            idCarrito: varChart,
+            cantProd: response.length,
+            productos:[]
+        }
+       
+        for(let i=0; i<response.length; i++){
+            auxObj.productos[i]={
+                producto:response[i].nombre,
+                precio:response[i].precio,
+                descripcion:response[i].descripcion
+            }
+        }
+        console.log(auxObj)
+        socket.emit('mailCarrito', auxObj)
+    })
+
+
+    fetch(`/api/carrito/${varChart}`,{
+        method: 'DELETE', 
+        headers: {'Content-Type': 'application/json'}
+    }) 
+    .then(responseD => responseD.json())
+    .catch(err => console.log('Error:', err))    
+    .then(data => {
+        actualizarCarrito()
+    })
+
+}
+
+function actualizarCarrito(){
     fetch(`/api/carrito/mail/${document.getElementById('logueoOkmail').textContent}`)
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
@@ -70,32 +112,6 @@ btnShowChart?.addEventListener("click", () => {
             }
         }
     });    
-})
-
-function endChart(varChart){
-    let auxObj={}
-    fetch(`/api/carrito/${varChart}/productos`)
-    .then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {
-        auxObj = {
-            nombre: document.getElementById('logueoOkuser').textContent,
-            mail: document.getElementById('logueoOkmail').textContent,
-            idCarrito: varChart,
-            cantProd: response.length,
-            productos:[]
-        }
-       
-        for(let i=0; i<response.length; i++){
-            auxObj.productos[i]={
-                producto:response[i].nombre,
-                precio:response[i].precio,
-                descripcion:response[i].descripcion
-            }
-        }
-        console.log(auxObj)
-        socket.emit('mailCarrito', auxObj)
-    })
 }
 
 socket.on('allProductos', productos => { 

@@ -21,6 +21,7 @@ btnCrearChart?.addEventListener("click", async() => {
                 boton.style.display = ''
             })
         }); 
+    
 })
 
 async function addProductos(idrecibido) {
