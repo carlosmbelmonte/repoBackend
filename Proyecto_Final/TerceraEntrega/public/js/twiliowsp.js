@@ -1,5 +1,7 @@
 import twilio from 'twilio'
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
+import log4js from "log4js"
+import logger from '../../logger.js'
 dotenv.config()
 
 const client = twilio(process.env.ACCTSID, process.env.AUTHTOKEN)
@@ -13,7 +15,7 @@ const wspTwilio = async(contenidoCarrito) => {
         from: 'whatsapp:+14155238886',
         to: `whatsapp:${numero}`
     })
-    console.log(message.dateUpdated)    
+    logger.info(message.dateUpdated)    
 }
 
 export default {

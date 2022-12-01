@@ -24,7 +24,6 @@ import logger from './logger.js'
 let productos = await productosApi.getAll()
 
 function createSendMail(mailConfig) {
-
   const transporter = nodemailer.createTransport(mailConfig);
 
   return function sendMail({ to, subject, text, html }) {
@@ -110,7 +109,7 @@ passport.use('login', new LocalStrategy(
     let user
     try {
         user = await User.findOne({ email })
-        console.log("usuario encontrado: ", user)
+        logger.info("usuario encontrado: ", user)
     } catch (error) {
         return done(err);
     }
@@ -141,7 +140,7 @@ async function createHash(password) {
 }
   
 async function isValidPassword(user, password) {
-    console.log(`Comparando ${password} con ${user.password}`);
+    logger.info(`Comparando ${password} con ${user.password}`);
     return await bcrypt.compare(password, user.password);
 }
 
@@ -213,7 +212,7 @@ function checkAuthentication(req, res, next) {
   
 app.get('/ruta-protegida', checkAuthentication, (req, res) => {
   const { user } = req;
-  console.log(user);
+  logger.info(user);
   res.send('<h1>Ruta OK!</h1>');
 });
   
@@ -221,20 +220,22 @@ app.get('/ruta-protegida', checkAuthentication, (req, res) => {
 //  LISTEN SERVER
 // ------------------------------------------------------------------------------
 controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
-
-  if (err) return console.log('error en conexión de base de datos', err);
-  console.log('BASE DE DATOS CONECTADA');
-
+  if (err) {
+    return logger.error('error en conexión de base de datos', err);
+  }
+  logger.info('BASE DE DATOS CONECTADA');
   http.listen(port, (err) => {
-    if (err) return console.log('error en listen server', err);
-    console.log(`Server running on port ${port}`);
+    if (err){ 
+      return logger.error('error en listen server', err);
+    }
+    logger.info(`Server running on port ${port}`);
   });
   
 });
 
 
 io.on("connection", async(socket) => {
-  console.log("Nuevo cliente conectado")
+  logger.info("Nuevo cliente conectado")
   socket.emit('allProductos', productos)
 
   socket.on('newProducto', async data => {

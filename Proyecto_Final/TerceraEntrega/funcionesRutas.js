@@ -25,7 +25,8 @@ function getLogin(req, res) {
     });
   }
   else {
-    console.log('user NO logueado');
+    //console.log('user NO logueado');
+    logger.info('user NO logueado');
     res.sendFile(__dirname + '/views/login.html');
   }
 }
@@ -44,7 +45,8 @@ function getSignup(req, res) {
     });
   }
   else {
-    console.log('user NO logueado');
+    //console.log('user NO logueado');
+    logger.info('user NO logueado');
     res.sendFile(__dirname + '/views/signup.html');
   }
     
@@ -53,7 +55,8 @@ function getSignup(req, res) {
 
 function postLogin (req, res) {
   let user = req.user;
-  console.log("consulta por usuario: ", user)
+  //console.log("consulta por usuario: ", user)
+  logger.info("consulta por usuario: ", user)
   res.redirect('/login') 
 }
 
@@ -63,13 +66,13 @@ function postSignup (req, res) {
 }
 
 function getFaillogin (req, res) {
-  res.render('login-error', {
-  });
+  res.render('login-error', {});
+  logger.warn(`Login-Error`)
 }
 
 function getFailsignup (req, res) {
-  res.render('signup-error', {
-  });
+  res.render('signup-error', {});
+  logger.warn(`Signup-Error`)
 }
 
 function getLogout (req, res) {
@@ -85,13 +88,15 @@ function getLogout (req, res) {
     })
   }
   else {
-    console.log('user NO logueado');
+    //console.log('user NO logueado');
+    logger.info('user NO logueado');
     res.sendFile(__dirname + '/views/login.html');
   }
 }
 
 function failRoute(req, res){
   res.status(404).render('routing-error', {});
+  logger.warn(`Routing-Error`)
 }
 
 export default{

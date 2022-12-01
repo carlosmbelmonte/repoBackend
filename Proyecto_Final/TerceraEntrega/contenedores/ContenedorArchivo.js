@@ -1,5 +1,7 @@
 import fs from 'fs'
 import config from '../config.js'
+import log4js from "log4js"
+import logger from '../logger.js'
 
 class ContenedorArchivo{
     constructor(fileData){
@@ -11,6 +13,7 @@ class ContenedorArchivo{
         try{
             await fs.promises.writeFile(this.fileData,'[]')    
         }catch(error){
+            logger.error(`Error al eliminar el archivo: ${error}`)
             throw new Error(`Error al eliminar el archivo: ${error}`)
         }            
     }
@@ -21,6 +24,7 @@ class ContenedorArchivo{
             const filterId = idProductos.filter((item) => item.id !== x)
             await fs.promises.writeFile(this.fileData,JSON.stringify(filterId, null,2)) 
         }catch(error){
+            logger.error(`Error al eliminar el objeto del archivo: ${error}`)
             throw new Error(`Error al eliminar el objeto del archivo: ${error}`)
         }
     }
@@ -30,6 +34,7 @@ class ContenedorArchivo{
             const todos = await fs.promises.readFile(this.fileData,'utf-8')
             return JSON.parse(todos)
         }catch(err){
+            logger.warn(`Array vacio`)
             return []
         } 
     }
@@ -39,6 +44,7 @@ class ContenedorArchivo{
             const idProductos = await this.getAll()           
             return idProductos.find(producto => producto.id == x);            
         }catch(error){
+            logger.error(`Error leer el ID de archivo: ${error}`)
             throw new Error(`Error leer el ID de archivo: ${error}`)
         } 
     }
@@ -56,6 +62,7 @@ class ContenedorArchivo{
             await fs.promises.writeFile(this.fileData,JSON.stringify(informacion, null,2))
             return newId    
         }catch(error){
+            logger.error(`Error al guardar: ${error}`)
             throw new Error(`Error al guardar: ${error}`)
         }
     }
@@ -63,6 +70,7 @@ class ContenedorArchivo{
         try{
             await fs.promises.writeFile(this.fileData,JSON.stringify(newArray, null,2))    
         }catch(error){
+            logger.error(`Error al guardar el archivo: ${error}`)
             throw new Error(`Error al guardar el archivo: ${error}`)
         } 
     }
@@ -74,6 +82,7 @@ class ContenedorArchivo{
             allProductos[index] = {...newObj, id: x}
             await fs.promises.writeFile(this.fileData,JSON.stringify(allProductos, null,2))
         }catch(error){
+            logger.error(`Error leer el ID de archivo: ${error}`)
             throw new Error(`Error leer el ID de archivo: ${error}`)
         } 
     }

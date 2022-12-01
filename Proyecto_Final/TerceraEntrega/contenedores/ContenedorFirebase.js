@@ -1,5 +1,7 @@
 import admin from "firebase-admin"
 import config from '../config.js'
+import log4js from "log4js"
+import logger from '../logger.js'
 
 admin.initializeApp({
     credential: admin.credential.cert(config.firebase)
@@ -23,6 +25,7 @@ class ContenedorFirebase {
             return result
 
         } catch (err) {
+            logger.warn(`Array vacio`)
             return []
         }
     }
@@ -31,12 +34,14 @@ class ContenedorFirebase {
         try{ 
             const item = await this.coleccion.doc(`${x}`).get();
             if (!item.exists) {
+                logger.error(`Error leer el ID del item`)
                 throw new Error(`Error leer el ID del item`)
             }else{
                 const respuesta = item.data()
                 return {id: x, ...respuesta}          
             }
         } catch (err) {
+            logger.error(`Error leer el ID de archivo: ${error}`)
             throw new Error(`Error leer el ID de archivo: ${err}`)
         }
     }
@@ -53,6 +58,7 @@ class ContenedorFirebase {
                 await this.createAll(arrayItems)
             }
         }catch(error){
+            logger.error(`Error al guardar: ${error}`)
             throw new Error(`Error al guardar: ${error}`)
         }
 
@@ -70,6 +76,7 @@ class ContenedorFirebase {
             await this.coleccion.doc(`${newId}`).set(newObj)
             return newId
         }catch(error){
+            logger.error(`Error al guardar: ${error}`)
             throw new Error(`Error al guardar: ${error}`)
         }
     }
@@ -78,6 +85,7 @@ class ContenedorFirebase {
         try{
             const res = await this.coleccion.doc(`${x}`).delete();
         }catch(error){
+            logger.error(`Error al eliminar el objeto del archivo: ${error}`)
             throw new Error(`Error al eliminar el objeto del archivo: ${error}`)
         }
     }
@@ -89,6 +97,7 @@ class ContenedorFirebase {
                 await this.coleccion.doc(`${preDelete[i].id}`).delete()
             }
         }catch(error){
+            logger.error(`Error al eliminar el objeto del archivo: ${error}`)
             throw new Error(`Error al eliminar el objeto del archivo: ${error}`)
         }
     }
@@ -97,6 +106,7 @@ class ContenedorFirebase {
         try{
             await this.coleccion.doc(`${x}`).update(newObj)
         }catch(error){
+            logger.error(`Error leer el ID de archivo: ${error}`)
             throw new Error(`Error leer el ID de archivo: ${error}`)
         } 
     }
