@@ -41,3 +41,5 @@
 >> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/controllersdb.png)
 - En la carpeta public/js, se debe modificar el archivo twiliowsp.js para agregar el nro de whatsapp del administrador:
 >> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/twiliowsp.png)
+- En la carpeta public/js, se encuentra el archivo twiliosms.js, este solo enviara sms a nros verificados previamente en la consola de twilio:
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/numerosVerificados.png)
