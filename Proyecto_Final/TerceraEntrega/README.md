@@ -18,3 +18,14 @@
 - Habilitar el modo cluster para el servidor, como opcional a través de una constante global.
 - Utilizar alguno de los loggers ya vistos y así reemplazar todos los mensajes a consola por logs eficientes hacia la misma consola. En el caso de errores moderados ó graves el log tendrá además como destino un archivo elegido.
 - Realizar una prueba de performance en modo local, con y sin cluster, utilizando Artillery en el endpoint del listado de productos (con el usuario vez logueado). Verificar los resultados.
+
+# Pasos a seguir para ejecutar el proyecto
+-  Se debe crear un archivo .env que contenga las credenciales de Twilio para poder mandar sms y Whatsapp. A su vez ese archivo .env debe tener el puerto de escucha del servidor:
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/variablesENV.png)
+- Luego se debe ejecutar el servidor ya sea en modo FORK o CLUSTER, esto se lo toma como 3er parametro:
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/modoFORK_00.png)
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/modoCLUSTER_00.png)
+- Despues aparece la vista de logueo, en la misma se debe colocar el mail de usuario y contraseña, en caso de un usuario creado, sino se debe crear uno.
+- Para las pruebas en Artillery, se usa el endpoint http://localhost:8080/api/productos ya que el mismo, trae todos los productos disponibles en la DB.
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/comandosArtillery.png)
+- Los resultados de las pruebas de Artillery estan en los archivos result_fork.txt y result_cluster.txt, en los mismos se evidencia que la performance del proyecto aumenta en modo CLUSTER.
