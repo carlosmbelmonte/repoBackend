@@ -11,6 +11,8 @@ import { Strategy as LocalStrategy } from "passport-local";
 import {Server as IOServer} from 'socket.io';
 import nodemailer from 'nodemailer'
 import log4js from "log4js"
+import cluster from 'cluster'
+import os from 'os'
 
 import rutas from './funcionesRutas.js'
 import config from './mongoAtlas/config.js'
@@ -22,6 +24,8 @@ import wspSend from './public/js/twiliowsp.js'
 import logger from './logger.js'
 
 let productos = await productosApi.getAll()
+const modoCluster = process.argv[3] == 'CLUSTER'
+const numCPUs = os.cpus().length
 
 function createSendMail(mailConfig) {
   const transporter = nodemailer.createTransport(mailConfig);
@@ -216,23 +220,24 @@ app.get('/ruta-protegida', checkAuthentication, (req, res) => {
   res.send('<h1>Ruta OK!</h1>');
 });
   
-// ------------------------------------------------------------------------------
-//  LISTEN SERVER
-// ------------------------------------------------------------------------------
-controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
-  if (err) {
-    return logger.error('error en conexión de base de datos', err);
-  }
-  logger.info('BASE DE DATOS CONECTADA');
-  http.listen(port, (err) => {
-    if (err){ 
-      return logger.error('error en listen server', err);
-    }
-    logger.info(`Server running on port ${port}`);
-  });
-  
-});
 
+if(modoCluster && cluster.isPrimary) {
+  logger.info('Modo CLUSTER');
+  logger.info(`Número de procesadores: ${numCPUs}`)
+  logger.info(`PID MASTER ${process.pid}`)
+
+  for(let i=0; i<numCPUs; i++) {
+      cluster.fork()
+  }
+
+  cluster.on('exit', worker => {
+      logger.info('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+      cluster.fork()
+  })
+}
+else {  
+  conexionDBPuerto(process.argv[2])
+}
 
 io.on("connection", async(socket) => {
   logger.info("Nuevo cliente conectado")
@@ -276,3 +281,16 @@ io.on("connection", async(socket) => {
       }) 
   })
 })
+
+function conexionDBPuerto(varPuerto){ 
+  logger.info('Modo FORK');
+  const port = parseInt(varPuerto) || parseInt(process.env.PUERTO)
+  controllersdb.conectarDB(config.URL_BASE_DE_DATOS, err => {
+    if (err) {return logger.error('error en conexión de base de datos', err);}
+    logger.info('BASE DE DATOS CONECTADA');
+    http.listen(port, (err) => {
+      if (err){ return logger.error('error en listen server', err)}
+      logger.info(`Server running on port ${port}`)
+    })
+  })  
+}
