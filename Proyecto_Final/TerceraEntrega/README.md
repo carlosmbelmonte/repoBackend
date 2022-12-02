@@ -43,3 +43,6 @@
 >> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/twiliowsp.png)
 - En la carpeta public/js, se encuentra el archivo twiliosms.js, este solo enviara sms a nros verificados previamente en la consola de twilio:
 >> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/numerosVerificados.png)
+
+# Navegabilidad:
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/navegabilidad.gif)
