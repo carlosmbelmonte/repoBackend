@@ -248,7 +248,7 @@ io.on("connection", async(socket) => {
   })
 
   socket.on('mailCarrito', async(objMailCarrito) => {
-      smsSend.smsTwilio()
+      smsSend.smsTwilio(objMailCarrito.phone)
       wspSend.wspTwilio(`Nuevo pedido de ${objMailCarrito.nombre} - ${objMailCarrito.mail}`)
       const sendMailCarrito = createSendMailEthereal()
       const cuentaDePrueba = 'carlos.m.belmonte@gmail.com'

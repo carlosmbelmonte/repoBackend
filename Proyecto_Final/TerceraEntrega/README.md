@@ -21,11 +21,23 @@
 
 # Pasos a seguir para ejecutar el proyecto
 -  Se debe crear un archivo .env que contenga las credenciales de Twilio para poder mandar sms y Whatsapp. A su vez ese archivo .env debe tener el puerto de escucha del servidor:
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/variablesENV.png)
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/variablesENV.png)
 - Luego se debe ejecutar el servidor ya sea en modo FORK o CLUSTER, esto se lo toma como 3er parametro:
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/modoFORK_00.png)
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/modoCLUSTER_00.png)
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/modoFORK_00.png)
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/modoCLUSTER_00.png)
 - Despues aparece la vista de logueo, en la misma se debe colocar el mail de usuario y contraseña, en caso de un usuario creado, sino se debe crear uno.
 - Para las pruebas en Artillery, se usa el endpoint http://localhost:8080/api/productos ya que el mismo, trae todos los productos disponibles en la DB.
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/comandosArtillery.png)
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/comandosArtillery.png)
 - Los resultados de las pruebas de Artillery estan en los archivos result_fork.txt y result_cluster.txt, en los mismos se evidencia que la performance del proyecto aumenta en modo CLUSTER.
+
+# Cambios a tener en cuenta:
+- En el archivo switchDB.js se selecciona que DB utilizar para almacenar los productos y carritos, hay 2 opciones, por archivos o por Firebase, para estas pruebas, se opto por Fisebase:
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/switchDB.png)
+- En el archivo server.js se hace referencia al mail de Administrador, el mismo se debe cambiar en las lineas 44 (con su pass) y la linea 78:
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/server.png)
+- En el archivo config.js se debe cambiar las credenciales de las base de datos, al respectivo administrador:
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/config.png)
+- En la carpeta mongoAtlas, se encuentra la conexion a la DB, la cual manejara las cuentas de usuarios del servidor, es decir todos los logueos, en dicha carpeta se debe cambiar el username y password de la base de datos, a la base propia:
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/controllersdb.png)
+- En la carpeta public/js, se debe modificar el archivo twiliowsp.js para agregar el nro de whatsapp del administrador:
+>> ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/TerceraEntrega/public/imagen/twiliowsp.png)

@@ -38,6 +38,7 @@ function endChart(varChart){
         auxObj = {
             nombre: document.getElementById('logueoOkuser').textContent,
             mail: document.getElementById('logueoOkmail').textContent,
+            phone: document.getElementById('logueoOkphone').textContent,
             idCarrito: varChart,
             cantProd: response.length,
             productos:[]
