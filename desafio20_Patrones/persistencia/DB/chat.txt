@@ -141,5 +141,18 @@
     "text": "Hola con logueo!",
     "fecha": "25/10/2022 10:51:35",
     "_id": 11
+  },
+  {
+    "author": {
+      "id": "sandra@gmail.com",
+      "nombre": "Sandra Ines",
+      "apellido": " Machardo",
+      "edad": "32",
+      "alias": "SIM",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/1-Girl-64.png"
+    },
+    "text": "Nuevo mensaje con DAO!!!",
+    "fecha": "17/12/2022 17:01:34",
+    "_id": 12
   }
 ]

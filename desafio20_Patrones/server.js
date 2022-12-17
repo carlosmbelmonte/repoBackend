@@ -22,8 +22,10 @@ const rutas = require('./rutas/funcionesRutas');
 const { routerFaker , productosRandom} = require('./rutas/routeFaker')
 const { router } = require('./rutas/routes')
 
-const { Contenedor } = require('./persistencia/contenedor') 
-const chats = new Contenedor('./persistencia/chat.txt')
+//const { Contenedor } = require('./persistencia/contenedor') 
+//const chats = new Contenedor('./persistencia/chat.txt')
+
+const chats = require('./persistencia/daos/index').chatsDao
 
 let productos = productosRandom()
 
