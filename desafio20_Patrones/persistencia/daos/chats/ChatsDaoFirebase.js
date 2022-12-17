@@ -3,7 +3,7 @@ const {ContenedorFirebase} = require('../../contenedores/ContenedorFirebase')
 class ChatsDaoFirebase extends ContenedorFirebase {
 
     constructor() {
-        super('chats')
+        super('chat')
     }
 }
 

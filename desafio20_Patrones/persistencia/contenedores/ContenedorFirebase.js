@@ -81,6 +81,23 @@ class ContenedorFirebase {
         }
     }
 
+    async saveNormalizr(newObj){
+        const informacion = await this.getAll()
+        let newId
+        if(informacion.length == 0){
+            newId = 1
+        }else{
+            newId = parseInt(informacion[informacion.length-1]._id) + 1
+        }
+        //informacion.push({...newObj, _id: newId})
+        try{
+            await this.coleccion.doc(`${newId}`).set({...newObj, _id: newId})
+            return newId    
+        }catch(error){
+            throw new Error(`Error al guardar: ${error}`)
+        }
+    }      
+
     async deleteById(x){
         try{
             const res = await this.coleccion.doc(`${x}`).delete();
