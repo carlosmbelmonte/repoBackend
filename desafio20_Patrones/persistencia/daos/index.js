@@ -1,8 +1,10 @@
-const { varSwitch } = require('../switchDB')
+//const { varSwitch } = require('../switchDB')
 var chatsDao
 
+const varSwitch = process.argv[6] || 'TXT'
+
 switch (varSwitch) {
-    case 'MEM':
+    case 'TXT':
         const { ChatsDaoArchivo } = require('./chats/ChatsDaoArchivos')
         chatsDao = new ChatsDaoArchivo()
         break
