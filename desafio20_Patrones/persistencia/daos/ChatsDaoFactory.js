@@ -1,5 +1,4 @@
-//const { varSwitch } = require('../switchDB')
-var chatsDao
+let chatsDao
 
 const varSwitch = process.argv[6] || 'TXT'
 
@@ -17,6 +16,10 @@ switch (varSwitch) {
         break
 }
 
-module.exports = { 
-    chatsDao:chatsDao 
+class ChatsDaoFactory {
+    static getDao() {
+        return chatsDao
+    }
 }
+
+module.exports = { ChatsDaoFactory };
