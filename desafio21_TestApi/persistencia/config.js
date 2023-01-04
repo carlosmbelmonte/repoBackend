@@ -1,6 +1,6 @@
 module.exports = {
     fileSystem: {
-        path: './persistencia/DB/'
+        path: './persistencia/DB'
     },
     firebase: {
         "type": "service_account",

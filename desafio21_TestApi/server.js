@@ -22,8 +22,8 @@ const rutas = require('./rutas/funcionesRutas');
 const { routerFaker , productosRandom} = require('./rutas/routeFaker')
 const { router } = require('./rutas/routes')
 
-const chats = require('./persistencia/daos/ChatsDaoFactory').ChatsDaoFactory.getDao()
-let productos = productosRandom()
+const chats = require('./persistencia/daos/DaoFactory').ChatsDaoFactory.getChatDao()
+const productos = require('./persistencia/daos/DaoFactory').ProductosDaoFactory.getProductoDao()
 
 const authorSchema = new schema.Entity('authors', {}, { idAttribute: 'id' }) 
 const messageSchema = new schema.Entity('messages', { author: authorSchema }, { idAttribute: '_id' }) 
@@ -184,14 +184,16 @@ else {
 // ------------------------------------------------------------------------------
 io.on("connection", async(socket) => {
   logger.info("Nuevo cliente conectado")
-  socket.emit('allProductos', productos)
+  let allProducts = await productos.getAll()
+  socket.emit('allProductos', allProducts)
+
   let allChats = await chats.getAll()
   const normalizedMessages = normalize(allChats, [messageSchema])//---->Para Normalizr
   socket.emit('allMensajes', normalizedMessages)
 
   socket.on('newProducto', async data => {
       await postProducto(data)
-      io.sockets.emit('allProductos', productos)
+      io.sockets.emit('allProductos', allProducts)
   })
 
   socket.on('newMensaje', async msg => {

@@ -57,10 +57,10 @@ socket.on('allProductos', productos => {
         document.getElementById('lista').innerHTML += `
             <tr class="table-dark"> 
                 <td class="table-dark">${producto.id}</td>
-                <td class="table-dark">${producto.title}</td>
-                <td class="table-dark">${producto.price}</td>
+                <td class="table-dark">${producto.nombre}</td>
+                <td class="table-dark">${producto.precio}</td>
                 <td class="table-dark">
-                    <img src="${producto.thumbnail}" height="48px">
+                    <img src="${producto.foto}" height="48px">
                 </td>
             </tr>`
         })  
