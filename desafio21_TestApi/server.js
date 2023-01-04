@@ -20,6 +20,7 @@ const User = require('./controlador/models');
 
 const rutas = require('./rutas/funcionesRutas');
 const { routerFaker , productosRandom} = require('./rutas/routeFaker')
+const { routerProductos } = require('./rutas/routeProductos')
 const { router } = require('./rutas/routes')
 
 const chats = require('./persistencia/daos/DaoFactory').ChatsDaoFactory.getChatDao()
@@ -108,7 +109,7 @@ async function isValidPassword(user, password) {
 const app = express();
 const http = new HTTPServer(app)//****************************************************************//
 const io = new IOServer(http)//****************************************************************//
-app.use('/api/productos-test', routerFaker)
+app.use('/api/productos-test', routerProductos)
 app.use('/api/randoms', router)
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
