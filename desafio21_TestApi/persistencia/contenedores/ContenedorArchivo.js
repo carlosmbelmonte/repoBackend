@@ -98,10 +98,16 @@ class ContenedorArchivo{
 
     async putById(x,newObj){
         try{
-            const allProductos = await this.getAll()             
-            const index = allProductos.map(producto => producto.id).indexOf(x)
-            allProductos[index] = {...newObj, id: x}
-            await fs.promises.writeFile(this.fileData,JSON.stringify(allProductos, null,2))
+            const allProductos = await this.getAll()
+            const filtrado = allProductos.filter((item) => item.id === x)
+            if(filtrado.length===0){
+                return {respuesta: `No existe el ID`}
+            }else{                           
+                const index = allProductos.map(producto => producto.id).indexOf(x)
+                allProductos[index] = {...newObj, id: x}
+                await fs.promises.writeFile(this.fileData,JSON.stringify(allProductos, null,2))
+                return {respuesta: `Dato actualizado exitosamente`}
+            }
         }catch(error){
             throw new Error(`Error leer el ID de archivo: ${error}`)
         } 

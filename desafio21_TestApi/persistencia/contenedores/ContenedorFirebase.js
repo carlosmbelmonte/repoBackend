@@ -128,7 +128,13 @@ class ContenedorFirebase {
 
     async putById(x,newObj){
         try{
-            await this.coleccion.doc(`${x}`).update(newObj)
+            const item = await this.coleccion.doc(`${x}`).get();
+            if (!item.exists) {
+                return {respuesta: `No existe el ID`}
+            }else{
+                await this.coleccion.doc(`${x}`).update(newObj)
+                return {respuesta: `Dato actualizado exitosamente`}          
+            }            
         }catch(error){
             logger.error(`Error leer el ID de archivo: ${error}`)
             throw new Error(`Error leer el ID de archivo: ${error}`)

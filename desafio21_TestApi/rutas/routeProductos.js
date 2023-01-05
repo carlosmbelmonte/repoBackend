@@ -23,6 +23,16 @@ routerProductos.delete('/:id', async(req, res) => {  // Elimina un producto por 
     res.send(allProducts)     
 })
 
+routerProductos.put('/:id', async(req, res) => {  // Recibe y actualiza un producto según su id   
+    const { nombre, descripcion, codigo, foto, precio, stock } = req.body
+    if(!nombre || !descripcion || !codigo || !foto || !precio || !stock){
+        res.status(400).json({ "error": "Ingrese todos los datos del producto" });
+    }else{
+        let idProducts = await productos.putById(parseInt(req.params.id),{'timestamp(producto)': new Date(), nombre, descripcion, codigo, foto, precio, stock})    
+        res.send(idProducts)     
+    }  
+})
+
 module.exports = {
     routerProductos: routerProductos
 }
