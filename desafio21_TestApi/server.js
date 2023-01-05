@@ -109,13 +109,15 @@ async function isValidPassword(user, password) {
 const app = express();
 const http = new HTTPServer(app)//****************************************************************//
 const io = new IOServer(http)//****************************************************************//
-app.use('/api/productos-test', routerProductos)
-app.use('/api/randoms', router)
+
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main.hbs' }));
 app.set('view engine', '.hbs');
-//app.use(express.static(__dirname + '/views'));
+
 app.use(express.static("servicio"))
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+app.use('/api/productos-test', routerProductos)
+app.use('/api/randoms', router)
 
 app.use(session({
   secret: 'shhhhhhhh',

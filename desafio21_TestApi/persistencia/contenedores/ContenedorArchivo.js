@@ -21,9 +21,16 @@ class ContenedorArchivo{
     async deleteById(x){
         try{
             const idProductos = await this.getAll()            
-            const filterId = idProductos.filter((item) => item.id !== x)
-            await fs.promises.writeFile(this.fileData,JSON.stringify(filterId, null,2)) 
+            const filtrado = idProductos.filter((item) => item.id === x)
+            if(filtrado.length===0){
+                return {respuesta: `No existe el ID`}
+            }else{
+                const filterId = idProductos.filter((item) => item.id !== x)
+                await fs.promises.writeFile(this.fileData,JSON.stringify(filterId, null,2))
+                return {respuesta: `ID eliminado exitosamente`}     
+            }            
         }catch(error){
+            logger.error(`Error al eliminar el objeto del archivo: ${error}`)
             throw new Error(`Error al eliminar el objeto del archivo: ${error}`)
         }
     }

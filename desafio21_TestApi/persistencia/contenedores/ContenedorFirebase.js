@@ -100,9 +100,16 @@ class ContenedorFirebase {
 
     async deleteById(x){
         try{
-            const res = await this.coleccion.doc(`${x}`).delete();
+            const item = await this.coleccion.doc(`${x}`).get();
+            if (!item.exists) {
+                return {respuesta: `No existe el ID`}
+            }else{
+                await this.coleccion.doc(`${x}`).delete();
+                return {respuesta: `ID eliminado exitosamente`}          
+            }
+
         }catch(error){
-            logger.error(`Error al eliminar el objeto del archivo: ${error}`)
+            logger.error(`Error al eliminar el objeto de firebase: ${error}`)
             throw new Error(`Error al eliminar el objeto del archivo: ${error}`)
         }
     }
