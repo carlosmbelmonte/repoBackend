@@ -70,13 +70,13 @@
     "stock": "6000 unidades"
   },
   {
-    "timestamp(producto)": "2023-01-05T23:14:07.402Z",
-    "nombre": "ZMR230_DB_TXT_Prueba",
-    "descripcion": "Medidor Bebe",
-    "codigo": "16000001",
-    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/apple-fruit-science-school-64.png",
-    "precio": "275 usd",
-    "stock": "Mucho stock",
+    "timestamp(producto)": "2023-01-06T13:08:31.629Z",
+    "nombre": "ZMR230_TEST_TXT",
+    "descripcion": "Medidor Trifasico",
+    "codigo": "88888001",
+    "foto": "https://i.postimg.cc/k4vBsCgP/medidor-ZMR.png",
+    "precio": "2850 usd",
+    "stock": "30800 unidades",
     "id": 8
   }
 ]
