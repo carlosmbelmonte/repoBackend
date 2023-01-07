@@ -1,4 +1,4 @@
-const { get, post, deleteId, put } = require('../clienteAxios')
+const { get, post, deleteId, put } = require('../cliente')
 
 const main = async() => {
     console.log(">>>> Mostrar todos los productos <<<<")
