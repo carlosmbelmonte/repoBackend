@@ -5,3 +5,10 @@
 [2023-01-05T16:35:18.663] [ERROR] prod - Error al eliminar el objeto de firebase: SyntaxError: Unexpected token D in JSON at position 0
 [2023-01-05T16:37:12.025] [ERROR] prod - Error al eliminar el objeto de firebase: SyntaxError: Unexpected token D in JSON at position 0
 [2023-01-05T16:40:11.173] [ERROR] prod - Error al eliminar el objeto de firebase: SyntaxError: Unexpected token D in JSON at position 0
+[2023-01-07T19:34:40.845] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:34:40.947] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.431] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.507] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.518] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.617] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.625] [ERROR] prod - Archivo Vacio o Inexistente
