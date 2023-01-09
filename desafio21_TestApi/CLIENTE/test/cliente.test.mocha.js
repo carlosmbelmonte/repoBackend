@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { get, put, deleteId, post } = require('../cliente.js')
+const { get, put, deleteId, post } = require('../cliente')
 
 describe('Prueba MOCHA', function () {
 
