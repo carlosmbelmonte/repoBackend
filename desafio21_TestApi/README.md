@@ -26,7 +26,7 @@ No hace falta realizar un cliente ya que utilizaremos tests para verificar el co
 
 # Observacion
 - En ocasiones el test Automatico suele reportar fallos, pero se debe a una demora en los tiempo de respuesta de FIREBASE, cuando dichos tiempos son igual o supera los 2000ms. Pero no implica una falla en la ejecucion del programa
-- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/testAutomatico-Observacion.png)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/testAutomatico_Observacion.png)
 
 # Dependencias a instalar en el SERVIDOR:
 - npm install express
