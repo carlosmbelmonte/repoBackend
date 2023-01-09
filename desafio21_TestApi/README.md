@@ -10,13 +10,15 @@ No hace falta realizar un cliente ya que utilizaremos tests para verificar el co
 # Ejecucion del Desafio
 - Este desafio consta de 2 partes, el SERVIDOR que es tal cual el desafio de anterior (se instalan las mismas dependencia).
 - Para ejecutarlo a este ya sea con ARCHIVOS o con Firebase, se aconseja escribir los siguientes comandos:
->> npm start 8080 FORK NONE NONE TXT
->> npm start 8080 FORK NONE NONE FIRE
+>> - npm start 8080 FORK NONE NONE TXT
+>> - npm start 8080 FORK NONE NONE FIRE
 - ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoArchivo.png)
 - ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoFirebase.png)
 - Luego nos dirigimos a la ruta donde se encuentra la carpeta de CLIENTE e instalamos las dependencias para el mismo, estan detalladas abajo.
 - Despues de instalar la dependencias, se ejecuta el test manual con el siguiente comando npm run test-manual, en el mismo se hace una prueba con axios solamente y se deben obtener los siguientes resultados:
 - ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/testManual.png)
+- Para finalizar, se realizan las pruebas de MOCHA, CHAI y SUPERTEST, para realizar las mismas, se ejecuta el siguiente comando npm run test, se obtienen los siguientes resultados:
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/testAutomatico.png)
 
 
 # Dependencias a instalar en el SERVIDOR:
