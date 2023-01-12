@@ -28,16 +28,16 @@ const schema = buildSchema(`
     id: Int
   }
   type Query {
-    getProducts: [Producto],
+    getProductos: [Producto],
   }
   type Mutation {
-    postProduct(datos: ProductosInput): Retorno
-    putProduct(id: Int, datos: ProductosInput): Respuesta,
-    deleteByIdProduct(id: Int): Respuesta,
+    postProducto(objeto: ProductosInput): Retorno
+    putProducto(id: Int, objeto: ProductosInput): Respuesta,
+    deleteProductoId(id: Int): Respuesta,
   }
 `)
 
-const getProducts = async () => { 
+const getProductos = async () => { 
     try {
         const allProductos = await productos.getAll()                 
         return allProductos                                                     
@@ -46,14 +46,44 @@ const getProducts = async () => {
     }
 }
 
-const graphqlProductController = graphqlHTTP({
+const postProducto = async ({ objeto }) => { 
+  try {
+      let allProductos = await productos.save({'timestamp_producto': new Date(),...objeto})                 
+      return {id: parseInt(allProductos)}                                                     
+  } catch (error) {
+      console.error(`El error es: ${error}`)
+  }
+}
+
+const putProducto = async (data) => { 
+  try {
+      let idProducts = await productos.putById(parseInt(data.id),{'timestamp_producto': new Date(), ...data.objeto})                
+      return idProducts                                                    
+  } catch (error) {
+      console.error(`El error es: ${error}`)
+  }
+}
+
+const deleteProductoId = async (data) => { 
+  try {
+      let idProducts = await productos.deleteById(parseInt(data.id))                
+      return idProducts                                                    
+  } catch (error) {
+      console.error(`El error es: ${error}`)
+  }
+}
+
+const graphqlProductos = graphqlHTTP({
     schema: schema,
     rootValue: {
-        getProducts: getProducts,
+        getProductos: getProductos,
+        postProducto: postProducto,
+        putProducto: putProducto,
+        deleteProductoId: deleteProductoId
     },
     graphiql: true,
 })
 
 module.exports={
-    graphqlProductController
+  graphqlProductos
 }

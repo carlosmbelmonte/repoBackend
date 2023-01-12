@@ -22,6 +22,7 @@ const rutas = require('./rutas/funcionesRutas');
 const { routerFaker , productosRandom} = require('./rutas/routeFaker')
 const { routerProductos } = require('./rutas/routeProductos')
 const { router } = require('./rutas/routes')
+const { graphqlProductos } = require('./controlador/graphcontroller')
 
 const chats = require('./persistencia/daos/DaoFactory').ChatsDaoFactory.getChatDao()
 const productos = require('./persistencia/daos/DaoFactory').ProductosDaoFactory.getProductoDao()
@@ -117,6 +118,7 @@ app.use(express.static("servicio"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/productos-test', routerProductos)
+app.use('/api/graphql', graphqlProductos)
 app.use('/api/randoms', router)
 
 app.use(session({

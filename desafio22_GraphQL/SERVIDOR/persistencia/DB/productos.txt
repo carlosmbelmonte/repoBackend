@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "timestamp_producto": "2022-09-03T12:33:41.453Z",
+    "timestamp(producto)": "2022-09-03T12:33:41.453Z",
     "nombre": "DDZ1513_DB_TXT",
     "descripcion": "Medidor Monofasico",
     "codigo": "80008001",
@@ -11,7 +11,7 @@
   },
   {
     "id": 2,
-    "timestamp_producto": "2022-09-03T12:43:16.422Z",
+    "timestamp(producto)": "2022-09-03T12:43:16.422Z",
     "nombre": "DTZ1513_DB_TXT",
     "descripcion": "Medidor Trifasico",
     "codigo": "80009001",
@@ -21,7 +21,7 @@
   },
   {
     "id": 3,
-    "timestamp_producto": "2022-09-03T12:35:46.177Z",
+    "timestamp(producto)": "2022-09-03T12:35:46.177Z",
     "nombre": "I310_DB_TXT",
     "descripcion": "Medidor Trifasico",
     "codigo": "80010001",
@@ -31,7 +31,7 @@
   },
   {
     "id": 4,
-    "timestamp_producto": "2022-09-03T12:36:26.312Z",
+    "timestamp(producto)": "2022-09-03T12:36:26.312Z",
     "nombre": "SL7000_DB_TXT",
     "descripcion": "Medidor Trifasico",
     "codigo": "60000001",
@@ -41,7 +41,7 @@
   },
   {
     "id": 5,
-    "timestamp_producto": "2022-09-30T21:14:56.066Z",
+    "timestamp(producto)": "2022-09-30T21:14:56.066Z",
     "nombre": "SP2301_DB_TXT",
     "descripcion": "Medidor Monofasico NONE",
     "codigo": "20000001",
@@ -51,7 +51,7 @@
   },
   {
     "id": 6,
-    "timestamp_producto": "2022-09-03T12:38:17.715Z",
+    "timestamp(producto)": "2022-09-03T12:38:17.715Z",
     "nombre": "ZMD405_DB_TXT",
     "descripcion": "Medidor Trifasico",
     "codigo": "37000001",
@@ -61,7 +61,7 @@
   },
   {
     "id": 7,
-    "timestamp_producto": "2022-09-03T12:39:03.160Z",
+    "timestamp(producto)": "2022-09-03T12:39:03.160Z",
     "nombre": "ZMG405_DB_TXT",
     "descripcion": "Medidor Trifasico",
     "codigo": "27000001",
@@ -70,7 +70,7 @@
     "stock": "6000 unidades"
   },
   {
-    "timestamp_producto": "2023-01-06T13:08:31.629Z",
+    "timestamp(producto)": "2023-01-06T13:08:31.629Z",
     "nombre": "ZMR230_TEST_TXT",
     "descripcion": "Medidor Trifasico",
     "codigo": "88888001",

@@ -12,3 +12,4 @@
 [2023-01-07T19:36:32.518] [ERROR] prod - Archivo Vacio o Inexistente
 [2023-01-07T19:36:32.617] [ERROR] prod - Archivo Vacio o Inexistente
 [2023-01-07T19:36:32.625] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-12T19:37:02.971] [ERROR] prod - Error al guardar: Error: Value for argument "data" is not a valid Firestore document. Input is not a plain JavaScript object.
