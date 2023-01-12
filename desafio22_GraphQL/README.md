@@ -28,6 +28,8 @@
 - npm install log4js
 - npm install minimist
 - npm install node-fetch
+- npm install --save express-graphql
+- npm install --save graphql
 
 # Dependencias a instalar en el CLIENTE:
 - npm install axios
