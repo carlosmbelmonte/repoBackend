@@ -4,7 +4,10 @@
 - Utilizar GraphiQL para realizar la prueba funcional de los querys y las mutaciones.
 
 # Ejecucion del Desafio
-
+- Se instalan las dependencias especificadas abajo en la carpeta SERVIDOR.
+- Luego en la ruta http://localhost:8080/api/graphql se ejecuta todas las funcionalidades de CRUD en graphql
+- Para probar estos cambios, se utilizan los archivos queriesFIRE.graphql para la DB en Firebase, y queriesTXT.graphql para la DB en Archivos. En dicho archivos se muestran como ejecutar las funcionalidades, para ambos es lo mismo, solo cambia la cantidad de PRODUCTOS en las bases.
+- El controlador de Graphql se encuentra en la carpeta SERVIDOR/controlador/graphcontroller.js
 
 # Observacion
 
