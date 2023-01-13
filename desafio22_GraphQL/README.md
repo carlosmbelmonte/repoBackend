@@ -5,12 +5,26 @@
 
 # Ejecucion del Desafio
 - Se instalan las dependencias especificadas abajo en la carpeta SERVIDOR.
+- Se inicializa el servidor con DB ya sea en Archivo o Firebase
+>> - npm start 8080 FORK NONE NONE TXT
+>> - npm start 8080 FORK NONE NONE FIRE
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoArchivo.png)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoFirebase.png)
 - Luego en la ruta http://localhost:8080/api/graphql se ejecuta todas las funcionalidades de CRUD en graphql
 - Para probar estos cambios, se utilizan los archivos queriesFIRE.graphql para la DB en Firebase, y queriesTXT.graphql para la DB en Archivos. En dicho archivos se muestran como ejecutar las funcionalidades, para ambos es lo mismo, solo cambia la cantidad de PRODUCTOS en las bases.
 - El controlador de Graphql se encuentra en la carpeta SERVIDOR/controlador/graphcontroller.js
 
-# Observacion
+# Ejecucion con DB en Archivo, prueba Query y Mutation
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoArchivo_graphqlQuery.png)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoArchivo_graphqlMutation.png)
 
+# Ejecucion con DB en Firebase, prueba Query y Mutation
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoFirebase_graphqlQuery.png)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/modoFirebase_graphqlMutation.png)
+
+# Vista desde Front con producto agregado (Firebase y Archivo)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/frontFirebase.png)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio21_TestApi/SERVIDOR/views/imagenes/frontArchivo.png)
 
 # Dependencias a instalar en el SERVIDOR:
 - npm install express
