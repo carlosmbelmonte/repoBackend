@@ -33,7 +33,8 @@ module.exports.datastores = {
   ***************************************************************************/
 
   default: {
-
+    adapter: 'sails-firestore',
+    serviceAccount: require('../desafios-ecommerce-firebase.json') //Este es el json generado por FIRESTORE
     /***************************************************************************
     *                                                                          *
     * Want to use a different database during development?                     *
