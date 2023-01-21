@@ -33,5 +33,7 @@
 - npm install --save express-graphql
 - npm install --save graphql
 
-# Dependencias a instalar en SAILS:
-
+# Dependencias a instalar en la carpeta SAILS:
+- npm -g install sails
+- npm install --save-dev nodemon
+- npm i sails-firestore
