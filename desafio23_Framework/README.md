@@ -18,6 +18,16 @@
 - En el archivo SAILS/config/models.js se modifica el nombre para la fecha de creacion del producto y se omite la coleccion updatedAt ya que no la usamos en el SERVIDOR.
 - ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio23_Framework/SERVIDOR/views/imagenes/modelsjs.png)
 
+# Ejecucion de SAILS y Observaciones
+- En la carpeta SAILS, ejecutamos el comando:
+>> - sails lift
+- Luego pregunta que hacer durante el desarrollo tanto alter como drop, borra todo lo que tenia previamente guardada la DB, tener esta precaucion. En esta situacion las vistas se ven asi:
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio23_Framework/SERVIDOR/views/imagenes/DBVacia.png)
+- Luego en la siguiente ruta http://localhost:1337/productos, se agregan los productos desde Postman:
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio23_Framework/SERVIDOR/views/imagenes/Postman.png)
+- Las nuevas vistas con los productos agregados desde SAILS se ven asi:
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/desafio23_Framework/SERVIDOR/views/imagenes/DBSails.png)
+
 # Dependencias a instalar en el SERVIDOR:
 - npm install express
 - npm install --save-dev nodemon
