@@ -70,7 +70,7 @@ module.exports.models = {
 
   attributes: {
     timestamp_producto: { type: 'number', autoCreatedAt: true, },
-    //updatedAt: { type: 'number', autoUpdatedAt: true, },
+    updatedAt: { type: 'number', autoUpdatedAt: true, },
     id: { type: 'number', autoIncrement: true, },
     //--------------------------------------------------------------------------
     //  /\   Using MongoDB?
