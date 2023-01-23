@@ -1,0 +1,158 @@
+[
+  {
+    "author": {
+      "id": "Carlos@chrome.com",
+      "nombre": "Carlos",
+      "apellido": "Belmonte",
+      "edad": "31",
+      "alias": "CMB",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/30-Scientist-64.png"
+    },
+    "text": "Hola mundo desde chrome!!!",
+    "fecha": "10/10/2022 11:42:38",
+    "_id": 1
+  },
+  {
+    "author": {
+      "id": "mariano@edge.com",
+      "nombre": "Mariano",
+      "apellido": "Belmonte",
+      "edad": "31",
+      "alias": "CMB",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/25-Researcher-64.png"
+    },
+    "text": "Hola mundo desde Edge!!!",
+    "fecha": "10/10/2022 11:43:48",
+    "_id": 2
+  },
+  {
+    "author": {
+      "id": "Carlos@chrome.com",
+      "nombre": "Carlos",
+      "apellido": "Belmonte",
+      "edad": "31",
+      "alias": "CMB",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/30-Scientist-64.png"
+    },
+    "text": "Este es el segundo mensaje enviado desde el mismo usuario de chrome!!!",
+    "fecha": "10/10/2022 11:52:55",
+    "_id": 3
+  },
+  {
+    "author": {
+      "id": "mariano@edge.com",
+      "nombre": "Mariano",
+      "apellido": "Belmonte",
+      "edad": "31",
+      "alias": "CMB",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/25-Researcher-64.png"
+    },
+    "text": "Nuevo mensaje desde el mismo usuario de EDGE!!",
+    "fecha": "10/10/2022 11:55:34",
+    "_id": 4
+  },
+  {
+    "author": {
+      "id": "sandra@edge.com",
+      "nombre": "Sandra",
+      "apellido": "Machado",
+      "edad": "32",
+      "alias": "SIM",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/1-Girl-64.png"
+    },
+    "text": "Ingreso de nuevo usuario desde EDGE",
+    "fecha": "10/10/2022 12:02:46",
+    "_id": 5
+  },
+  {
+    "author": {
+      "id": "sandra@edge.com",
+      "nombre": "Sandra",
+      "apellido": "Machado",
+      "edad": "32",
+      "alias": "SIM",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/1-Girl-64.png"
+    },
+    "text": "Nuevo mensaje de usuario desde CHROME",
+    "fecha": "10/10/2022 12:04:22",
+    "_id": 6
+  },
+  {
+    "author": {
+      "id": "Federico@chrome.com",
+      "nombre": "Federico",
+      "apellido": "Labate",
+      "edad": "5",
+      "alias": "FL",
+      "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-64.png"
+    },
+    "text": "Nuevo mensaje con funcion de Normalizr desde CHROME!",
+    "fecha": "10/10/2022 13:02:26",
+    "_id": 7
+  },
+  {
+    "author": {
+      "id": "Federico@chrome.com",
+      "nombre": "Federico",
+      "apellido": "Labate",
+      "edad": "5",
+      "alias": "FL",
+      "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-64.png"
+    },
+    "text": "El mismo usuario mandando el mensaje desde EDGE",
+    "fecha": "10/10/2022 13:05:43",
+    "_id": 8
+  },
+  {
+    "author": {
+      "id": "Joaquin@edge.com",
+      "nombre": "Joaquin",
+      "apellido": "Belmonte",
+      "edad": "1",
+      "alias": "JB",
+      "avatar": "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__1-64.png"
+    },
+    "text": "Nuevo usuario desde edge, para probar los porcentajes de compresion.",
+    "fecha": "10/10/2022 13:29:15",
+    "_id": 9
+  },
+  {
+    "author": {
+      "id": "Joaquin@edge.com",
+      "nombre": "Joaquin",
+      "apellido": "Belmonte",
+      "edad": "1",
+      "alias": "JB",
+      "avatar": "https://cdn4.iconfinder.com/data/icons/smileys-for-fun/128/smiley__1-64.png"
+    },
+    "text": "El mismo usuario envia un mensaje desde Chrome!",
+    "fecha": "10/10/2022 13:30:09",
+    "_id": 10
+  },
+  {
+    "author": {
+      "id": "carlos.m.belmonte@gmail.com",
+      "nombre": "Mariano",
+      "apellido": "Belmonte",
+      "edad": "32",
+      "alias": "CMB",
+      "avatar": "https://cdn0.iconfinder.com/data/icons/avatar-vol2/63/53-64.png"
+    },
+    "text": "Hola con logueo!",
+    "fecha": "25/10/2022 10:51:35",
+    "_id": 11
+  },
+  {
+    "author": {
+      "id": "sandra@gmail.com",
+      "nombre": "Sandra Ines",
+      "apellido": " Machardo",
+      "edad": "32",
+      "alias": "SIM",
+      "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/1-Girl-64.png"
+    },
+    "text": "Nuevo mensaje con DAO!!!",
+    "fecha": "17/12/2022 17:01:34",
+    "_id": 12
+  }
+]

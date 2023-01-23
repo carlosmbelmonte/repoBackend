@@ -1,0 +1,15 @@
+[2022-12-17T16:54:27.522] [ERROR] prod - Archivo Vacio o Inexistente
+[2022-12-17T16:55:39.434] [ERROR] prod - Archivo Vacio o Inexistente
+[2022-12-17T16:58:40.762] [ERROR] prod - Archivo Vacio o Inexistente
+[2022-12-17T16:58:53.078] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-05T16:35:18.663] [ERROR] prod - Error al eliminar el objeto de firebase: SyntaxError: Unexpected token D in JSON at position 0
+[2023-01-05T16:37:12.025] [ERROR] prod - Error al eliminar el objeto de firebase: SyntaxError: Unexpected token D in JSON at position 0
+[2023-01-05T16:40:11.173] [ERROR] prod - Error al eliminar el objeto de firebase: SyntaxError: Unexpected token D in JSON at position 0
+[2023-01-07T19:34:40.845] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:34:40.947] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.431] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.507] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.518] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.617] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-07T19:36:32.625] [ERROR] prod - Archivo Vacio o Inexistente
+[2023-01-12T19:37:02.971] [ERROR] prod - Error al guardar: Error: Value for argument "data" is not a valid Firestore document. Input is not a plain JavaScript object.

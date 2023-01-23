@@ -1,0 +1,44 @@
+query {
+  getProductos {
+    id
+    nombre
+    descripcion
+    codigo
+    foto
+    precio
+    stock
+    timestamp_producto
+  }
+}
+
+mutation {
+  postProducto(objeto: {
+    nombre: "Calculadora",
+    descripcion: "Calculadora Icono",
+    codigo: "291090",
+    foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-64.png",
+    precio: "50 usd",
+    stock: "80 unidades"
+  }) {
+    id
+  }
+}
+
+mutation {
+  putProducto(id:3,objeto: {
+    nombre: "Calculadora Actualizada",
+    descripcion: "Calculadora Actualizada",
+    codigo: "291090",
+    foto: "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-64.png",
+    precio: "580 usd",
+    stock: "80 unidades"
+  }) {
+    respuesta
+  }
+}
+
+mutation {
+  deleteProductoId(id:3) {
+    respuesta
+  }
+}
