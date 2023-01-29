@@ -47,7 +47,7 @@ Desarrollarás el backend de una aplicación de **e-commerce** para poder vender
 		-	**usuarios:** clientes registrados
 		
 		-	**productos:** catálogo completo
-				-	Link para foto (puede almacenarse de modo estático en la página en una subruta **/images/:productoid )**
+				-	Link para foto (puede almacenarse de modo estático en la página en una subruta **/images/:productoid**)
 				-	Precio unitario
 				-	Descripción
 				-	Categoría
