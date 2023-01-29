@@ -47,29 +47,29 @@ Desarrollarás el backend de una aplicación de **e-commerce** para poder vender
 		-	**usuarios:** clientes registrados
 		
 		-	**productos:** catálogo completo
-				-	Link para foto (puede almacenarse de modo estático en la página en una subruta **/images/:productoid**)
-				-	Precio unitario
-				-	Descripción
-				-	Categoría
+				-	Link para foto (puede almacenarse de modo estático en la página en una subruta **/images/:productoid**).
+				-	Precio unitario.
+				-	Descripción.
+				-	Categoría.
 				
 		-	**mensajes:** chat del usuario (preguntas y respuestas)
-				-	Email: del usuario que pregunta o al que se responde    
-				-	Tipo (‘usuario’ para preguntas ó ‘sistema’ para respuestas)    
-				-	Fecha y hora    
-				-	Cuerpo del mensaje
+				-	Email: del usuario que pregunta o al que se responde.    
+				-	Tipo (‘usuario’ para preguntas ó ‘sistema’ para respuestas).   
+				-	Fecha y hora.    
+				-	Cuerpo del mensaje.
 				
 		-	**carrito:** orden temporal de compra   
-				-	Email    
-				-	Fecha y hora    
-				-	Items con sus cantidades
-				-	Dirección de entrega
+				-	Email.    
+				-	Fecha y hora.    
+				-	Items con sus cantidades.
+				-	Dirección de entrega.
 				
-		-	**ordenes:** las órdenes generadas, que deben incluir los productos, descripciones y los precios **al momento de la compra.**
-				- Ítems: las órdenes deben poder tener productos surtidos, cada uno con su cantidad. Por ejemplo: remeras x 2 y gorra x 1
-				-  Número de orden: Se extrae de la cantidad de órdenes almacenadas    
-				-	Fecha y hora
-				-	estado ( por defecto en ‘generada’)    
-				-	Email de quién realizó la orden
+		-	**ordenes:** las órdenes generadas, que deben incluir los productos, descripciones y los precios **al momento de la compra**.
+				-   Ítems: las órdenes deben poder tener productos surtidos, cada uno con su cantidad. Por ejemplo: remeras x 2 y gorra x 1.
+				-   Número de orden: Se extrae de la cantidad de órdenes almacenadas.    
+				-	Fecha y hora.
+				-	Estado ( por defecto en ‘generada’).    
+				-	Email de quién realizó la orden.
 -	Finalizada la orden, enviar un mail a la dirección de mi cuenta con los detalles de la orden.
 -	Se dispondrá de un archivo de configuración externo con opciones para desarrollo y otras para producción, que serán visualizadas a través de una vista construida con handlebars. Como parámetros de configuración estará el puerto de escucha del servidor, la url de la base de datos, el mail que recibirá notificaciones del backend, tiempo de expiración de sesión y los que sea necesario incluir.
 -	Vamos a contar con un canal de chat general donde el usuario enviará los mensajes en la ruta **/chat** y en **/chat/:email** podrá ver sólo los suyos. Se utilizará la colección **mensajes** en MongoDB. La tecnología de comunicación a utilizar será Websockets. El servidor implementará una vista, utilizando handlebars, para visualizar todos los mensajes y poder responder individualmente a ellos, eligiendo el email de respuesta.
