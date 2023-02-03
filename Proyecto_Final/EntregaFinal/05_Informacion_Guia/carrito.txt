@@ -1,0 +1,5 @@
+Modelo para crear carritos por POSTMAN
+{
+    "email": " ",
+    "direccion": " "
+}

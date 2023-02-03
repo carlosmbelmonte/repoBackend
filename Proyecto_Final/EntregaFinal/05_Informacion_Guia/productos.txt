@@ -1,0 +1,9 @@
+Modelo para subir productos por POSTMAN
+{
+    "nombre": " ",
+    "descripcion": " ",
+    "categoria": " ",
+    "foto": " ",
+    "precio": ,
+    "stock": ,
+}
