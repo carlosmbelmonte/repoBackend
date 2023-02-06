@@ -3,6 +3,7 @@ import path from 'path';//---> Solucion encontrada en Google
 import {fileURLToPath} from 'url';//---> Solucion encontrada en Google
 import routerProductos from './01_routes/routeProductos.js'
 import routerCarrito from './01_routes/routeCarrito.js'
+import routerUsuarios from './01_routes/routeUsuarios.js'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
@@ -23,6 +24,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use('/api/productos', routerProductos)
 app.use('/api/carritos', routerCarrito)
+app.use('/api/usuarios', routerUsuarios)
 
 app.use((req, res, next) => {
     res.send({error: -2, descripcion: `ruta no implementada`})

@@ -22,7 +22,7 @@ class ContenedorMongo {
             const respuesta = await this.coleccion.find({id:{$eq: `${x}`}})
             return respuesta
         }catch(err){
-            throw new Error(`Error leer el ID de archivo: ${err}`)
+            throw new Error(`Error leer el ID de documento: ${err}`)
         }
     }
 
@@ -31,7 +31,16 @@ class ContenedorMongo {
             const respuesta = await this.coleccion.find({categoria:{$eq: `${x}`}})
             return respuesta
         }catch(err){
-            throw new Error(`Error leer el ID de archivo: ${err}`)
+            throw new Error(`Error leer la categoria de documento: ${err}`)
+        }
+    }
+
+    async getByEmail(x){
+        try{
+            const respuesta = await this.coleccion.find({email:{$eq: `${x}`}})
+            return respuesta
+        }catch(err){
+            throw new Error(`Error leer el email de documento: ${err}`)
         }
     }
 
@@ -47,7 +56,7 @@ class ContenedorMongo {
             await this.coleccion.insertMany({id:newId, ...newObj})   
             return { id : `${newId}` }
         }catch(error){
-            throw new Error(`Error leer el ID de archivo: ${error}`)
+            throw new Error(`Error leer el ID de documento: ${error}`)
         }
     } 
     
@@ -67,7 +76,7 @@ class ContenedorMongo {
                 
             }
         }catch(error){
-            throw new Error(`Error leer el ID de archivo: ${error}`)
+            throw new Error(`Error leer el ID de documento: ${error}`)
         } 
     }
 
@@ -83,7 +92,7 @@ class ContenedorMongo {
                 return { mensaje: "Item Eliminado",  Item: {id:x} }
             }
         }catch(error){
-            throw new Error(`Error leer el ID de archivo: ${error}`)
+            throw new Error(`Error leer el ID de documento: ${error}`)
         } 
     }
 }
