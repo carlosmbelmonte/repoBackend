@@ -1,0 +1,11 @@
+Modelo para crear usuario CLIENTE por POSTMAN
+{
+    "nombrefull": " ",
+    "password": " ",
+    "password2": " ",
+    "email": "", 
+    "adress": " ", 
+    "age": , 
+    "phone": , 
+    "avatar": " "
+}

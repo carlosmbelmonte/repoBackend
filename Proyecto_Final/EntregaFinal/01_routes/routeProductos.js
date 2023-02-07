@@ -1,14 +1,16 @@
 import { Router } from "express"
+import { verifyTokenAdmin, verifyTokenCliente } from "../03_services/middlewares/verifyToken.js"
 import { getProductos, getProductoById, postProducto, putProductoById, deleteProductoById, getProductByCategory } from "../02_controllers/products.controllers.js"
 
 const routerProductos = Router()
-let administrador = true
 
 routerProductos.get('/', getProductos)
 routerProductos.get('/:id', getProductoById)
-routerProductos.post('/', postProducto)
-routerProductos.put('/:id',putProductoById)
-routerProductos.delete('/:id', deleteProductoById)
 routerProductos.get('/categoria/:categoria', getProductByCategory)
+
+/*SOLO ADMIN PUEDE MODIFICAR/BORRAR PRODUCTO*/
+routerProductos.post('/', verifyTokenAdmin,postProducto)
+routerProductos.put('/:id', verifyTokenAdmin,putProductoById)
+routerProductos.delete('/:id', verifyTokenAdmin,deleteProductoById)
 
 export default routerProductos

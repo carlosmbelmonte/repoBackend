@@ -18,17 +18,28 @@ const login = async(req, res) => { //
     let usuarioByEmail = await usuarios.getByEmail(email)
     
     if(!password || !email ){
-        res.status(400).json({ error: "Ingrese todos los datos para loguearse" });
+        return res.status(400).json({ error: "Ingrese todos los datos para loguearse" });
     }else{
         if (usuarioByEmail.length === 0) {
             res.status(400).json({ error: "Ingrese correctamente el email" });    
         }else{
-            let comparePassword = await bcrypt.compare(password, usuarioByEmail[0].password)
-            if(!comparePassword){
-                res.status(400).json({ error: "Ingrese correctamente la contraseña" });    
-            }else{
-                const token = jwt.sign({ email: usuarioByEmail[0].email }, 'shhhhhhh', { expiresIn: 120 }) //Un valor numerico equivale a Xsegundos
-                res.send({token})     
+            if(usuarioByEmail[0].email !== "admin@admin.com"){
+                let comparePassword = await bcrypt.compare(password, usuarioByEmail[0].password)
+                if(!comparePassword){
+                    return res.status(400).json({ error: "Ingrese correctamente la contraseña del CLIENTE" });    
+                }else{
+                    const token = jwt.sign({ email: usuarioByEmail[0].email }, 'CLIENTE', { expiresIn: 180 }) //Un valor numerico equivale a Xsegundos
+                    return res.send({CLIENTE: token})     
+                }                
+            }
+
+            if(usuarioByEmail[0].email === "admin@admin.com"){
+                if(usuarioByEmail[0].password !== password){
+                    return res.status(400).json({ error: "Ingrese correctamente la contraseña del ADMIN" });    
+                }else{
+                    const token = jwt.sign({ email: usuarioByEmail[0].email }, 'ADMIN', { expiresIn: 360 }) //Un valor numerico equivale a Xsegundos
+                    return res.send({ADMIN: token})     
+                }                               
             }
         }
     }
