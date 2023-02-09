@@ -9,6 +9,8 @@ const verifyTokenCliente= (req, res, next) => {
             return res.status(403).json({ message: 'Token de CLIENTE expiro'}) 
         }else{
             console.log(decoded)
+            req.email = decoded.email
+            req.direccion = decoded.direccion
             next()
         }
     })

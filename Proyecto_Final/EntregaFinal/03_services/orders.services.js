@@ -39,7 +39,15 @@ class Orders {
         } catch (err) {
             console.log(err);
         }
-    }    
+    }  
+    
+    async deleteById(id) {
+        try {
+            return await OrdenesDaoFactory.getOrdenesDao().deleteById(id);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 export default Orders

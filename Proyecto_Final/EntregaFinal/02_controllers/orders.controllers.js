@@ -5,11 +5,21 @@ const ordenes = new Orders()
 const carritos = new Carts()
 
 const getOrders = async(req, res) => {
-
+    let allOrdenes = await ordenes.getAll()
+    if(allOrdenes.length === 0){
+        return res.send({ error : `No existen ordenes` })    
+    }else{
+        return res.send(allOrdenes)    
+    }
 }
 
 const getOrderById = async(req, res) => { //Devuelve una orden según su id
-
+    let getOrder = await ordenes.getById(parseInt(req.params.id))
+    if (getOrder.length === 0) {
+        return res.send({ error : `No existe orden con ID=${parseInt(req.params.id)} `})
+    }else{
+        return res.send(getOrder[0])
+    }
 }
 
 const postOrder = async(req, res) => {  // Devuelve el ID de la orden agregada   
@@ -18,7 +28,7 @@ const postOrder = async(req, res) => {  // Devuelve el ID de la orden agregada
     let count = 0
 
     if (getCart.length === 0) {
-        res.send({ error : `No existe carrito con ID=${parseInt(req.params.idCart)} `})
+        return res.send({ error : `No existe carrito con ID=${parseInt(req.params.idCart)} `})
     }else{
         for(let i = 0; i < getCart[0].productos.length; i++){
             let auxObj = {
@@ -42,12 +52,13 @@ const postOrder = async(req, res) => {  // Devuelve el ID de la orden agregada
             email: getCart[0].email,
             direccion: getCart[0].direccion      
         })
-        res.send(idOrder)               
+        return res.send(idOrder)               
     }
 }
 
 const deleteOrderById = async(req, res) => {
-    
+    let deleteiDOrder = await ordenes.deleteById(parseInt(req.params.id))   
+    return res.send(deleteiDOrder)     
 }
 
 export { getOrders, getOrderById, postOrder, deleteOrderById }

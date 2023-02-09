@@ -4,8 +4,8 @@ Modelo para crear usuario CLIENTE por POSTMAN
     "password": " ",
     "password2": " ",
     "email": "", 
-    "adress": " ", 
-    "age": , 
-    "phone": , 
+    "direccion": " ", 
+    "edad": , 
+    "telefono": , 
     "avatar": " "
 }
