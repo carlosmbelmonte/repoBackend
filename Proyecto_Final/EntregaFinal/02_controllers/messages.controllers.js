@@ -41,4 +41,13 @@ const postMensajes = async(req, res) => { //Crea un nuevo mensaje
 
 }
 
-export { getMensajes, postMensajes }
+const getMensajesByEmail = async(req, res) => { //Devuelve los mensajes segun su email
+    let mensajesByEmail = await mensajes.getByEmail(req.params.email)
+    if (mensajesByEmail.length === 0) {
+        return res.send({ error : `No existen mensajes para el mail=${req.params.email} `})
+    }else{
+        return res.send(mensajesByEmail)
+    }
+}
+
+export { getMensajes, postMensajes, getMensajesByEmail }
