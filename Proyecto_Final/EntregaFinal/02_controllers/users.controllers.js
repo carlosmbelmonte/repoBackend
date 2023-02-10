@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import Users from "../03_services/users.services.js"
+import sendmail from "../03_services/utils/sendmail.js"
 
 const usuarios = new Users()
 
@@ -59,6 +60,26 @@ const signup = async(req, res) => {  //
                 const createHash = await bcrypt.hash(password, salt)
 
                 let idUsers = await usuarios.save({nombrefull, password: createHash, email, direccion, edad, telefono, avatar})
+                sendmail(
+                    {
+                        from: `SERVIDOR - ${process.env.TESTMAIL}`,
+                        to: `${process.env.TESTMAIL}`,//Quien recibe el maiL
+                        subject: 'Nuevo usuario registrado',
+                        html: `        
+                            <div>
+                                <h5>Informacion de Usuario</h5>
+                                <ul>
+                                    <li>Nombre y Apellido: ${nombrefull}</li>
+                                    <li>Edad: ${edad}</li>
+                                    <li>Email: ${email}</li>
+                                    <li>Direccion: ${direccion}</li>
+                                    <li>Telefono: ${telefono}</li>
+                                    <li>Avatar (URL): ${avatar}</li>        
+                                </ul>
+                            </div>`
+                    })
+
+
                 return res.send({mensaje: `Nuevo usuario registrado con ID=${idUsers.id}`}) 
             }else{
                 return res.status(400).json({ error: "Ya existe este usuario" });     
