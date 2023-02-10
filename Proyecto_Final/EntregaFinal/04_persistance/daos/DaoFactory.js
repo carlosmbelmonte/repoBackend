@@ -2,6 +2,7 @@ let productosDao
 let carritosDao
 let usuariosDao
 let ordenesDao
+let mensajesDao
 
 const varSwitch = process.argv[3] || 'MONGO'
 
@@ -11,11 +12,13 @@ switch (varSwitch) {
         const { default: CarritosDaoMongo } = await import('./CarritosDaoMongo.js')
         const { default: UsuariosDaoMongo } = await import('./UsuariosDaoMongo.js')
         const { default: OrdenesDaoMongo } = await import('./OrdenesDaoMongo.js')
+        const { default: MensajesDaoMongo } = await import('./MensajesDaoMongo.js')
 
         productosDao = new ProductosDaoMongo()
         carritosDao = new CarritosDaoMongo()
         usuariosDao = new UsuariosDaoMongo()
         ordenesDao = new OrdenesDaoMongo()
+        mensajesDao = new MensajesDaoMongo()
         break
     default: 
         // do nothing;           
@@ -46,4 +49,10 @@ class OrdenesDaoFactory {
     }
 }
 
-export { ProductosDaoFactory, CarritosDaoFactory, UsuariosDaoFactory, OrdenesDaoFactory }
+class MensajesDaoFactory {
+    static getMensajesDao() {
+        return mensajesDao
+    }
+}
+
+export { ProductosDaoFactory, CarritosDaoFactory, UsuariosDaoFactory, OrdenesDaoFactory, MensajesDaoFactory }

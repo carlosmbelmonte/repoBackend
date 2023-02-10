@@ -7,6 +7,7 @@ import routerProductos from './01_routes/routeProductos.js'
 import routerCarrito from './01_routes/routeCarrito.js'
 import routerUsuarios from './01_routes/routeUsuarios.js'
 import routerOrdenes from './01_routes/routeOrdenes.js';
+import routerMensajes from './01_routes/routeMensajes.js';
 
 import * as dotenv from 'dotenv'
 dotenv.config()
@@ -35,6 +36,7 @@ app.use('/api/productos', routerProductos)
 app.use('/api/carritos', routerCarrito)
 app.use('/api/usuarios', routerUsuarios)
 app.use('/api/ordenes', routerOrdenes)
+app.use('/api/chat', routerMensajes)
 
 app.use((req, res, next) => {
     res.send({error: -2, descripcion: `ruta no implementada`})

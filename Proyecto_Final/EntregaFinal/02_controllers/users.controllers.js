@@ -8,9 +8,9 @@ const usuarios = new Users()
 const getUsuarios = async(req, res) => {  // Devuelve todos los usuarios.
     let allUsuarios = await usuarios.getAll()
     if(allUsuarios.length === 0){
-        res.send({ error : `No existen usuarios` })    
+        return res.send({ error : `No existen usuarios` })    
     }else{
-        res.send(allUsuarios)    
+        return res.send(allUsuarios)    
     }
 }
 
