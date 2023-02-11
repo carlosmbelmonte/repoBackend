@@ -14,21 +14,32 @@
 <body>
   <div id="loginPrevio" class="mx-3 mb-3 mt-3 rounded-4 bg-secondary bg-opacity-10 p-2">
     <h1 class="text-primary display-5 fw-bold mx-3">Login de Usuario</h1>
-    <form class="form" role="form" action="/api/usuarios/login" method="post" autocomplete="off">
+    <form id="formLogin" class="form" role="form" action="javascript:submitlogin()" method="post" autocomplete="off">
       <div class="form-group mx-3">
         <label class="form-label fst-italic fw-bold">Ingrese su Mail y Contraseña</label>
-        <input name='email' placeholder="email@email.com" class="form-control mb-1" type="text" >
+        <input name='emaillogin' placeholder="email@email.com" class="form-control mb-1" type="text" required>
       </div>
       <div class="form-group mx-3">
-        <input name='password' placeholder="Password" class="form-control mb-1" type="password" >
+        <input name='passwordlogin' placeholder="Password" class="form-control mb-1" type="password" required>
       </div>
-
+      <div class="form-group mx-3">
+        <p id="msjPostRegistro" class="text-success fw-bold mb-1"></p>
+      </div>      
       <div class="form-group mx-3">
         <input class="btn btn-success my-3" type="submit" value="Login">
       </div>
     </form>
-    <button class="btn btn-warning mx-3 mb-3" onclick="location.href='/signup'" id="gotoLogin">Ir a Register</button>
+    <button class="btn btn-warning mx-3 mb-3"  onclick="gotoRegistro()" id="gotoRegister">Ir a Register</button>
+  </div>
+  <div id="loginerror" style="display:none;">
+    {{> loginerror }}    
+  </div>
+  <div id="registro" style="display:none;">
+    {{> signup }}    
+  </div>
+  <div id="registroerror" style="display:none;">
+    {{> signuperror }}    
   </div>
 </body>
-
+<script src="js/login.js"></script>
 </html>

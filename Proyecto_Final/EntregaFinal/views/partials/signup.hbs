@@ -1,0 +1,42 @@
+<div class="mx-3 mb-3 mt-3 rounded-4 bg-secondary bg-opacity-10 p-2">
+  <h1 class="text-primary display-5 fw-bold mx-3">Registro de Usuario</h1>
+  <form id="formRegistro" class="form" role="form" action="javascript:submitregister()" method="post" autocomplete="off">
+      <div class="form-group mx-3">
+        <label class="form-label fst-italic fw-bold">Ingrese su Registro</label>
+        <input name='emailregistro' placeholder="Email" class="form-control mb-1" type="email" required> 
+      </div>
+
+      <div class="form-group mx-3">
+        <input name='passwordregistro' placeholder="Password" class="form-control mb-1" type="password" required>  
+      </div>
+
+      <div class="form-group mx-3">
+        <input name='password2registro' placeholder="Repita su Password" class="form-control mb-1" type="password" required>  
+      </div>
+
+      <div class="form-group mx-3">
+        <input name='usernameregistro' placeholder="Nombre y Apellido" class="form-control mb-1" type="text" required>          
+      </div>
+
+      <div class="form-group mx-3">
+        <input name='addressregistro' placeholder="Direccion" class="form-control mb-1" type="text" required>          
+      </div>
+
+      <div class="form-group mx-3">
+        <input name='ageregistro' placeholder="Edad" class="form-control mb-1" type="number" required>          
+      </div>
+
+      <div class="form-group mx-3">
+        <input name='phoneregistro' placeholder="Telefono" class="form-control mb-1" type="number" required>          
+      </div>          
+          
+      <div class="form-group mx-3">
+        <input id="avatarURL" name='avatarregistro' placeholder="Avatar: URL" class="form-control mb-1" type="text">          
+      </div>  
+
+      <div class="form-group">
+        <input class="btn btn-success mx-3 mt-3 mb-3" type="submit" value="Register">
+      </div> 
+  </form>
+  <button class="btn btn-warning mx-3 mb-3" onclick="gotoLogin()" id="gotoLogin">Ir a Login</button>
+</div>
