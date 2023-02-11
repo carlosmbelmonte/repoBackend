@@ -35,9 +35,9 @@ const submitlogin = () => {
                 document.getElementById('registroerror').style.display = 'none' 
                 document.getElementById('msjErrorLogin').innerText = `${response.error}`
             }
-            if(!response.error){
-                document.getElementById('msjPostRegistro').innerText =''
-            }
+            if(!response.error){ document.getElementById('msjPostRegistro').innerText ='' }
+            if(response.cliente){ console.log(parseJwt(response.cliente)) }
+            if(response.admin){ console.log(parseJwt(response.admin)) }
         })
 }
 
@@ -72,4 +72,14 @@ const submitregister = () => {
                 gotoLogin()    
             }
         })
+}
+
+function parseJwt (token) {
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
 }

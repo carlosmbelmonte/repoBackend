@@ -38,7 +38,7 @@ const login = async(req, res) => { //
                     return res.status(400).json({ error: "Ingrese correctamente la contraseña del CLIENTE" });    
                 }else{
                     const token = jwt.sign({ email: usuarioByEmail[0].email, direccion:usuarioByEmail[0].direccion }, 'CLIENTE', { expiresIn: 180 }) //Un valor numerico equivale a Xsegundos
-                    return res.send({CLIENTE: token})     
+                    return res.send({cliente: token})     
                 }                
             }
 
@@ -47,7 +47,7 @@ const login = async(req, res) => { //
                     return res.status(400).json({ error: "Ingrese correctamente la contraseña del ADMIN" });    
                 }else{
                     const token = jwt.sign({ email: usuarioByEmail[0].email }, 'ADMIN', { expiresIn: 360 }) //Un valor numerico equivale a Xsegundos
-                    return res.send({ADMIN: token})     
+                    return res.send({admin: token})     
                 }                               
             }
         }
