@@ -67,7 +67,7 @@ const signup = async(req, res) => {  //
                 const salt = await bcrypt.genSalt(10)
                 const createHash = await bcrypt.hash(password, salt)
 
-                let idUsers = await usuarios.save({nombrefull, password: createHash, email, direccion, edad, telefono, avatar})
+                let idUsers = await usuarios.save({nombrefull, password: createHash, email, direccion, edad: parseInt(edad), telefono: parseInt(telefono), avatar})
                 sendmail(
                     {
                         from: `SERVIDOR - ${process.env.TESTMAIL}`,
