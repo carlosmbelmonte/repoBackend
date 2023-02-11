@@ -5,12 +5,20 @@ import sendmail from "../03_services/utils/sendmail.js"
 
 const usuarios = new Users()
 
-const getUsuarios = async(req, res) => {  // Devuelve todos los usuarios.
-    let allUsuarios = await usuarios.getAll()
-    if(allUsuarios.length === 0){
+const getUsuariosByEmail = async(req, res) => {  // Devuelve datos del usuario por email.
+    let usuarioByEmail = await usuarios.getByEmail(req.params.email)
+    if(usuarioByEmail.length === 0){
         return res.send({ error : `No existen usuarios` })    
     }else{
-        return res.send(allUsuarios)    
+        return res.send({
+            id: usuarioByEmail[0].id, 
+            nombrefull: usuarioByEmail[0].nombrefull,
+            email: usuarioByEmail[0].email,
+            direccion: usuarioByEmail[0].direccion,
+            edad: usuarioByEmail[0].edad,
+            telefono: usuarioByEmail[0].telefono,
+            avatar: usuarioByEmail[0].avatar,   
+        })    
     }
 }
 
@@ -90,4 +98,4 @@ const signup = async(req, res) => {  //
 }
 
 
-export { getUsuarios , login, signup }
+export { getUsuariosByEmail , login, signup }
