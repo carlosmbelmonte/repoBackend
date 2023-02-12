@@ -1,10 +1,18 @@
-<div class="mx-3 mb-3 mt-3 rounded-4 bg-primary bg-opacity-10 p-2">
+<div id="msjDeslogueo" class="mx-3 mb-3 mt-3 rounded-4 bg-primary bg-opacity-10 p-2" style="display: none;">
     <div class="d-flex justify-content-between">
-        <h1 id="logoutMensaje" class="text-primary display-5 fw-bold mx-3">Hasta luego {{userSend}}</h1>       
+        <h1 id="logoutMensaje" class="text-primary display-5 fw-bold mx-3">Hasta luego, muchas gracias por su visita!!!</h1>
+        <button class="btn btn-warning mx-3"  id="failLogout">Volver</button>        
     </div>
 </div>
 <script>
-    setTimeout(() => {
-        location.href = '/login'
-    }, 2000)
+window.addEventListener("load", function(event) {
+    if(sessionStorage.getItem("deslogueado") === 'OK'){
+        document.getElementById('msjDeslogueo').style.display = '' 
+    }  
+})
+document.getElementById("failLogout")?.addEventListener("click", () => {
+    sessionStorage.clear()
+    document.getElementById('msjDeslogueo').style.display = 'none' 
+    window.location.href='/'
+})
 </script>

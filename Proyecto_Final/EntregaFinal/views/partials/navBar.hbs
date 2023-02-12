@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg bg-success bg-opacity-25 p-2">
+	<div class="container-fluid">
+		<div class="navbar-brand fw-bold">Engenium</div>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<button id="showProducts" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Productos</button>
+				</li>
+				<li class="nav-item">
+					<button id="showPersonal" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Informacion Personal</button>
+				</li>
+				<li class="nav-item">
+					<button id="showChart" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Carrito</button>
+				</li>
+				<li class="nav-item">
+					<button id="showConfServer" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Configuracion del servidor</button>
+				</li>
+				<li class="nav-item">
+					<button id="showChat" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Chat</button>
+				</li>				
+			</ul>
+			<div class="d-flex justify-content-end" style="align-items: center;">
+				<div>
+					<h2 id="logueoOkh1" class="text-success fw-bold mx-3" style="display: none;">Bienvenido</h2>
+				</div>
+				<div class="d-flex" style="align-items: center;">
+					{{#if avatarSend}}
+						<img src="{{avatarSend}}" height="48px">            
+					{{/if}}
+					<div>
+						<p id="logueoOkuser" class="text-success fw-bold mx-1 mb-0" style="font-size: 1.25rem;"></p>
+						<p id="logueoOkmail" class="text-success fw-bold mx-1 mb-0"></p>
+						<p id="logueoOkphone" class="text-success fw-bold mx-1 mb-0" style="display: none;"></p>			
+					</div>
+				</div>
+				<div>
+					<button class="btn btn-warning mx-3 mt-3 mb-3" id="desloguear" style="display: none;">Desloguear</button>  
+				</div>       
+			</div>
+		</div>
+	</div>
+</nav>

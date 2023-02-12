@@ -1,45 +1,56 @@
-<!DOCTYPE html>
-<html lang="es">
+<nav class="navbar navbar-expand-lg bg-success bg-opacity-25 p-2">
+    <div class="container-fluid">
+        <div class="navbar-brand fw-bold">Engenium</div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button id="showProducts" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Productos</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showPersonal" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Informacion Personal</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showChart" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Carrito</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showConfServer" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Configuracion del servidor</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showChat" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Chat</button>
+                </li>				
+            </ul>
+        </div>
+    </div>
+</nav>
+<main>  
+    <div id="loginPrevio" class="mx-3 mb-3 mt-3 rounded-4 bg-secondary bg-opacity-10 p-2">
+        <h1 class="text-primary display-5 fw-bold mx-3">Login de Usuario</h1>
+        <form id="formLogin" class="form" role="form" action="javascript:submitlogin()" method="post" autocomplete="off">
+            <div class="form-group mx-3">
+                <label class="form-label fst-italic fw-bold">Ingrese su Mail y Contraseña</label>
+                <input name='emaillogin' placeholder="email@email.com" class="form-control mb-1" type="text" required>
+            </div>
+            <div class="form-group mx-3">
+                <input name='passwordlogin' placeholder="Password" class="form-control mb-1" type="password" required>
+            </div>
+            <div class="form-group mx-3">
+                <p id="msjPostRegistro" class="text-success fw-bold mb-1"></p>
+            </div>      
+            <div class="form-group mx-3">
+                <input class="btn btn-success my-3" type="submit" value="Login">
+            </div>
+        </form>
+        <button class="btn btn-warning mx-3 mb-3"  onclick="gotoRegistro()" id="gotoRegister">Ir a Register</button>
+    </div>
+    <div id="loginerror" style="display:none;">
+        {{> loginerror }}    
+    </div>
+    <div id="registro" style="display:none;">
+        {{> signup }}    
+    </div>
+    <div id="registroerror" style="display:none;">
+        {{> signuperror }}    
+    </div>  
+</main>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <title>Login</title> 
-</head>
 
-<body>
-  <div id="loginPrevio" class="mx-3 mb-3 mt-3 rounded-4 bg-secondary bg-opacity-10 p-2">
-    <h1 class="text-primary display-5 fw-bold mx-3">Login de Usuario</h1>
-    <form id="formLogin" class="form" role="form" action="javascript:submitlogin()" method="post" autocomplete="off">
-      <div class="form-group mx-3">
-        <label class="form-label fst-italic fw-bold">Ingrese su Mail y Contraseña</label>
-        <input name='emaillogin' placeholder="email@email.com" class="form-control mb-1" type="text" required>
-      </div>
-      <div class="form-group mx-3">
-        <input name='passwordlogin' placeholder="Password" class="form-control mb-1" type="password" required>
-      </div>
-      <div class="form-group mx-3">
-        <p id="msjPostRegistro" class="text-success fw-bold mb-1"></p>
-      </div>      
-      <div class="form-group mx-3">
-        <input class="btn btn-success my-3" type="submit" value="Login">
-      </div>
-    </form>
-    <button class="btn btn-warning mx-3 mb-3"  onclick="gotoRegistro()" id="gotoRegister">Ir a Register</button>
-  </div>
-  <div id="loginerror" style="display:none;">
-    {{> loginerror }}    
-  </div>
-  <div id="registro" style="display:none;">
-    {{> signup }}    
-  </div>
-  <div id="registroerror" style="display:none;">
-    {{> signuperror }}    
-  </div>
-</body>
-<script src="js/main.js"></script>
-</html>

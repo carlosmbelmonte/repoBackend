@@ -1,0 +1,48 @@
+<nav id="navInfo" class="navbar navbar-expand-lg bg-success bg-opacity-25 p-2"  style="display: none;">
+    <div class="container-fluid">
+        <div class="navbar-brand fw-bold">Engenium</div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button id="showProducts" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Productos</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showPersonal" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Informacion Personal</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showChart" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Carrito</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showConfServer" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Configuracion del servidor</button>
+                </li>
+                <li class="nav-item">
+                    <button id="showChat" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Chat</button>
+                </li>				
+            </ul>
+
+			<div class="d-flex justify-content-end" style="align-items: center;">
+				<div>
+					<h2 id="logueoOkh1" class="text-success fw-bold mx-3" >Bienvenido</h2>
+				</div>
+				<div class="d-flex" style="align-items: center;">
+					{{#if avatarSend}}
+						<img src="{{avatarSend}}" height="48px">            
+					{{/if}}
+					<div>
+						<p id="logueoOkuser" class="text-success fw-bold mx-1 mb-0" style="font-size: 1.25rem;">{{userSend}}</p>
+						<p id="logueoOkmail" class="text-success fw-bold mx-1 mb-0">{{mailSend}}</p>
+						<p id="logueoOkphone" class="text-success fw-bold mx-1 mb-0" style="display: none;">{{phoneSend}}</p>			
+					</div>
+				</div>
+				<div>
+					<button class="btn btn-warning mx-3 mt-3 mb-3" id="desloguear" >Desloguear</button>  
+				</div>       
+			</div>
+
+        </div>
+    </div>
+</nav>
+<main>
+    {{> listarProductos }}
+</main>
+<script src="js/infoProdCart.js"></script> 
