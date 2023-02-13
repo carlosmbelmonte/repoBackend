@@ -112,4 +112,13 @@ const deleteOrderById = async(req, res) => {
     }    
 }
 
-export { getOrders, getOrderById, postOrder, deleteOrderById }
+const getOrderByEmail = async(req, res) => {
+    let ordenesByEmail = await ordenes.getByEmail(req.params.email)
+    if(ordenesByEmail.length === 0){
+        return res.send({ error : `No existen ordenes para este mail` })    
+    }else{
+        return res.send(ordenesByEmail)    
+    }
+}
+
+export { getOrders, getOrderById, postOrder, deleteOrderById, getOrderByEmail }

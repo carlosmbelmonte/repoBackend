@@ -39,6 +39,20 @@ async function addProductos(idrecibido) {
 }
 
 function finalizarCarrito(){
+    fetch(`/api/ordenes/${valorCarrito}`, {
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json','auth-token':`${sessionStorage.getItem("Cliente")}`}
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            console.log({idOrden: response.id})
+            //let items = response.ProductosEnCarrito.map(item => `Producto: ${item.producto.nombre} Cantidad: ${item.cantidad} <br/>` );
+            //document.getElementById('mensajeGuardado').style.display = ''
+            //document.getElementById('objectosenCarrito').innerHTML = `<p>${items.join('')}</p>`
+        })    
+
+
+
     document.getElementById('objectosenCarrito').innerHTML = ``
     document.getElementById('nroIDCarrito').innerText = ``
     botones.forEach((boton) => {
