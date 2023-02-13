@@ -12,6 +12,9 @@
                 <li class="nav-item">
                     <button id="showChart" type="button" class="btn btn-outline-success fw-bold" style="border: none;display: none;">Carrito</button>
                 </li>
+				<li class="nav-item">
+					<button id="showLogReg" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Login</button>
+				</li>
                 <li class="nav-item">
                     <button id="showConfServer" type="button" class="btn btn-outline-success fw-bold" style="border: none;">Configuracion del servidor</button>
                 </li>
@@ -20,6 +23,7 @@
                 </li>				
             </ul>
         </div>
+        <p id="logueoOkmail" style="display: none;">none</p>
     </div>
 </nav>
 <main>  
@@ -50,7 +54,13 @@
     </div>
     <div id="registroerror" style="display:none;">
         {{> signuperror }}    
-    </div>  
+    </div>
+    <div id="servidorset" style="display:none;">
+        Configuracion Server
+    </div>
+    {{> chat }} 
 </main>
+<script src="js/login.js"></script>
+<script src="js/chat.js"></script>
 
 

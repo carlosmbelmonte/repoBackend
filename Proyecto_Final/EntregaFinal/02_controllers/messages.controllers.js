@@ -32,7 +32,7 @@ const postMensajes = async(req, res) => { //Crea un nuevo mensaje
         let idMsj = await mensajes.save({
             email: email, 
             tipo: usertipo, 
-            'timestamp(mensaje)': new Date(), 
+            fecha: new Date(), 
             mensaje: mensajecuerpo
         })
         let allMensajes = await mensajes.getAll() 

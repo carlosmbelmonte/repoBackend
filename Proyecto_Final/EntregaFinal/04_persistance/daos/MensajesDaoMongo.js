@@ -7,7 +7,7 @@ class MensajesDaoMongo extends ContenedorMongo {
             id: {type: Number, require: true, max: 255},
             email: {type: String, require: true},
             tipo: {type: String, require: true},
-            'timestamp(mensaje)': {type: String, require: true, max: 100},
+            fecha: {type: String, require: true, max: 100},
             mensaje: {type: String, require: true},
         })
     }
