@@ -110,7 +110,33 @@ document.getElementById("showChart")?.addEventListener("click", () => {
     document.getElementById('productosDisponibles').style.display = 'none'  
     document.getElementById('informacionPersonal').style.display = 'none'   
     document.getElementById('productosCarrito').style.display = ''
-    document.getElementById('chatGeneral').style.display = 'none'      
+    document.getElementById('chatGeneral').style.display = 'none' 
+    
+    fetch(`/api/ordenes/email/${parseJwt(sessionStorage.getItem("Cliente")).email}`)
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+        if(response.error){ 
+            document.getElementById('listarOrdenes').innerHTML = `<p>No tiene ordenes realizadas</p>`  
+        }else{
+            let items = response.map(item =>    
+            `<div>
+                <h5>Informacion del pedido</h5>
+                <ul>
+                    <li>ID Orden: ${item.id}</li>
+                    <li>Item: ${item.item.map(aux => `Producto: ${aux.nombre}<-->Cant: ${aux.cantidad} `)}</li>
+                    <li>Direccion: ${item.direccion}</li>
+                    <li>PrecioTotal: ${item.preciototal}</li>
+                    <li>Fecha: ${item["timestamp(ordenes)"]}</li>
+                    <li>Estado: ${item.estado}</li>      
+                </ul>
+            </div>`
+            )
+            document.getElementById('listarOrdenes').innerHTML = `<p>${items.join('')}</p>`            
+        }
+
+    })
+
 })
 
 document.getElementById("showChat")?.addEventListener("click", () => {

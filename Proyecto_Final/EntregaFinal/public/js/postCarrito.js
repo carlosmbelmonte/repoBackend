@@ -46,12 +46,7 @@ function finalizarCarrito(){
         .catch(error => console.error('Error:', error))
         .then(response => {
             console.log({idOrden: response.id})
-            //let items = response.ProductosEnCarrito.map(item => `Producto: ${item.producto.nombre} Cantidad: ${item.cantidad} <br/>` );
-            //document.getElementById('mensajeGuardado').style.display = ''
-            //document.getElementById('objectosenCarrito').innerHTML = `<p>${items.join('')}</p>`
         })    
-
-
 
     document.getElementById('objectosenCarrito').innerHTML = ``
     document.getElementById('nroIDCarrito').innerText = ``
