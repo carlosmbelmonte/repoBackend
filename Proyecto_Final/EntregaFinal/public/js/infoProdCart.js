@@ -1,9 +1,11 @@
 window.addEventListener("load", function(event) {
+    document.getElementById('chatGeneral').style.display = 'none' 
+    document.getElementById('productosCarrito').style.display = 'none'
+    
     if(sessionStorage.getItem("Cliente")||sessionStorage.getItem("Admin")){
         document.getElementById('navInfo').style.display = ''
         document.getElementById('productosDisponibles').style.display = '' 
-        listarProductos()
-        
+        listarProductos()    
     }
     if(sessionStorage.getItem("Admin")){
         document.getElementById('logueoOkmail').innerHTML = 'admin@admin.com'
@@ -57,6 +59,13 @@ const mostrarUsuario = () => {
             respuesta => {
                 document.getElementById('logueoOkuser').innerHTML = `${respuesta.nombrefull}`
                 document.getElementById('logueoOkmail').innerHTML = `${respuesta.email}`
+                
+                document.getElementById('infoperNombre').innerHTML = `Nombre y Apellido: ${respuesta.nombrefull}`
+                document.getElementById('infoperEdad').innerHTML = `Edad: ${respuesta.edad}`
+                document.getElementById('infoperEmail').innerHTML = `Email: ${respuesta.email}`
+                document.getElementById('infoperDir').innerHTML = `Direccion: ${respuesta.direccion}`
+                document.getElementById('infoperTel').innerHTML = `Telefono: ${respuesta.telefono}`
+                document.getElementById('infoperAvatar').innerHTML = `<img src=" ${respuesta.avatar}" class="img-fluid rounded-start" alt="...">`
             })
     
 }
@@ -82,3 +91,31 @@ function expiracion (token){
         window.location.href='/logout'
     }, expire)
 }
+
+document.getElementById("showProducts")?.addEventListener("click", () => {
+    document.getElementById('productosDisponibles').style.display = ''  
+    document.getElementById('informacionPersonal').style.display = 'none'  
+    document.getElementById('productosCarrito').style.display = 'none' 
+    document.getElementById('chatGeneral').style.display = 'none'      
+})
+
+document.getElementById("showPersonal")?.addEventListener("click", () => {
+    document.getElementById('productosDisponibles').style.display = 'none'  
+    document.getElementById('informacionPersonal').style.display = ''   
+    document.getElementById('productosCarrito').style.display = 'none'
+    document.getElementById('chatGeneral').style.display = 'none'      
+})
+
+document.getElementById("showChart")?.addEventListener("click", () => {
+    document.getElementById('productosDisponibles').style.display = 'none'  
+    document.getElementById('informacionPersonal').style.display = 'none'   
+    document.getElementById('productosCarrito').style.display = ''
+    document.getElementById('chatGeneral').style.display = 'none'      
+})
+
+document.getElementById("showChat")?.addEventListener("click", () => {
+    document.getElementById('productosDisponibles').style.display = 'none'  
+    document.getElementById('informacionPersonal').style.display = 'none'   
+    document.getElementById('productosCarrito').style.display = 'none'
+    document.getElementById('chatGeneral').style.display = ''      
+})
