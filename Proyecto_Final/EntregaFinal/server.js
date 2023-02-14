@@ -1,10 +1,8 @@
 import express from 'express'
 import { Server as HTTPServer} from 'http'
-//import path from 'path';//---> Solucion encontrada en Google
-//import {fileURLToPath} from 'url';//---> Solucion encontrada en Google
 import { engine } from 'express-handlebars';
 import {Server as IOServer} from 'socket.io';
-
+import config from './seteo.js'
 import routerProductos from './01_routes/routeProductos.js'
 import routerCarrito from './01_routes/routeCarrito.js'
 import routerUsuarios from './01_routes/routeUsuarios.js'
@@ -13,20 +11,14 @@ import routerMensajes from './01_routes/routeMensajes.js'
 import routerViews from './01_routes/routeViews.js'
 import Messages from "./03_services/messages.services.js"
 
-import * as dotenv from 'dotenv'
-dotenv.config()
-
-//const __filename = fileURLToPath(import.meta.url);//---> Solucion encontrada en Google
-//const __dirname = path.dirname(__filename);//---> Solucion encontrada en Google
-
 const app = express()
 const http = new HTTPServer(app)
 const io = new IOServer(http)
-const PORT = process.env.PORT || 8080
+
 const chats = new Messages()
 
-const serverPort = http.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`)
+const serverPort = http.listen(config.PORT, config.HOST,() => {
+    console.log(`App listening on http://${config.HOST}:${config.PORT}`)
 })
 serverPort.on('error', error => console.log(`Error en el puerto del servidor: ${error}`))
 

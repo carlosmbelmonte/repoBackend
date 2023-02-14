@@ -1,12 +1,13 @@
 import nodemailer from 'nodemailer'
+import config from '../../seteo.js'
 
 const sendmail = async(objeto) =>{
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         port: 587,
         auth: {
-            user: `${process.env.TESTMAIL}`,//Quien envia el mail
-            pass: `${process.env.TESTMAILPASS}`//password genereda con GOOGLE
+            user: `${config.TESTMAIL}`,//Quien envia el mail
+            pass: `${config.TESTMAILPASS}`//password genereda con GOOGLE
         }
     })
 

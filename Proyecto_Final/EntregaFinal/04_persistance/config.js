@@ -1,9 +1,8 @@
-import * as dotenv from 'dotenv'
-dotenv.config()
+import config from '../seteo.js'
 
 export default{
     mongodb: {
-        cnxStr: `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.zxvolg7.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`,
+        cnxStr: `mongodb+srv://${config.USER}:${config.PASSWORD}@cluster0.zxvolg7.mongodb.net/${config.DATABASE}?retryWrites=true&w=majority`,
         options: {
             useNewUrlParser: true,
             useUnifiedTopology: true,
