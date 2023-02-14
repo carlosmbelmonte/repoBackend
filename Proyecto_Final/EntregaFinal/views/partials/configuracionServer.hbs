@@ -1,0 +1,28 @@
+<div id="configServer" class='container mt-3'>
+    <div class='row'>
+            <h1 style="background-color: lightgray;">Variables externas a configurar para la ejecucion del proyecto</h1>
+            <p>Se tienen 2 script, uno para el entorno de Desarrollo y otro para Produccion, cada uno con su respectivo archivo .env, las variables de los mismos son las siguientes:</p>
+            <img src="imagen/development.png" alt="..." class="img-thumbnail" style="width: 50%;">
+            <img src="imagen/production.png" alt="..." class="img-thumbnail" style="width: 50%;">
+            <p>En verde, se indica la diferencia entre el entorno de desarrollo y produccion.</br>
+            En rojo, corresponde a la conexion con la DB, para este caso se uso Cloud mongoDB. Testmail y Testmailpass corresponde al mail utilizado con nodemailer.</br>
+            En celeste, el tiempo de expiracion del JWT.
+            </p>
+            <p>
+                <b>NODE_ENV =</b> Desarrollo o Produccion</br>
+                <b>PORT =</b> Puerto de escucha</br>
+                <b>USER =</b> Usuario de Cloud mongoDB </br>
+                <b>PASSWORD =</b> Contraseña de Cloud mongoDB </br>
+                <b>DATABASE =</b> Coleccion en Cloud mongoDB"</br>					
+                <b>TESTMAIL =</b> Email que se utilizará para envíar y recibir los emails</br>
+                <b>TESTMAILPASS =</b> Contraseña de aplicaciones otorgada por google</br>					
+                <b>EXPIREADMIN =</b> Expiracion del JWT para el administrador</br>
+                <b>EXPIRECLIENT =</b> Expiracion del JWT para el cliente</br>					
+            </p>
+            <h1 style="background-color: lightgray;">Scripts de ejecución</h1>
+            <p>En el archivo package.json se encuentran los siguientes scripts para ejecutar el proyecto ya sea en Produccion o Desarrollo, los comando de ejecucion se detallan abajo.</p>
+            <img src="imagen/scripts.png" alt="..." class="img-thumbnail" >
+            <p>npm run dev</br>
+            npm run prod</br></p>
+    </div>
+</div>
