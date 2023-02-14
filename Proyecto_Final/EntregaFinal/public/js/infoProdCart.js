@@ -83,6 +83,7 @@ function parseJwt (token) {
 function expiracion (token){
     let auxObj = parseJwt(token)
     let expire = (parseInt(auxObj.exp)- parseInt(auxObj.iat))*1000 //valor en segundos
+    console.log(expire)
     setTimeout(() => {
         sessionStorage.clear()
         document.getElementById('navInfo').style.display = 'none' 

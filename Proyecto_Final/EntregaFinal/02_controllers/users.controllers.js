@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import Users from "../03_services/users.services.js"
 import sendmail from "../03_services/utils/sendmail.js"
+import config from '../seteo.js'
 
 const usuarios = new Users()
 
@@ -37,7 +38,7 @@ const login = async(req, res) => { //
                 if(!comparePassword){
                     return res.status(400).json({ error: "Ingrese correctamente la contraseña del CLIENTE" });    
                 }else{
-                    const token = jwt.sign({ email: usuarioByEmail[0].email, direccion:usuarioByEmail[0].direccion }, 'CLIENTE', { expiresIn: 180 }) //Un valor numerico equivale a Xsegundos
+                    const token = jwt.sign({ email: usuarioByEmail[0].email, direccion:usuarioByEmail[0].direccion }, 'CLIENTE', { expiresIn: parseInt(config.EXPIRECLIENT) }) //Un valor numerico equivale a Xsegundos
                     return res.send({cliente: token})     
                 }                
             }
@@ -46,7 +47,7 @@ const login = async(req, res) => { //
                 if(usuarioByEmail[0].password !== password){
                     return res.status(400).json({ error: "Ingrese correctamente la contraseña del ADMIN" });    
                 }else{
-                    const token = jwt.sign({ email: usuarioByEmail[0].email }, 'ADMIN', { expiresIn: 360 }) //Un valor numerico equivale a Xsegundos
+                    const token = jwt.sign({ email: usuarioByEmail[0].email }, 'ADMIN', { expiresIn: parseInt(config.EXPIREADMIN) }) //Un valor numerico equivale a Xsegundos
                     return res.send({admin: token})     
                 }                               
             }
