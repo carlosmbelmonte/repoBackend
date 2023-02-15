@@ -87,3 +87,62 @@ Los requisitos extra son funcionalidades opcionales que no se incluyen en los cr
 **No es necesario ni recomendado.**
 -	Crear un administrador de stock, dado que puede escaparse del scope y requerir bastante trabajo extra. Podremos gestionar el stock desde la base MongoDB.    
 -	Implementar el FrontEnd salvo que así sea deseado por parte del estudiante.
+
+# Ejecucion del Desafio
+- Se instalan todas las dependencias especificadas en el package.json con el comando npm i
+- Se crean 2 archivos .env, uno para Desarrollo (development.env) y otro para Producción (production.env). Ambos comparten el mismo nombre de las variables globales, solo que cambian su contenido (en algunos casos).
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/development.png)
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/production.png)
+- Para correr el server en modo desarrollo, se escribe el comando npm run dev.
+- Para correr el server en modo producción, se escribe el comando npm run prod.
+- El archivo package.json tiene 2 scripts, para aceptar estos comandos
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/scripts.png)
+- En mongo atlas, se crea la colección proyectofinal. Tiene un documento llamado usuarios. En el mismo se debe crear un usuario admin con id=0, como se muestra en la imagen:
+- ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/userAdmin.png)
+- Se recomienda cambiar el tiempo de expiración en el archivo development.env, para poder ver la expiracion de los JWT. Los valores de los mismos estan expresados en segundos.
+- En las rutas API se puede probar el proyecto RestFul, mientras que en el front del mismo, se prueba la creacion de usuarios, chats, carritos y ordenes. Tambien se pueden crear carritos, chats y ordenes desde las rutas API. Se recomienda usar Postman
+
+# Carga documentos con Postman
+- En la ruta /api/productos/ y mediante el metodo POST se cargan productos a la base de dato, estos son cargados a traves del body, con el siguiente formato, precio y stock son numeros, el resto string:
+```json
+{
+    "nombre": " ",
+    "descripcion": " ",
+    "categoria": " ",
+    "foto": " ",
+    "precio": ,
+    "stock": ,
+}
+```
+- En la ruta /api/usuarios/signup y mediante el metodo POST se cargan usuarios a la DB, tambien se puede hacer desde el front. Tienen el siguiente formato, edad y telefono son numeros:
+```json
+{
+    "nombrefull": " ",
+    "password": " ",
+    "password2": " ",
+    "email": "", 
+    "direccion": " ", 
+    "edad": , 
+    "telefono": , 
+    "avatar": " "
+}
+```
+- En la ruta /api/carritos/ y mediante el metodo POST se generan carritos en la DB, tambien se puede hacer desde el front. Estos estan asociados a un mail y una direccion:
+```json
+{
+    "email": " ",
+    "direccion": " "
+}
+```
+- ACLARACION: Algunas rutas requieren de un token, ya sea de USUARIO o de ADMIN, para obtener estos tokens. La ruta para obtenerlos es /API/usuarios/login 
+- Para esto se requiere que el usuario previamente se registre y luego colocar el mail/password. Con el siguiente JSON se obtiene el token:
+```json
+{
+    "email": " ",
+    "password": " "
+}
+```
+
+# Navegabiidad
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/ProyectoFinal-ecommerce.png)
+
