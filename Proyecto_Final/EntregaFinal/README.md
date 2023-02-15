@@ -144,5 +144,5 @@ Los requisitos extra son funcionalidades opcionales que no se incluyen en los cr
 ```
 
 # Navegabiidad
-![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/ProyectoFinal-ecommerce.png)
+![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/ProyectoFinal-ecommerce.gif)
 
