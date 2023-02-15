@@ -146,3 +146,6 @@ Los requisitos extra son funcionalidades opcionales que no se incluyen en los cr
 # Navegabiidad
 ![image](https://github.com/carlosmbelmonte/repoBackend/blob/main/Proyecto_Final/EntregaFinal/public/imagen/ProyectoFinal-ecommerce.gif)
 
+# Deploy del proyecto en Render
+- En este caso el proyecto se encuentra en Render, la ruta es la siguiente:
+https://ecommerce-cbelmonte-backend.onrender.com/
